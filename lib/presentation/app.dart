@@ -28,7 +28,7 @@ class _MainPageState extends State<MainPage> {
           backgroundColor: context.theme.appColors.background,
           body: child,
           bottomNavigationBar: SizedBox(
-            height: 64,
+            // height: 64,
             child: BottomNavigationBar(
               elevation: 12,
               backgroundColor: context.theme.appColors.ink.darkest,

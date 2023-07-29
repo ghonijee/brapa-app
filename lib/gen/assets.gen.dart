@@ -69,6 +69,9 @@ class $AssetsBankGen {
   /// File path: assets/bank/bukopin.svg
   String get bukopinSvg => 'assets/bank/bukopin.svg';
 
+  /// File path: assets/bank/cash.png
+  AssetGenImage get cash => const AssetGenImage('assets/bank/cash.png');
+
   /// File path: assets/bank/cimb.png
   AssetGenImage get cimbPng => const AssetGenImage('assets/bank/cimb.png');
 
@@ -139,6 +142,17 @@ class $AssetsBankGen {
   /// File path: assets/bank/ocbc.svg
   String get ocbcSvg => 'assets/bank/ocbc.svg';
 
+  /// File path: assets/bank/other.png
+  AssetGenImage get other => const AssetGenImage('assets/bank/other.png');
+
+  /// File path: assets/bank/other_acount.png
+  AssetGenImage get otherAcount =>
+      const AssetGenImage('assets/bank/other_acount.png');
+
+  /// File path: assets/bank/other_acount_alt.png
+  AssetGenImage get otherAcountAlt =>
+      const AssetGenImage('assets/bank/other_acount_alt.png');
+
   /// File path: assets/bank/panin.png
   AssetGenImage get paninPng => const AssetGenImage('assets/bank/panin.png');
 
@@ -185,6 +199,7 @@ class $AssetsBankGen {
         btnSvg,
         bukopinPng,
         bukopinSvg,
+        cash,
         cimbPng,
         cimbSvg,
         citiPng,
@@ -207,6 +222,9 @@ class $AssetsBankGen {
         megaSvg,
         ocbcPng,
         ocbcSvg,
+        other,
+        otherAcount,
+        otherAcountAlt,
         paninPng,
         paninSvg,
         permataPng,

@@ -1,4 +1,6 @@
 import 'package:app_ui/app_ui.dart';
+import 'package:app_ui/molecules/account_chip.dart';
+import 'package:app_ui/molecules/category_chip.dart';
 import 'package:app_ui/token/figma_token.dart';
 import 'package:app_ui/utils/numeric_formatter.dart';
 import 'package:app_ui/utils/string_extension.dart';
@@ -23,6 +25,17 @@ class _RecordPageState extends State<RecordPage> {
   final TextEditingController amountController = TextEditingController();
   final TextEditingController memoController = TextEditingController();
   final FocusNode focusNode = FocusNode();
+  Category? categorySelected;
+  Account? accountSelected;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    categorySelected = Category("no");
+    accountSelected = Account(name: "no");
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -63,24 +76,26 @@ class _RecordPageState extends State<RecordPage> {
                 ],
               ),
               FreeSpaceUI.vertical(12.sp),
-              Container(
+              SizedBox(
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 20.sp),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextUI.smallNoneRegular(
-                          "Category",
-                          color: context.colors.sky.dark,
-                        ),
-                        TextUI.tinyNoneRegular(
-                          "Show more",
-                          color: context.colors.primary.base,
-                        )
-                      ],
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.sp),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TextUI.smallNoneRegular(
+                            "Category",
+                            color: context.colors.sky.dark,
+                          ),
+                          TextUI.tinyNoneRegular(
+                            "Show more",
+                            color: context.colors.primary.base,
+                          )
+                        ],
+                      ),
                     ),
                     FreeSpaceUI.vertical(16.sp),
                     SizedBox.fromSize(
@@ -92,43 +107,11 @@ class _RecordPageState extends State<RecordPage> {
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           var item = listCategory[index];
-                          return Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.only(right: 12.sp),
-                            decoration: BoxDecoration(
-                                color: context.theme.appColors.ink.dark,
-                                border: true
-                                    ? Border.all(
-                                        color: context
-                                            .theme.appColors.primary.darkest,
-                                        width: 2,
-                                      )
-                                    : null,
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(32))),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 16.sp, vertical: 8.sp),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextUI.smallNoneRegular(item.name),
-                                FreeSpaceUI.horizontal(12.sp),
-                                Container(
-                                  padding: const EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(45),
-                                    color: context.theme.appColors.red.lightest,
-                                  ),
-                                  child: Icon(
-                                    item.icon,
-                                    size: 16,
-                                    color: context.theme.appColors.red.darkest,
-                                  ),
-                                )
-                              ],
-                            ),
-                          );
+                          return CategoryChip(
+                              icon: item.icon!,
+                              label: item.name,
+                              isActive: item == categorySelected,
+                              onValueChanged: () {});
                         },
                       ),
                     )
@@ -136,24 +119,26 @@ class _RecordPageState extends State<RecordPage> {
                 ),
               ),
               FreeSpaceUI.vertical(24),
-              Container(
+              SizedBox(
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 20.sp),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextUI.smallNoneRegular(
-                          "Account",
-                          color: context.colors.sky.dark,
-                        ),
-                        TextUI.tinyNoneRegular(
-                          "Show more",
-                          color: context.colors.primary.base,
-                        )
-                      ],
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.sp),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TextUI.smallNoneRegular(
+                            "Account",
+                            color: context.colors.sky.dark,
+                          ),
+                          TextUI.tinyNoneRegular(
+                            "Show more",
+                            color: context.colors.primary.base,
+                          )
+                        ],
+                      ),
                     ),
                     FreeSpaceUI.vertical(16.sp),
                     SizedBox.fromSize(
@@ -165,38 +150,11 @@ class _RecordPageState extends State<RecordPage> {
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           var item = listAccount[index];
-                          return Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.only(right: 12.sp),
-                            decoration: BoxDecoration(
-                                color: context.theme.appColors.ink.dark,
-                                border: true
-                                    ? Border.all(
-                                        color: context
-                                            .theme.appColors.primary.darkest,
-                                        width: 2,
-                                      )
-                                    : null,
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(32))),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 16.sp, vertical: 8.sp),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextUI.smallNoneRegular(item.name),
-                                FreeSpaceUI.horizontal(12.sp),
-                                Container(
-                                    padding: const EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(45),
-                                      color:
-                                          context.theme.appColors.red.lightest,
-                                    ),
-                                    child: Assets.bank.bcaPng.image(width: 20))
-                              ],
-                            ),
+                          return AccountChip(
+                            assetPath: item.assets!,
+                            label: item.name,
+                            isActive: accountSelected == item,
+                            onValueChanged: () {},
                           );
                         },
                       ),
@@ -204,7 +162,7 @@ class _RecordPageState extends State<RecordPage> {
                   ],
                 ),
               ),
-              FreeSpaceUI.vertical(20),
+              // FreeSpaceUI.vertical(20),
               NumericKeyboard(
                 onKeyboardTap: (value) {
                   var oldValue = amountController.text;

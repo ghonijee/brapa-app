@@ -10,7 +10,7 @@ class Category {
 
 List<Category> listCategory = [
   Category("Housing", icon: Icons.home_filled),
-  Category("Bill", icon: Icons.directions_car_filled_rounded),
+  Category("Bill", icon: Icons.receipt),
   Category("Transport", icon: IonIcons.car_sharp),
   Category("Supplies", icon: Icons.trolley),
   Category("Entertainment", icon: Icons.movie_creation_rounded),
@@ -18,6 +18,6 @@ List<Category> listCategory = [
   Category("Personal Care", icon: Icons.person),
   Category("Gift", icon: Icons.card_giftcard_rounded),
   Category("Donation", icon: Icons.handshake_rounded),
-  Category("Snacks", icon: Icons.food_bank_rounded),
-  Category("Other", icon: Icons.dns_rounded),
+  Category("Food & Drinks", icon: Icons.food_bank_rounded),
+  Category("Other", icon: Icons.upcoming_rounded),
 ];
