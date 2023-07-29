@@ -1,6 +1,9 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:app_ui/atom/text_ui.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:icons_plus/icons_plus.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 @RoutePage()
 class SettingPage extends StatelessWidget {
@@ -8,9 +11,75 @@ class SettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: TextUI.largeNoneBold("Setting Page"),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        backgroundColor: context.colors.background,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FreeSpaceUI.vertical(8.h),
+              const TextUI.titleRegular("Settings"),
+              FreeSpaceUI.vertical(20.sp),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // TextUI.largeNoneBold("Master Data"),
+                  // FreeSpaceUI.vertical(16),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    onTap: () {
+                      //
+                    },
+                    leading: Icon(
+                      BoxIcons.bxl_pocket,
+                      size: 28,
+                    ),
+                    trailing: Icon(
+                      Icons.chevron_right_rounded,
+                      size: 28,
+                    ),
+                    title: TextUI.regularTightRegular("Accounts"),
+                  ),
+                  FreeSpaceUI.vertical(8),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    onTap: () {
+                      //
+                    },
+                    leading: Icon(
+                      Icons.upload_rounded,
+                      size: 28,
+                    ),
+                    trailing: Icon(
+                      Icons.chevron_right_rounded,
+                      size: 28,
+                    ),
+                    title: TextUI.regularTightRegular("Expense Categories"),
+                  ),
+                  FreeSpaceUI.vertical(8),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    onTap: () {
+                      //
+                    },
+                    leading: Icon(
+                      Icons.download_rounded,
+                      size: 28,
+                    ),
+                    trailing: Icon(
+                      Icons.chevron_right_rounded,
+                      size: 28,
+                    ),
+                    title: TextUI.regularTightRegular("Income Categories"),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

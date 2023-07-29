@@ -26,12 +26,12 @@ class AccountPage extends StatelessWidget {
               const TextUI.titleRegular("Accounts"),
               FreeSpaceUI.vertical(20),
               Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: context.colors.surface,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextUI.smallNormalMedium("My Balance"),

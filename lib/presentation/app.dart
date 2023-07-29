@@ -18,8 +18,8 @@ class _MainPageState extends State<MainPage> {
     return AutoTabsRouter.tabBar(
       routes: const [
         RecordRoute(),
-        AccountRoute(),
         HistoryRoute(),
+        AccountRoute(),
         SettingRoute(),
       ],
       builder: (context, child, controller) {
@@ -51,16 +51,16 @@ class _MainPageState extends State<MainPage> {
                       child: Icon(Icons.add_box_outlined),
                     )),
                 BottomNavigationBarItem(
-                    label: 'Account',
-                    icon: Padding(
-                      padding: EdgeInsets.all(4.0),
-                      child: Icon(Icons.wallet_outlined),
-                    )),
-                BottomNavigationBarItem(
                     label: 'History',
                     icon: Padding(
                       padding: EdgeInsets.all(4.0),
                       child: Icon(Icons.bar_chart_outlined),
+                    )),
+                BottomNavigationBarItem(
+                    label: 'Account',
+                    icon: Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: Icon(Icons.wallet_outlined),
                     )),
                 BottomNavigationBarItem(
                     label: 'Settings',
