@@ -7,10 +7,12 @@ import 'package:app_ui/utils/string_extension.dart';
 import 'package:app_ui/utils/theme_extension.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:how_much/data/dummy/account.dart';
-import 'package:how_much/data/dummy/category.dart';
-import 'package:how_much/gen/assets.gen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:how_much/data/constant/account.dart';
+import 'package:how_much/presentation/provider/category/get_list_category_provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
+import '../../../domain/category.dart';
 
 @RoutePage()
 class RecordPage extends StatefulWidget {
@@ -32,7 +34,7 @@ class _RecordPageState extends State<RecordPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    categorySelected = Category("no");
+
     accountSelected = Account(name: "no");
   }
 
@@ -98,23 +100,29 @@ class _RecordPageState extends State<RecordPage> {
                       ),
                     ),
                     FreeSpaceUI.vertical(16.sp),
-                    SizedBox.fromSize(
-                      size: Size.fromHeight(48.px),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: listCategory.length,
-                        scrollDirection: Axis.horizontal,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          var item = listCategory[index];
-                          return CategoryChip(
-                              icon: item.icon!,
-                              label: item.name,
-                              isActive: item == categorySelected,
-                              onValueChanged: () {});
-                        },
-                      ),
-                    )
+                    Consumer(builder: (context, ref, child) {
+                      final listCategory = ref.watch(getListCategoryProvider);
+                      if (listCategory.isLoading)
+                        return CircularProgressIndicator();
+
+                      return SizedBox.fromSize(
+                        size: Size.fromHeight(48.px),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: listCategory.value?.length,
+                          scrollDirection: Axis.horizontal,
+                          physics: const BouncingScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            var item = listCategory.value?[index];
+                            return CategoryChip(
+                                // icon: "Icons.home_filled",
+                                label: item!.name,
+                                isActive: item == categorySelected,
+                                onValueChanged: () {});
+                          },
+                        ),
+                      );
+                    })
                   ],
                 ),
               ),

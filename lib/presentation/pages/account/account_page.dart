@@ -4,7 +4,7 @@ import 'package:app_ui/utils/string_extension.dart';
 import 'package:app_ui/utils/theme_extension.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:how_much/data/dummy/account.dart';
+import 'package:how_much/data/constant/account.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 @RoutePage()
