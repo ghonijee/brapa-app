@@ -2,19 +2,14 @@ import 'package:app_ui/token/figma_token.dart';
 import 'package:app_ui/utils/theme_extension.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:how_much/presentation/provider/account/get_list_account_provider.dart';
 import 'package:how_much/presentation/router/app_router.dart';
 
 @RoutePage()
-class MainPage extends StatefulWidget {
-  const MainPage({super.key});
-
+class MainPage extends ConsumerWidget {
   @override
-  State<MainPage> createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return AutoTabsRouter.tabBar(
       routes: const [
         RecordRoute(),
@@ -39,7 +34,10 @@ class _MainPageState extends State<MainPage> {
                   .copyWith(color: context.theme.appColors.sky.dark),
               showUnselectedLabels: true,
               currentIndex: tabsRouter.activeIndex,
-              onTap: tabsRouter.setActiveIndex,
+              onTap: (value) {
+                ref.refresh(getListAccountProvider);
+                tabsRouter.setActiveIndex(value);
+              },
               selectedItemColor: context.theme.appColors.sky.light,
               unselectedItemColor: context.theme.appColors.sky.dark,
               type: BottomNavigationBarType.fixed,

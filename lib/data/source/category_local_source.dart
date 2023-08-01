@@ -14,6 +14,10 @@ class CategoryLocalSource implements BaseLocalSource<CategoryModel> {
     throw UnimplementedError();
   }
 
+  Future<void> clearAll() {
+    return isar.categoryModels.clear();
+  }
+
   @override
   Future<List<CategoryModel>> getAll() {
     return isar.categoryModels.where().findAll();

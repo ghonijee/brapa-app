@@ -1,5 +1,5 @@
-import 'dart:developer';
-
+import 'package:how_much/data/models/account_model.dart';
+import 'package:how_much/data/models/transaction_model.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -11,6 +11,8 @@ class IsarService {
     final isar = await Isar.open(
       [
         CategoryModelSchema,
+        AccountModelSchema,
+        TransactionModelSchema,
       ],
       directory: dir.path,
     );

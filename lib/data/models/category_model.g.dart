@@ -17,18 +17,24 @@ const CategoryModelSchema = CollectionSchema(
   name: r'CategoryModel',
   id: 2062173352312629051,
   properties: {
-    r'isActive': PropertySchema(
+    r'categoryType': PropertySchema(
       id: 0,
+      name: r'categoryType',
+      type: IsarType.byte,
+      enumMap: _CategoryModelcategoryTypeEnumValueMap,
+    ),
+    r'isActive': PropertySchema(
+      id: 1,
       name: r'isActive',
       type: IsarType.bool,
     ),
     r'name': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'name',
       type: IsarType.string,
     ),
     r'order': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'order',
       type: IsarType.long,
     )
@@ -68,9 +74,10 @@ void _categoryModelSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeBool(offsets[0], object.isActive);
-  writer.writeString(offsets[1], object.name);
-  writer.writeLong(offsets[2], object.order);
+  writer.writeByte(offsets[0], object.categoryType.index);
+  writer.writeBool(offsets[1], object.isActive);
+  writer.writeString(offsets[2], object.name);
+  writer.writeLong(offsets[3], object.order);
 }
 
 CategoryModel _categoryModelDeserialize(
@@ -80,10 +87,13 @@ CategoryModel _categoryModelDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = CategoryModel(
+    categoryType: _CategoryModelcategoryTypeValueEnumMap[
+            reader.readByteOrNull(offsets[0])] ??
+        CategoryType.exp,
     id: id,
-    isActive: reader.readBoolOrNull(offsets[0]),
-    name: reader.readStringOrNull(offsets[1]),
-    order: reader.readLongOrNull(offsets[2]),
+    isActive: reader.readBoolOrNull(offsets[1]),
+    name: reader.readStringOrNull(offsets[2]),
+    order: reader.readLongOrNull(offsets[3]),
   );
   return object;
 }
@@ -96,15 +106,28 @@ P _categoryModelDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (_CategoryModelcategoryTypeValueEnumMap[
+              reader.readByteOrNull(offset)] ??
+          CategoryType.exp) as P;
     case 1:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 2:
+      return (reader.readStringOrNull(offset)) as P;
+    case 3:
       return (reader.readLongOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
+
+const _CategoryModelcategoryTypeEnumValueMap = {
+  'exp': 0,
+  'inc': 1,
+};
+const _CategoryModelcategoryTypeValueEnumMap = {
+  0: CategoryType.exp,
+  1: CategoryType.inc,
+};
 
 Id _categoryModelGetId(CategoryModel object) {
   return object.id ?? Isar.autoIncrement;
@@ -202,6 +225,62 @@ extension CategoryModelQueryWhere
 
 extension CategoryModelQueryFilter
     on QueryBuilder<CategoryModel, CategoryModel, QFilterCondition> {
+  QueryBuilder<CategoryModel, CategoryModel, QAfterFilterCondition>
+      categoryTypeEqualTo(CategoryType value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'categoryType',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CategoryModel, CategoryModel, QAfterFilterCondition>
+      categoryTypeGreaterThan(
+    CategoryType value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'categoryType',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CategoryModel, CategoryModel, QAfterFilterCondition>
+      categoryTypeLessThan(
+    CategoryType value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'categoryType',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CategoryModel, CategoryModel, QAfterFilterCondition>
+      categoryTypeBetween(
+    CategoryType lower,
+    CategoryType upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'categoryType',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
   QueryBuilder<CategoryModel, CategoryModel, QAfterFilterCondition> idIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -537,6 +616,20 @@ extension CategoryModelQueryLinks
 
 extension CategoryModelQuerySortBy
     on QueryBuilder<CategoryModel, CategoryModel, QSortBy> {
+  QueryBuilder<CategoryModel, CategoryModel, QAfterSortBy>
+      sortByCategoryType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'categoryType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CategoryModel, CategoryModel, QAfterSortBy>
+      sortByCategoryTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'categoryType', Sort.desc);
+    });
+  }
+
   QueryBuilder<CategoryModel, CategoryModel, QAfterSortBy> sortByIsActive() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isActive', Sort.asc);
@@ -577,6 +670,20 @@ extension CategoryModelQuerySortBy
 
 extension CategoryModelQuerySortThenBy
     on QueryBuilder<CategoryModel, CategoryModel, QSortThenBy> {
+  QueryBuilder<CategoryModel, CategoryModel, QAfterSortBy>
+      thenByCategoryType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'categoryType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CategoryModel, CategoryModel, QAfterSortBy>
+      thenByCategoryTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'categoryType', Sort.desc);
+    });
+  }
+
   QueryBuilder<CategoryModel, CategoryModel, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
@@ -629,6 +736,13 @@ extension CategoryModelQuerySortThenBy
 
 extension CategoryModelQueryWhereDistinct
     on QueryBuilder<CategoryModel, CategoryModel, QDistinct> {
+  QueryBuilder<CategoryModel, CategoryModel, QDistinct>
+      distinctByCategoryType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'categoryType');
+    });
+  }
+
   QueryBuilder<CategoryModel, CategoryModel, QDistinct> distinctByIsActive() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'isActive');
@@ -654,6 +768,13 @@ extension CategoryModelQueryProperty
   QueryBuilder<CategoryModel, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<CategoryModel, CategoryType, QQueryOperations>
+      categoryTypeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'categoryType');
     });
   }
 

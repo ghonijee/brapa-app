@@ -1,18 +1,22 @@
 import 'package:app_ui/app_ui.dart';
-import 'package:app_ui/atom/text_ui.dart';
-import 'package:app_ui/utils/string_extension.dart';
-import 'package:app_ui/utils/theme_extension.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:how_much/data/constant/account.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:how_much/domain/account.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../provider/account/get_list_account_provider.dart';
+
 @RoutePage()
-class AccountPage extends StatelessWidget {
+class AccountPage extends ConsumerWidget {
   const AccountPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final listAccount = ref.watch(getListAccountProvider);
+    if (listAccount.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -31,11 +35,12 @@ class AccountPage extends StatelessWidget {
                   color: context.colors.surface,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextUI.smallNormalMedium("My Balance"),
-                    TextUI.smallNoneBold("2,000,000")
+                    const TextUI.smallNormalMedium("My Balance"),
+                    TextUI.smallNoneBold(
+                        listAccount.value!.countValue()!.currency())
                   ],
                 ),
               ),
@@ -43,7 +48,7 @@ class AccountPage extends StatelessWidget {
               Expanded(
                 child: GridView.builder(
                   shrinkWrap: true,
-                  itemCount: listAccount.length,
+                  itemCount: listAccount.value!.length,
                   padding: EdgeInsets.zero,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     childAspectRatio: 6 / 5,
@@ -52,7 +57,7 @@ class AccountPage extends StatelessWidget {
                     mainAxisSpacing: 16.0,
                   ),
                   itemBuilder: (context, index) {
-                    var item = listAccount[index];
+                    var item = listAccount.value![index];
                     return Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(

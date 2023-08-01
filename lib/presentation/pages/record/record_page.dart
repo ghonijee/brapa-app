@@ -1,45 +1,32 @@
+import 'dart:developer';
+
 import 'package:app_ui/app_ui.dart';
 import 'package:app_ui/molecules/account_chip.dart';
 import 'package:app_ui/molecules/category_chip.dart';
 import 'package:app_ui/token/figma_token.dart';
-import 'package:app_ui/utils/numeric_formatter.dart';
-import 'package:app_ui/utils/string_extension.dart';
-import 'package:app_ui/utils/theme_extension.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:how_much/data/constant/account.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:how_much/domain/category.dart';
 import 'package:how_much/presentation/provider/category/get_list_category_provider.dart';
+import 'package:how_much/presentation/provider/transaction/create_record_provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
-import '../../../domain/category.dart';
+import '../../provider/account/get_list_account_provider.dart';
 
 @RoutePage()
-class RecordPage extends StatefulWidget {
+class RecordPage extends ConsumerWidget {
   const RecordPage({super.key});
 
   @override
-  State<RecordPage> createState() => _RecordPageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    var controller = ref.watch(createRecordProvider);
+    // var listCategory = controller.segmentedControllerGroupValue == 0
+    //     ? ref.watch(expCategoriesProvider)
+    //     : ref.watch(incomeCategoriesProvider);
+    var getListCategory = ref.watch(getListCategoryProvider);
 
-class _RecordPageState extends State<RecordPage> {
-  late int segmentedControllerGroupValue = 0;
-  final TextEditingController amountController = TextEditingController();
-  final TextEditingController memoController = TextEditingController();
-  final FocusNode focusNode = FocusNode();
-  Category? categorySelected;
-  Account? accountSelected;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    accountSelected = Account(name: "no");
-  }
-
-  @override
-  Widget build(BuildContext context) {
+    final listAccount = ref.watch(getListAccountProvider);
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -53,15 +40,14 @@ class _RecordPageState extends State<RecordPage> {
                 child: SizedBox(
                   width: 70.w,
                   child: SegmentedControl(
-                    groupValue: segmentedControllerGroupValue,
+                    groupValue: controller.segmentedControllerGroupValue,
                     children: [
                       SegmentedControlValue(label: "Expense"),
                       SegmentedControlValue(label: "Income"),
                     ],
                     onValueChanged: (index, value) {
-                      setState(() {
-                        segmentedControllerGroupValue = index;
-                      });
+                      controller.segmentedControllerGroupValue = index;
+                      controller.notifyListeners();
                     },
                   ),
                 ),
@@ -70,11 +56,11 @@ class _RecordPageState extends State<RecordPage> {
                 children: [
                   FreeSpaceUI.vertical(16.sp),
                   AmountInputField(
-                    focusNode: focusNode,
-                    controller: amountController,
+                    focusNode: controller.focusNode,
+                    controller: controller.amountController,
                   ),
                   FreeSpaceUI.vertical(12.sp),
-                  MemoInputField(memoController: memoController),
+                  MemoInputField(memoController: controller.memoController),
                 ],
               ),
               FreeSpaceUI.vertical(12.sp),
@@ -100,29 +86,44 @@ class _RecordPageState extends State<RecordPage> {
                       ),
                     ),
                     FreeSpaceUI.vertical(16.sp),
-                    Consumer(builder: (context, ref, child) {
-                      final listCategory = ref.watch(getListCategoryProvider);
-                      if (listCategory.isLoading)
-                        return CircularProgressIndicator();
-
-                      return SizedBox.fromSize(
-                        size: Size.fromHeight(48.px),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: listCategory.value?.length,
-                          scrollDirection: Axis.horizontal,
-                          physics: const BouncingScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            var item = listCategory.value?[index];
-                            return CategoryChip(
-                                // icon: "Icons.home_filled",
-                                label: item!.name,
-                                isActive: item == categorySelected,
-                                onValueChanged: () {});
-                          },
-                        ),
-                      );
-                    })
+                    getListCategory.maybeWhen(
+                        loading: () => Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                        data: (listCategory) {
+                          var result =
+                              controller.segmentedControllerGroupValue == 1
+                                  ? listCategory!.incomeList()
+                                  : listCategory!.expenseList();
+                          return SizedBox.fromSize(
+                            size: Size.fromHeight(48.px),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: result.length,
+                              scrollDirection: Axis.horizontal,
+                              physics: const BouncingScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                var item = result?[index];
+                                return CategoryChip(
+                                    // icon: "Icons.home_filled",
+                                    label: item!.name,
+                                    isActive: item ==
+                                        ref
+                                            .watch(createRecordProvider)
+                                            .categorySelected,
+                                    onValueChanged: () {
+                                      ref
+                                          .watch(createRecordProvider)
+                                          .categorySelected = item;
+                                      controller.notifyListeners();
+                                    });
+                              },
+                            ),
+                          );
+                        },
+                        orElse: () {
+                          return SizedBox();
+                        }),
                   ],
                 ),
               ),
@@ -149,45 +150,58 @@ class _RecordPageState extends State<RecordPage> {
                       ),
                     ),
                     FreeSpaceUI.vertical(16.sp),
-                    SizedBox.fromSize(
-                      size: Size.fromHeight(48.px),
-                      child: ListView.builder(
-                        addSemanticIndexes: true,
-                        shrinkWrap: true,
-                        itemCount: listAccount.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          var item = listAccount[index];
-                          return AccountChip(
-                            assetPath: item.assets!,
-                            label: item.name,
-                            isActive: accountSelected == item,
-                            onValueChanged: () {},
-                          );
-                        },
-                      ),
-                    )
+                    listAccount.isLoading
+                        ? SizedBox()
+                        : SizedBox.fromSize(
+                            size: Size.fromHeight(48.px),
+                            child: ListView.builder(
+                              addSemanticIndexes: true,
+                              shrinkWrap: true,
+                              itemCount: listAccount.value?.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                var item = listAccount.value?[index];
+                                return AccountChip(
+                                  assetPath: item!.assets!,
+                                  label: item.name,
+                                  isActive: item ==
+                                      ref
+                                          .watch(createRecordProvider)
+                                          .accountSelected,
+                                  onValueChanged: () {
+                                    ref
+                                        .watch(createRecordProvider)
+                                        .accountSelected = item;
+                                    controller.notifyListeners();
+                                  },
+                                );
+                              },
+                            ),
+                          ),
                   ],
                 ),
               ),
               // FreeSpaceUI.vertical(20),
               NumericKeyboard(
                 onKeyboardTap: (value) {
-                  var oldValue = amountController.text;
+                  var oldValue = controller.amountController.text;
                   var newValue = oldValue + value;
-                  amountController.text = newValue.currency(prefix: '');
+                  controller.amountController.text =
+                      newValue.currency(prefix: '');
                 },
                 textStyle: FigmaTextStyles.largeNormalMedium,
-                rightButtonFn: () {
+                rightButtonFn: () async {
                   // On Submit
+                  await controller.save();
+                  ref.refresh(getListAccountProvider);
                 },
-                rightButtonLongPressFn: () {},
                 rightIcon: const Icon(
                   Icons.check,
                 ),
                 leftButtonFn: () {
-                  amountController.text = amountController.text
-                      .substring(0, amountController.text.length - 1)
+                  controller.amountController.text = controller
+                      .amountController.text
+                      .substring(0, controller.amountController.text.length - 1)
                       .currency(prefix: "");
                 },
                 leftIcon: const Icon(

@@ -11,6 +11,9 @@ class CategoryModel {
 
   String? name;
 
+  @enumerated
+  final CategoryType categoryType;
+
   bool? isActive;
 
   int? order;
@@ -18,14 +21,32 @@ class CategoryModel {
   CategoryModel({
     this.id,
     this.name,
+    required this.categoryType,
     this.isActive,
     this.order,
   });
+
+  factory CategoryModel.fromDomain(Category data) => CategoryModel(
+        id: data.id,
+        name: data.name,
+        categoryType: data.categoryType,
+        isActive: data.isActive,
+        order: data.order,
+      );
+
+  toDomain() => Category(
+        id: id,
+        name: name!,
+        categoryType: categoryType,
+        isActive: isActive,
+        order: order,
+      );
 }
 
 extension CategoryModelExt on List<CategoryModel> {
   toDomaiList() => map(
         (e) => Category(
+          categoryType: e.categoryType,
           name: e.name!,
           id: e.id,
           isActive: e.isActive,
