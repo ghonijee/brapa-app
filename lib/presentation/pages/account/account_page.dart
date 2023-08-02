@@ -6,6 +6,8 @@ import 'package:how_much/domain/account.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../provider/account/get_list_account_provider.dart';
+import 'widgets/account_card_widget.dart';
+import 'widgets/account_detail_bottom_sheet.dart';
 
 @RoutePage()
 class AccountPage extends ConsumerWidget {
@@ -58,39 +60,25 @@ class AccountPage extends ConsumerWidget {
                   ),
                   itemBuilder: (context, index) {
                     var item = listAccount.value![index];
-                    return Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: context.colors.surface,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            height: 40,
-                            width: 40,
-                            padding: const EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              color: context.theme.appColors.sky.light,
-                            ),
-                            child: Image.asset(
-                              item.assets!,
-                              fit: BoxFit.fitWidth,
-                            ),
-                          ),
-                          FreeSpaceUI.vertical(20),
-                          TextUI.smallNoneBold(item.balance!.currency()),
-                          FreeSpaceUI.vertical(8),
-                          TextUI.smallNoneMedium(
-                            item.name,
-                            color: context.colors.sky.base,
-                          )
-                        ],
-                      ),
-                    );
+                    return GestureDetector(
+                        onTap: () {
+                          // showModalBottomSheet(
+                          //   context: context,
+                          //   enableDrag: true,
+                          //   isScrollControlled: true,
+                          //   useRootNavigator: true,
+                          //   backgroundColor: null,
+                          //   shape: const RoundedRectangleBorder(
+                          //       borderRadius: BorderRadius.only(
+                          //     topLeft: Radius.circular(16),
+                          //     topRight: Radius.circular(16),
+                          //   )),
+                          //   builder: (context) {
+                          //     return const AccountDetailBottomSheet();
+                          //   },
+                          // );
+                        },
+                        child: AccountCardWidget(item: item));
                   },
                 ),
               ),

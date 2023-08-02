@@ -52,6 +52,7 @@ dependencies:
   hooks_riverpod: ^2.3.7
   moment_dart: ^0.18.1
   intl: ^0.18.1
+  scrollable_positioned_list: ^0.3.8
 
 dev_dependencies:
   flutter_test:
