@@ -491,7 +491,7 @@ packages:
     source: hosted
     version: "2.1.6"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
       sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
@@ -594,6 +594,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  moment_dart:
+    dependency: "direct main"
+    description:
+      name: moment_dart
+      sha256: "02fe00904b30e3421316b3cfdc3c4ad0ff15b4d6c352c5fd228bb0b451f008a6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.18.1"
   package_config:
     dependency: transitive
     description:

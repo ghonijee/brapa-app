@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import '../../domain/transaction.dart';
@@ -11,9 +13,11 @@ class TransactionRepository {
 
   Future<Either<String, List<Transaction>>> getAll() async {
     try {
+      // localSource.clearAll();
       var result = await localSource.getAll();
+
       return Right(result.toDomaiList());
-    } catch (e) {
+    } catch (e, s) {
       return Left(e.toString());
     }
   }

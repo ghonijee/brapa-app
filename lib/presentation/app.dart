@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:how_much/presentation/provider/account/get_list_account_provider.dart';
+import 'package:how_much/presentation/provider/transaction/get_list_transaction_provider.dart';
 import 'package:how_much/presentation/router/app_router.dart';
 
 @RoutePage()
@@ -35,7 +36,15 @@ class MainPage extends ConsumerWidget {
               showUnselectedLabels: true,
               currentIndex: tabsRouter.activeIndex,
               onTap: (value) {
-                ref.refresh(getListAccountProvider);
+                switch (value) {
+                  case 1:
+                    ref.refresh(getListTransactionProvider);
+                    break;
+                  case 2:
+                    ref.refresh(getListAccountProvider);
+                    break;
+                  default:
+                }
                 tabsRouter.setActiveIndex(value);
               },
               selectedItemColor: context.theme.appColors.sky.light,

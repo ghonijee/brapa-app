@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:how_much/data/models/account_model.dart';
 import 'package:how_much/data/models/category_model.dart';
+import 'package:how_much/domain/account.dart';
+import 'package:how_much/domain/category.dart';
 import 'package:isar/isar.dart';
 
 import '../../domain/transaction.dart';
@@ -40,11 +42,12 @@ class TransactionModel {
         value: value ?? 0,
         memo: memo,
         createdAt: createdAt,
-        account: account.value!.toDomain(),
-        category: category.value!.toDomain(),
+        account: account.value?.toDomain() ?? Account(name: "No"),
+        category: category.value?.toDomain() ??
+            Category(name: "Other", categoryType: CategoryType.exp),
       );
 }
 
 extension TransactionModelExt on List<TransactionModel> {
-  toDomaiList() => map((e) => e.toDomain()).toList();
+  List<Transaction> toDomaiList() => map((e) => e.toDomain()).toList();
 }

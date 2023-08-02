@@ -50,6 +50,8 @@ dependencies:
   riverpod_annotation: ^2.1.1
   flutter_hooks: ^0.20.0
   hooks_riverpod: ^2.3.7
+  moment_dart: ^0.18.1
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

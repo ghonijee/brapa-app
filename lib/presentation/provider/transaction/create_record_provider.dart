@@ -35,6 +35,7 @@ class CreateRecordNotifier extends ChangeNotifier {
         value: amountController.text.toNumber() ?? 0,
         memo: memoController.text,
         category: categorySelected!,
+        createdAt: DateTime.now(),
         account: accountSelected!,
       );
 

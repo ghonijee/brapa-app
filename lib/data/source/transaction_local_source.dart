@@ -1,3 +1,4 @@
+import 'package:how_much/data/models/account_model.dart';
 import 'package:how_much/data/source/base_local_source.dart';
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
@@ -15,6 +16,12 @@ class TransactionLocalSource implements BaseLocalSource<TransactionModel> {
     });
   }
 
+  Future<void> clearAll() async {
+    await isar.writeTxn(() async {
+      isar.transactionModels.clear();
+    });
+  }
+
   @override
   Future<List<TransactionModel>> getAll() {
     return isar.transactionModels.where().findAll();
@@ -23,10 +30,11 @@ class TransactionLocalSource implements BaseLocalSource<TransactionModel> {
   @override
   Future<TransactionModel?> store(TransactionModel data) async {
     late int id;
-    await isar.writeTxn(() async {
-      id = await isar.transactionModels.put(data);
+    isar.writeTxnSync(() {
+      id = isar.transactionModels.putSync(data);
+      data.account.save();
+      data.category.save();
     });
-
     return isar.transactionModels.get(id);
   }
 
