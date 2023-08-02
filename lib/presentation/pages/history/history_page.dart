@@ -4,7 +4,9 @@ import 'package:app_ui/app_ui.dart';
 import 'package:app_ui/atom/text_ui.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:how_much/domain/category.dart';
 import 'package:how_much/domain/transaction.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -12,12 +14,13 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../provider/transaction/get_list_transaction_provider.dart';
 
 @RoutePage()
-class HistoryPage extends ConsumerWidget {
+class HistoryPage extends HookConsumerWidget {
   const HistoryPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var listHistory = ref.watch(getListTransactionProvider);
+    var historyView = useState(0);
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -29,6 +32,22 @@ class HistoryPage extends ConsumerWidget {
             children: [
               FreeSpaceUI.vertical(8.h),
               const TextUI.titleRegular("History"),
+              FreeSpaceUI.vertical(20),
+              Center(
+                child: SizedBox(
+                  // width: 70.w,
+                  child: SegmentedControl(
+                    groupValue: historyView.value,
+                    children: [
+                      SegmentedControlValue(label: "Daily"),
+                      SegmentedControlValue(label: "Monthly"),
+                    ],
+                    onValueChanged: (index, value) {
+                      historyView.value = index;
+                    },
+                  ),
+                ),
+              ),
               FreeSpaceUI.vertical(20),
               listHistory.when(
                 error: (error, stackTrace) {
@@ -43,15 +62,18 @@ class HistoryPage extends ConsumerWidget {
                   child: CircularProgressIndicator(),
                 ),
                 data: (data) {
+                  var listData = historyView.value == 0
+                      ? data.groupDaily()
+                      : data.groupMonthly();
                   return Expanded(
                     child: ListView.separated(
                       padding: EdgeInsets.zero,
                       separatorBuilder: (context, index) => const SizedBox(
                         height: 16,
                       ),
-                      itemCount: data.groupDaily().length,
+                      itemCount: listData.length,
                       itemBuilder: (context, index) {
-                        var groupItem = data.groupDaily()[index];
+                        var groupItem = listData[index];
                         return Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(

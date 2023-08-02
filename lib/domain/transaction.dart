@@ -68,21 +68,22 @@ extension TransactionExtension on List<Transaction> {
     return group;
   }
 
-  groupMonthly() {
+  List<History> groupMonthly() {
     var group = <History>[];
     for (var item in this) {
       var indexGroup = group.indexWhere((element) =>
           element.date.eqvMonth(item.createdAt!) &&
           element.date.eqvYear(item.createdAt!));
       if (indexGroup < 0) {
-        group.add(History(
-            label: DateFormat.yMMMM().format(item.createdAt!),
+        var historyItem = History(
+            label: DateFormat("MMMM yyyy").format(item.createdAt!),
             date: item.createdAt!,
-            amount: item.value,
-            transactions: [item]));
+            amount: 0,
+            transactions: [item]);
+        historyItem.calculate(item);
+        group.add(historyItem);
       } else {
-        var itemGroup = group[indexGroup];
-        group[indexGroup].amount = itemGroup.amount + item.value;
+        group[indexGroup].calculate(item);
         group[indexGroup].transactions.add(item);
       }
     }
