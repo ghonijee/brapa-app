@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:how_much/domain/category.dart';
 import 'package:how_much/domain/transaction.dart';
+import 'package:how_much/presentation/router/app_router.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../provider/transaction/get_list_transaction_provider.dart';
@@ -62,9 +63,7 @@ class HistoryPage extends HookConsumerWidget {
                   child: CircularProgressIndicator(),
                 ),
                 data: (data) {
-                  var listData = historyView.value == 0
-                      ? data.groupDaily()
-                      : data.groupMonthly();
+                  var listData = historyView.value == 0 ? data.groupDaily() : data.groupMonthly();
                   return Expanded(
                     child: ListView.separated(
                       padding: EdgeInsets.zero,
@@ -83,8 +82,7 @@ class HistoryPage extends HookConsumerWidget {
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   TextUI.smallNoneBold(
                                     groupItem.label,
@@ -103,9 +101,12 @@ class HistoryPage extends HookConsumerWidget {
                                 itemCount: groupItem.transactions.length,
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
-                                  var transactionItem =
-                                      groupItem.transactions[index];
+                                  var transactionItem = groupItem.transactions[index];
                                   return ListTile(
+                                    onTap: () {
+                                      // WidgetUI.showBottomSheet(context, TransactionEditBottomSheet());
+                                      context.router.push(RecordDetailRoute(transaction: transactionItem));
+                                    },
                                     contentPadding: EdgeInsets.zero,
                                     leading: HistoryIconItemWidget(
                                       type: transactionItem.type,
@@ -113,12 +114,10 @@ class HistoryPage extends HookConsumerWidget {
                                     trailing: TextUI.smallNoneRegular(
                                       transactionItem.isExpense()
                                           ? "- ${transactionItem.value.toThousandSeparator()}"
-                                          : transactionItem.value
-                                              .toThousandSeparator(),
+                                          : transactionItem.value.toThousandSeparator(),
                                       color: context.colors.sky.lighter,
                                     ),
-                                    title: TextUI.smallNormalMedium(
-                                        transactionItem.category.name),
+                                    title: TextUI.smallNormalMedium(transactionItem.category.name),
                                     subtitle: TextUI.smallNoneRegular(
                                       transactionItem.account.name ?? "...",
                                       color: context.colors.sky.base,

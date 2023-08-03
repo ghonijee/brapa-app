@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:how_much/presentation/app.dart';
-
+import '../../domain/transaction.dart';
 import '../pages/pages.dart';
 
 part 'app_router.gr.dart';
@@ -21,5 +21,6 @@ class AppRouter extends _$AppRouter {
             AutoRoute(page: SettingRoute.page),
           ],
         ),
+        AutoRoute(page: RecordDetailRoute.page),
       ];
 }

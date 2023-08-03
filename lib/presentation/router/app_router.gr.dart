@@ -33,6 +33,17 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const HistoryPage(),
       );
     },
+    RecordDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<RecordDetailRouteArgs>(
+          orElse: () => const RecordDetailRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: RecordDetailPage(
+          key: args.key,
+          transaction: args.transaction,
+        ),
+      );
+    },
     AccountRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -88,6 +99,44 @@ class HistoryRoute extends PageRouteInfo<void> {
   static const String name = 'HistoryRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RecordDetailPage]
+class RecordDetailRoute extends PageRouteInfo<RecordDetailRouteArgs> {
+  RecordDetailRoute({
+    Key? key,
+    Transaction? transaction,
+    List<PageRouteInfo>? children,
+  }) : super(
+          RecordDetailRoute.name,
+          args: RecordDetailRouteArgs(
+            key: key,
+            transaction: transaction,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'RecordDetailRoute';
+
+  static const PageInfo<RecordDetailRouteArgs> page =
+      PageInfo<RecordDetailRouteArgs>(name);
+}
+
+class RecordDetailRouteArgs {
+  const RecordDetailRouteArgs({
+    this.key,
+    this.transaction,
+  });
+
+  final Key? key;
+
+  final Transaction? transaction;
+
+  @override
+  String toString() {
+    return 'RecordDetailRouteArgs{key: $key, transaction: $transaction}';
+  }
 }
 
 /// generated route for

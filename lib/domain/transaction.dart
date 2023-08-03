@@ -1,10 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:app_ui/app_ui.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:how_much/domain/category.dart';
 import 'package:intl/intl.dart';
 import 'package:moment_dart/moment_dart.dart';
+
+import 'package:app_ui/app_ui.dart';
 
 import 'account.dart';
 import 'history.dart';
@@ -41,19 +42,36 @@ class Transaction {
 
   bool isExpense() => type == TransactionType.exp;
   bool isIncome() => type == TransactionType.inc;
+
+  Transaction copyWith({
+    int? id,
+    TransactionType? type,
+    int? value,
+    String? memo,
+    DateTime? createdAt,
+    Category? category,
+    Account? account,
+  }) {
+    return Transaction(
+      id: id ?? this.id,
+      type: type ?? this.type,
+      value: value ?? this.value,
+      memo: memo ?? this.memo,
+      createdAt: createdAt ?? this.createdAt,
+      category: category ?? this.category,
+      account: account ?? this.account,
+    );
+  }
 }
 
 extension TransactionExtension on List<Transaction> {
   List<History> groupDaily() {
     var group = <History>[];
     for (var item in this) {
-      var indexGroup = group.indexWhere(
-          (element) => element.date.eqvYearMonthDay(item.createdAt!));
+      var indexGroup = group.indexWhere((element) => element.date.eqvYearMonthDay(item.createdAt!));
       if (indexGroup < 0) {
         var historyItem = History(
-            label: item.createdAt!.isToday()
-                ? "Today"
-                : DateFormat("dd MMMM yy").format(item.createdAt!),
+            label: item.createdAt!.isToday() ? "Today" : DateFormat("dd MMMM yy").format(item.createdAt!),
             date: item.createdAt!,
             amount: 0,
             transactions: [item]);
@@ -71,9 +89,8 @@ extension TransactionExtension on List<Transaction> {
   List<History> groupMonthly() {
     var group = <History>[];
     for (var item in this) {
-      var indexGroup = group.indexWhere((element) =>
-          element.date.eqvMonth(item.createdAt!) &&
-          element.date.eqvYear(item.createdAt!));
+      var indexGroup = group
+          .indexWhere((element) => element.date.eqvMonth(item.createdAt!) && element.date.eqvYear(item.createdAt!));
       if (indexGroup < 0) {
         var historyItem = History(
             label: DateFormat("MMMM yyyy").format(item.createdAt!),

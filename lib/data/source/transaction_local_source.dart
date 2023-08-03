@@ -42,6 +42,8 @@ class TransactionLocalSource implements BaseLocalSource<TransactionModel> {
   Future<void> update(TransactionModel data) async {
     isar.writeTxn(() async {
       await isar.transactionModels.put(data);
+      await data.account.save();
+      await data.category.save();
     });
   }
 }
