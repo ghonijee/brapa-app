@@ -20,7 +20,7 @@ class CategoryLocalSource implements BaseLocalSource<CategoryModel> {
 
   @override
   Future<List<CategoryModel>> getAll() {
-    return isar.categoryModels.where().findAll();
+    return isar.categoryModels.where().sortByOrder().findAll();
   }
 
   @override

@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:fpdart/fpdart.dart';
+import 'package:how_much/domain/account.dart';
+import 'package:how_much/domain/category.dart';
 import 'package:injectable/injectable.dart';
 import '../../domain/transaction.dart';
 import '../models/transaction_model.dart';
@@ -10,6 +12,17 @@ import '../source/transaction_local_source.dart';
 class TransactionRepository {
   final TransactionLocalSource localSource;
   TransactionRepository(this.localSource);
+
+  Future<Either<String, List<Transaction>>> searchAll({required String keyword}) async {
+    try {
+      // localSource.clearAll();
+      var result = await localSource.findAll(keyword: keyword);
+
+      return Right(result.toDomaiList());
+    } catch (e, s) {
+      return Left(e.toString());
+    }
+  }
 
   Future<Either<String, List<Transaction>>> getAll() async {
     try {

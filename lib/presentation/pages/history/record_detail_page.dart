@@ -4,10 +4,13 @@ import 'package:app_ui/molecules/category_chip.dart';
 import 'package:app_ui/token/figma_token.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:how_much/domain/category.dart';
 import 'package:how_much/domain/transaction.dart';
+import 'package:how_much/presentation/provider/transaction/delete_record_provider.dart';
 import 'package:how_much/presentation/provider/transaction/update_record_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -15,6 +18,7 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../provider/account/get_list_account_provider.dart';
 import '../../provider/category/get_list_category_provider.dart';
+import '../../provider/transaction/get_list_transaction_provider.dart';
 
 @RoutePage()
 class RecordDetailPage extends HookConsumerWidget {
@@ -24,8 +28,8 @@ class RecordDetailPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var controller = ref.watch(updateRecordProvider.notifier);
-    controller.loadTransaction(transaction!);
+    var controller = ref.watch(updateRecordProvider);
+
     var getListCategory = ref.watch(getListCategoryProvider);
     final listAccount = ref.watch(getListAccountProvider);
     final listCategoryScroll = ItemScrollController();
@@ -53,7 +57,21 @@ class RecordDetailPage extends HookConsumerWidget {
                       ),
                     ),
                     IconButton(
-                      onPressed: () => context.router.pop(),
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDeleteItemUI(onConfirm: () {
+                                ref.watch(deleteRecordProvider).delete(controller.transaction).then<void>((value) {
+                                  ref.watch(asyncListHistory.notifier).reload();
+                                  context.router.popForced();
+                                  context.router.pop();
+                                });
+                              }, onCancel: () {
+                                context.router.pop();
+                              });
+                            });
+                      },
                       icon: const Icon(Icons.delete_rounded),
                       color: context.colors.onBackground,
                     ),
@@ -135,10 +153,11 @@ class RecordDetailPage extends HookConsumerWidget {
                                         scrollDirection: Axis.horizontal,
                                         physics: const BouncingScrollPhysics(),
                                         itemBuilder: (context, index) {
-                                          var item = result?[index];
+                                          var item = result[index];
+
                                           return CategoryChip(
                                               alignment: Alignment.center,
-                                              label: item!.name,
+                                              label: item.name,
                                               isActive: item == controller.categorySelected,
                                               onValueChanged: () {
                                                 controller.categorySelected = item;
@@ -186,15 +205,16 @@ class RecordDetailPage extends HookConsumerWidget {
                                           separatorBuilder: (context, index) => FreeSpaceUI.horizontal(8),
                                           addSemanticIndexes: true,
                                           shrinkWrap: true,
-                                          itemCount: data!.length,
+                                          itemCount: data.length,
                                           scrollDirection: Axis.horizontal,
                                           itemBuilder: (context, index) {
                                             var item = data[index];
+
                                             return AccountChip(
                                               alignment: Alignment.center,
-                                              assetPath: item!.assets!,
+                                              assetPath: item.assets!,
                                               label: item.name,
-                                              isActive: item == controller.accountSelected,
+                                              isActive: item.id == controller.accountSelected?.id,
                                               onValueChanged: () {
                                                 controller.accountSelected = item;
                                                 controller.notifyListeners();
@@ -217,6 +237,7 @@ class RecordDetailPage extends HookConsumerWidget {
                             FreeSpaceUI.vertical(16),
                             TextFormField(
                               style: FigmaTextStyles.smallNormalRegular,
+                              controller: controller.memoController,
                               maxLines: 2,
                               decoration: InputDecoration(
                                 filled: true,
@@ -248,7 +269,7 @@ class RecordDetailPage extends HookConsumerWidget {
                               child: TextFormField(
                                 style: FigmaTextStyles.smallNormalRegular.copyWith(color: context.colors.onSurface),
                                 enabled: false,
-                                initialValue: DateFormat("dd MMMM yyyy").format(DateTime.now()),
+                                controller: controller.dateController,
                                 decoration: InputDecoration(
                                   prefixIcon: const Icon(Icons.calendar_month_rounded),
                                   prefixIconColor: context.colors.onSurface,
@@ -263,7 +284,12 @@ class RecordDetailPage extends HookConsumerWidget {
                         ),
                         FreeSpaceUI.vertical(42),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            controller.save().then((value) {
+                              ref.watch(asyncListHistory.notifier).reload();
+                              context.router.pop();
+                            });
+                          },
                           style: ElevatedButton.styleFrom(
                             minimumSize: Size.fromHeight(48.px),
                             backgroundColor: context.colors.primary.base,

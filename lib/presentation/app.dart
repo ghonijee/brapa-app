@@ -29,19 +29,17 @@ class MainPage extends ConsumerWidget {
               elevation: 12,
               backgroundColor: context.theme.appColors.ink.darkest,
               iconSize: 24,
-              selectedLabelStyle: FigmaTextStyles.tinyNoneRegular
-                  .copyWith(color: context.theme.appColors.onBackground),
-              unselectedLabelStyle: FigmaTextStyles.tinyNoneRegular
-                  .copyWith(color: context.theme.appColors.sky.dark),
+              selectedLabelStyle: FigmaTextStyles.tinyNoneRegular.copyWith(color: context.theme.appColors.onBackground),
+              unselectedLabelStyle: FigmaTextStyles.tinyNoneRegular.copyWith(color: context.theme.appColors.sky.dark),
               showUnselectedLabels: true,
               currentIndex: tabsRouter.activeIndex,
               onTap: (value) {
                 switch (value) {
                   case 1:
-                    ref.refresh(getListTransactionProvider);
+                    ref.invalidate(asyncListHistory);
                     break;
                   case 2:
-                    ref.refresh(getListAccountProvider);
+                    ref.invalidate(getListAccountProvider);
                     break;
                   default:
                 }

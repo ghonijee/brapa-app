@@ -1,4 +1,5 @@
 import 'package:how_much/data/models/account_model.dart';
+import 'package:how_much/data/models/category_model.dart';
 import 'package:how_much/data/source/base_local_source.dart';
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
@@ -22,9 +23,21 @@ class TransactionLocalSource implements BaseLocalSource<TransactionModel> {
     });
   }
 
+  Future<List<TransactionModel>> findAll({String keyword = ''}) {
+    var query = isar.transactionModels
+        .filter()
+        .memoContains(keyword, caseSensitive: false)
+        .or()
+        .category((q) => q.nameContains(keyword, caseSensitive: false))
+        .or()
+        .account((q) => q.nameContains(keyword, caseSensitive: false))
+        .findAll();
+    return query;
+  }
+
   @override
   Future<List<TransactionModel>> getAll() {
-    return isar.transactionModels.where().findAll();
+    return isar.transactionModels.where().sortByCreatedAtDesc().findAll();
   }
 
   @override
@@ -40,7 +53,7 @@ class TransactionLocalSource implements BaseLocalSource<TransactionModel> {
 
   @override
   Future<void> update(TransactionModel data) async {
-    isar.writeTxn(() async {
+    await isar.writeTxn(() async {
       await isar.transactionModels.put(data);
       await data.account.save();
       await data.category.save();

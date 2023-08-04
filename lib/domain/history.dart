@@ -18,7 +18,6 @@ class History {
   });
 
   calculate(Transaction transaction) {
-    print(transaction.type);
     if (transaction.isExpense()) {
       amount -= transaction.value;
     } else {

@@ -17,7 +17,7 @@ class AccountLocalSource implements BaseLocalSource<AccountModel> {
 
   @override
   Future<List<AccountModel>> getAll() {
-    return isar.accountModels.where().findAll();
+    return isar.accountModels.where().sortByOrder().findAll();
   }
 
   @override
@@ -31,11 +31,12 @@ class AccountLocalSource implements BaseLocalSource<AccountModel> {
   }
 
   @override
-  Future<void> update(AccountModel data) async {
+  Future<AccountModel?> update(AccountModel data) async {
     late int id;
 
     await isar.writeTxn(() async {
       id = await isar.accountModels.put(data);
     });
+    return isar.accountModels.get(id);
   }
 }

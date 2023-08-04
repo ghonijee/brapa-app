@@ -11,15 +11,15 @@ import 'account.dart';
 import 'history.dart';
 
 class Transaction {
-  int? id;
+  final int? id;
 
   final TransactionType type;
 
   final int value;
 
-  String? memo;
+  final String? memo;
 
-  DateTime? createdAt;
+  final DateTime? createdAt;
 
   final Category category;
 
@@ -38,6 +38,14 @@ class Transaction {
   @override
   String toString() {
     return 'Transaction(id: $id, type: $type, value: $value, memo: $memo, createdAt: $createdAt, category: $category, account: $account)';
+  }
+
+  String subtitle() {
+    var value = account.name;
+    if (memo != null) {
+      value += " - ${memo!.trim()}";
+    }
+    return value;
   }
 
   bool isExpense() => type == TransactionType.exp;
@@ -105,6 +113,17 @@ extension TransactionExtension on List<Transaction> {
       }
     }
 
+    return group;
+  }
+
+  List<History> groupAll() {
+    var historyItem = History(label: "Result", date: DateTime.now(), amount: 0, transactions: []);
+    for (var item in this) {
+      historyItem.calculate(item);
+      historyItem.transactions.add(item);
+    }
+
+    var group = <History>[historyItem];
     return group;
   }
 }

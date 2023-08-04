@@ -24,6 +24,23 @@ class Account {
   increase(int value) {
     balance = balance! + value;
   }
+
+  @override
+  bool operator ==(covariant Account other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id &&
+        other.name == name &&
+        other.assets == assets &&
+        other.balance == balance &&
+        other.order == order &&
+        other.isActive == isActive;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^ name.hashCode ^ assets.hashCode ^ balance.hashCode ^ order.hashCode ^ isActive.hashCode;
+  }
 }
 
 extension AccountExtension on List<Account> {

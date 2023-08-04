@@ -44,7 +44,7 @@ class AccountRepository {
 
   Future<Either<String, bool>> update(Account data) async {
     try {
-      var id = await localSource.update(AccountModel.fromDomain(data));
+      var account = await localSource.update(AccountModel.fromDomain(data));
       return const Right(true);
     } catch (e) {
       return Left(e.toString());

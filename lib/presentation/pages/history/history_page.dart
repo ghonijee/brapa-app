@@ -1,18 +1,16 @@
 import 'dart:developer';
 
 import 'package:app_ui/app_ui.dart';
-import 'package:app_ui/atom/text_ui.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:how_much/domain/category.dart';
 import 'package:how_much/domain/transaction.dart';
 import 'package:how_much/presentation/router/app_router.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../provider/transaction/get_list_transaction_provider.dart';
+import '../../provider/transaction/update_record_provider.dart';
 
 @RoutePage()
 class HistoryPage extends HookConsumerWidget {
@@ -20,8 +18,10 @@ class HistoryPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var listHistory = ref.watch(getListTransactionProvider);
+    final listHistory = ref.watch(asyncListHistory);
     var historyView = useState(0);
+    var searchMode = useState(false);
+    TextEditingController findController = useTextEditingController();
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -32,20 +32,57 @@ class HistoryPage extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               FreeSpaceUI.vertical(8.h),
-              const TextUI.titleRegular("History"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const TextUI.titleRegular("History"),
+                  GestureDetector(
+                    onTap: () => searchMode.value = !searchMode.value,
+                    child:
+                        searchMode.value ? const TextUI.smallNormalRegular('Cancel') : const Icon(Icons.search_rounded),
+                  )
+                ],
+              ),
               FreeSpaceUI.vertical(20),
-              Center(
-                child: SizedBox(
-                  // width: 70.w,
-                  child: SegmentedControl(
-                    groupValue: historyView.value,
-                    children: [
-                      SegmentedControlValue(label: "Daily"),
-                      SegmentedControlValue(label: "Monthly"),
-                    ],
-                    onValueChanged: (index, value) {
-                      historyView.value = index;
-                    },
+              WidgetUI.visibility(
+                visibility: searchMode.value,
+                child: TextFormField(
+                  controller: findController,
+                  onTap: () {
+                    searchMode.value = true;
+                  },
+                  onChanged: (value) {
+                    ref.watch(asyncListHistory.notifier).find(value);
+                  },
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.search),
+                    contentPadding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                    filled: true,
+                    fillColor: context.colors.ink.darker,
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ),
+              WidgetUI.visibility(
+                visibility: !searchMode.value,
+                child: Center(
+                  child: SizedBox(
+                    // width: 70.w,
+                    child: SegmentedControl(
+                      groupValue: historyView.value,
+                      children: [
+                        SegmentedControlValue(label: "Daily"),
+                        SegmentedControlValue(label: "Monthly"),
+                      ],
+                      onValueChanged: (index, value) {
+                        historyView.value = index;
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -63,7 +100,7 @@ class HistoryPage extends HookConsumerWidget {
                   child: CircularProgressIndicator(),
                 ),
                 data: (data) {
-                  var listData = historyView.value == 0 ? data.groupDaily() : data.groupMonthly();
+                  final listData = historyView.value == 0 ? data.groupDaily() : data.groupMonthly();
                   return Expanded(
                     child: ListView.separated(
                       padding: EdgeInsets.zero,
@@ -105,6 +142,8 @@ class HistoryPage extends HookConsumerWidget {
                                   return ListTile(
                                     onTap: () {
                                       // WidgetUI.showBottomSheet(context, TransactionEditBottomSheet());
+                                      ref.watch(updateRecordProvider).loadTransaction(transactionItem);
+
                                       context.router.push(RecordDetailRoute(transaction: transactionItem));
                                     },
                                     contentPadding: EdgeInsets.zero,
@@ -119,8 +158,9 @@ class HistoryPage extends HookConsumerWidget {
                                     ),
                                     title: TextUI.smallNormalMedium(transactionItem.category.name),
                                     subtitle: TextUI.smallNoneRegular(
-                                      transactionItem.account.name ?? "...",
+                                      transactionItem.subtitle(),
                                       color: context.colors.sky.base,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   );
                                 },
@@ -132,7 +172,7 @@ class HistoryPage extends HookConsumerWidget {
                     ),
                   );
                 },
-              )
+              ),
             ],
           ),
         ),

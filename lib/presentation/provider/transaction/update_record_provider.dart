@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:how_much/data/repository/account_repository.dart';
 import 'package:how_much/data/repository/transaction_repository.dart';
 import 'package:how_much/domain/category.dart';
+import 'package:intl/intl.dart';
 
 import '../../../domain/account.dart';
 import '../../../domain/transaction.dart';
@@ -12,6 +15,7 @@ import '../../../gen/injection/injection.dart';
 class UpdateRecordNotifier extends ChangeNotifier {
   Account? accountSelected;
   Category? categorySelected;
+  DateTime? dateSelected;
   late Transaction transaction;
   final TextEditingController amountController = TextEditingController();
   final TextEditingController memoController = TextEditingController();
@@ -29,19 +33,38 @@ class UpdateRecordNotifier extends ChangeNotifier {
 
   void loadTransaction(Transaction item) {
     transaction = item;
+    accountSelected = item.account;
+    categorySelected = item.category;
+    dateSelected = item.createdAt;
+    dateController.text =
+        DateFormat("dd MMMM yyyy").format(transaction.createdAt!);
+    amountController.text = transaction.value.toThousandSeparator();
+    memoController.text = transaction.memo ?? "";
+    notifyListeners();
+  }
+
+  rollbackAccountBalance() async {
+    if (transaction.type == TransactionType.exp) {
+      transaction.account.increase(transaction.value);
+    } else {
+      transaction.account.decrease(transaction.value);
+    }
+    await accountRepository.update(transaction.account);
   }
 
   Future<void> save() async {
     try {
+      await rollbackAccountBalance();
+
       transaction = transaction.copyWith(
         value: amountController.text.toNumber() ?? 0,
-        memo: memoController.text,
         category: categorySelected!,
-        createdAt: DateTime.now(),
         account: accountSelected!,
+        memo: memoController.text,
+        createdAt: dateSelected,
       );
 
-      await repository.store(transaction).then((value) {
+      await repository.update(transaction).then((value) {
         if (transaction.type == TransactionType.exp) {
           accountSelected?.decrease(transaction.value);
         } else {
@@ -51,8 +74,8 @@ class UpdateRecordNotifier extends ChangeNotifier {
       });
 
       reset();
-    } catch (e) {
-      //
+    } catch (e, s) {
+      log("Error Save", error: e, stackTrace: s);
     }
   }
 
@@ -65,7 +88,8 @@ class UpdateRecordNotifier extends ChangeNotifier {
   }
 }
 
-final updateRecordProvider = ChangeNotifierProvider((ref) => UpdateRecordNotifier(
-      getIt<TransactionRepository>(),
-      getIt<AccountRepository>(),
-    ));
+final updateRecordProvider =
+    ChangeNotifierProvider((ref) => UpdateRecordNotifier(
+          getIt<TransactionRepository>(),
+          getIt<AccountRepository>(),
+        ));
