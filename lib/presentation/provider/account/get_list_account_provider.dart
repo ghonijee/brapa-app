@@ -1,6 +1,6 @@
-import 'package:how_much/data/repository/account_repository.dart';
-import 'package:how_much/domain/account.dart';
-import 'package:how_much/gen/injection/injection.dart';
+import 'package:brapa/data/repository/account_repository.dart';
+import 'package:brapa/domain/account.dart';
+import 'package:brapa/gen/injection/injection.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 final getListAccountProvider = FutureProvider((ref) async {

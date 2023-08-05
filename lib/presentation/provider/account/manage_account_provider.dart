@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:how_much/data/repository/account_repository.dart';
-import 'package:how_much/domain/account.dart';
-import 'package:how_much/gen/injection/injection.dart';
+import 'package:brapa/data/repository/account_repository.dart';
+import 'package:brapa/domain/account.dart';
+import 'package:brapa/gen/injection/injection.dart';
 
 class ManageAccountNotifier extends StateNotifier<Account> {
   final AccountRepository repository;

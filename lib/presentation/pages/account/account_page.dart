@@ -2,7 +2,7 @@ import 'package:app_ui/app_ui.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:how_much/domain/account.dart';
+import 'package:brapa/domain/account.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../provider/account/get_list_account_provider.dart';

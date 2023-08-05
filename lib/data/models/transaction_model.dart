@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:how_much/data/models/account_model.dart';
-import 'package:how_much/data/models/category_model.dart';
-import 'package:how_much/domain/account.dart';
-import 'package:how_much/domain/category.dart';
+import 'package:brapa/data/models/account_model.dart';
+import 'package:brapa/data/models/category_model.dart';
+import 'package:brapa/domain/account.dart';
+import 'package:brapa/domain/category.dart';
 import 'package:isar/isar.dart';
 
 import '../../domain/transaction.dart';
@@ -43,8 +43,7 @@ class TransactionModel {
         memo: memo,
         createdAt: createdAt,
         account: account.value?.toDomain() ?? Account(name: "No"),
-        category: category.value?.toDomain() ??
-            Category(name: "Other", categoryType: CategoryType.exp),
+        category: category.value?.toDomain() ?? Category(name: "Other", categoryType: CategoryType.exp),
       );
 }
 

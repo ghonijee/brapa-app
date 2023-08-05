@@ -3,7 +3,7 @@ import 'package:app_ui/molecules/account_chip.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:how_much/domain/account.dart';
+import 'package:brapa/domain/account.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 

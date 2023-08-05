@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:how_much/presentation/app.dart';
+import 'package:brapa/presentation/app.dart';
 import '../../domain/account.dart';
 import '../../domain/category.dart';
 import '../../domain/transaction.dart';

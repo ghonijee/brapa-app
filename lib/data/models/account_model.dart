@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:how_much/domain/account.dart';
+import 'package:brapa/domain/account.dart';
 import 'package:isar/isar.dart';
 
 part 'account_model.g.dart';

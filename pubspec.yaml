@@ -1,5 +1,5 @@
-name: how_much
-description: A new Flutter project.
+name: brapa
+description: Trace expanse & income and then manage accounts balance.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -73,6 +73,7 @@ dev_dependencies:
   riverpod_generator: ^2.2.4
   custom_lint: ^0.4.0
   riverpod_lint: ^1.4.0
+  flutter_launcher_icons: ^0.13.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -88,12 +89,18 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
       - assets/
+      - assets/launcher/
       - assets/category/
       - assets/accounts/
       # - assets/bank/
       # - assets/ewallet/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+  
+flutter_launcher_icons:
+  android: "launcher_icon"
+  image_path: "assets/launcher/icon.png"
+  min_sdk_android: 21
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

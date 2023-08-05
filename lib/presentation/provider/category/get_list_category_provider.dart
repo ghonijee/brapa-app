@@ -1,6 +1,6 @@
-import 'package:how_much/data/repository/category_repository.dart';
-import 'package:how_much/domain/category.dart';
-import 'package:how_much/gen/injection/injection.dart';
+import 'package:brapa/data/repository/category_repository.dart';
+import 'package:brapa/domain/category.dart';
+import 'package:brapa/gen/injection/injection.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 final getListCategoryProvider = FutureProvider((ref) async {

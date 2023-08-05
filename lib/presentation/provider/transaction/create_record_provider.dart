@@ -1,9 +1,9 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:how_much/data/repository/account_repository.dart';
-import 'package:how_much/data/repository/transaction_repository.dart';
-import 'package:how_much/domain/category.dart';
+import 'package:brapa/data/repository/account_repository.dart';
+import 'package:brapa/data/repository/transaction_repository.dart';
+import 'package:brapa/domain/category.dart';
 
 import '../../../domain/account.dart';
 import '../../../domain/transaction.dart';
@@ -29,9 +29,7 @@ class CreateRecordNotifier extends ChangeNotifier {
   Future<void> save() async {
     try {
       var transaction = Transaction(
-        type: segmentedControllerGroupValue == 0
-            ? TransactionType.exp
-            : TransactionType.inc,
+        type: segmentedControllerGroupValue == 0 ? TransactionType.exp : TransactionType.inc,
         value: amountController.text.toNumber() ?? 0,
         memo: memoController.text,
         category: categorySelected!,
@@ -63,8 +61,7 @@ class CreateRecordNotifier extends ChangeNotifier {
   }
 }
 
-final createRecordProvider =
-    ChangeNotifierProvider((ref) => CreateRecordNotifier(
-          getIt<TransactionRepository>(),
-          getIt<AccountRepository>(),
-        ));
+final createRecordProvider = ChangeNotifierProvider((ref) => CreateRecordNotifier(
+      getIt<TransactionRepository>(),
+      getIt<AccountRepository>(),
+    ));

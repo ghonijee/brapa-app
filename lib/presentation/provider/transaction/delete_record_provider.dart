@@ -3,9 +3,9 @@ import 'dart:developer';
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:how_much/data/repository/account_repository.dart';
-import 'package:how_much/data/repository/transaction_repository.dart';
-import 'package:how_much/domain/category.dart';
+import 'package:brapa/data/repository/account_repository.dart';
+import 'package:brapa/data/repository/transaction_repository.dart';
+import 'package:brapa/domain/category.dart';
 import 'package:intl/intl.dart';
 
 import '../../../domain/account.dart';

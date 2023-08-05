@@ -20,7 +20,7 @@ class ManageAccountsPage extends ConsumerWidget {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: const TextUI.largeNoneBold("Accounts"),
+          title: const TextUI.titleRegular("Accounts"),
           backgroundColor: context.colors.background,
           actions: [
             GestureDetector(
@@ -53,13 +53,13 @@ class ManageAccountsPage extends ConsumerWidget {
                         context.router.push(DetailAccountRoute(data: account, formMode: FormAccountType.update));
                       },
                       contentPadding: EdgeInsets.zero,
-                      leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
+                      leading: Container(
+                        width: 80,
+                        height: 40,
+                        decoration: BoxDecoration(),
                         child: Image.asset(
                           account.assets!,
-                          fit: BoxFit.cover,
-                          width: 60,
-                          height: 60,
+                          fit: BoxFit.fitHeight,
                           color: account.isActive! ? null : Colors.grey,
                           colorBlendMode: BlendMode.color,
                         ),

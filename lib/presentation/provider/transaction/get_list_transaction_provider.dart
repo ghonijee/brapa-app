@@ -1,9 +1,9 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:how_much/data/repository/transaction_repository.dart';
-import 'package:how_much/domain/account.dart';
-import 'package:how_much/domain/transaction.dart';
-import 'package:how_much/gen/injection/injection.dart';
+import 'package:brapa/data/repository/transaction_repository.dart';
+import 'package:brapa/domain/account.dart';
+import 'package:brapa/domain/transaction.dart';
+import 'package:brapa/gen/injection/injection.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class AsyncListHistoryTransaction extends AsyncNotifier<List<Transaction>> {

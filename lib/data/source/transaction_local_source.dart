@@ -1,6 +1,6 @@
-import 'package:how_much/data/models/account_model.dart';
-import 'package:how_much/data/models/category_model.dart';
-import 'package:how_much/data/source/base_local_source.dart';
+import 'package:brapa/data/models/account_model.dart';
+import 'package:brapa/data/models/category_model.dart';
+import 'package:brapa/data/source/base_local_source.dart';
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
 import '../models/transaction_model.dart';

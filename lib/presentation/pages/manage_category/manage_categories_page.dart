@@ -2,10 +2,10 @@ import 'package:app_ui/app_ui.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:how_much/domain/category.dart';
-import 'package:how_much/presentation/pages/pages.dart';
-import 'package:how_much/presentation/provider/account/manage_account_provider.dart';
-import 'package:how_much/presentation/router/app_router.dart';
+import 'package:brapa/domain/category.dart';
+import 'package:brapa/presentation/pages/pages.dart';
+import 'package:brapa/presentation/provider/account/manage_account_provider.dart';
+import 'package:brapa/presentation/router/app_router.dart';
 
 import '../../../gen/assets.gen.dart';
 import '../../provider/category/get_list_category_provider.dart';

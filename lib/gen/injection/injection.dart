@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:how_much/data/services/isar_service.dart';
+import 'package:brapa/data/services/isar_service.dart';
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
 

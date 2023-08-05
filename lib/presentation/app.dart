@@ -3,9 +3,9 @@ import 'package:app_ui/utils/theme_extension.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:how_much/presentation/provider/account/get_list_account_provider.dart';
-import 'package:how_much/presentation/provider/transaction/get_list_transaction_provider.dart';
-import 'package:how_much/presentation/router/app_router.dart';
+import 'package:brapa/presentation/provider/account/get_list_account_provider.dart';
+import 'package:brapa/presentation/provider/transaction/get_list_transaction_provider.dart';
+import 'package:brapa/presentation/router/app_router.dart';
 
 import 'provider/category/get_list_category_provider.dart';
 

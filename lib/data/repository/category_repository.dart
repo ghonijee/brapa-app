@@ -1,7 +1,7 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:how_much/data/models/category_model.dart';
-import 'package:how_much/data/source/category_local_source.dart';
-import 'package:how_much/domain/category.dart';
+import 'package:brapa/data/models/category_model.dart';
+import 'package:brapa/data/source/category_local_source.dart';
+import 'package:brapa/domain/category.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
