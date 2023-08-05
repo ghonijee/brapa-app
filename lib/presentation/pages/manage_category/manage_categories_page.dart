@@ -7,6 +7,7 @@ import 'package:how_much/presentation/pages/pages.dart';
 import 'package:how_much/presentation/provider/account/manage_account_provider.dart';
 import 'package:how_much/presentation/router/app_router.dart';
 
+import '../../../gen/assets.gen.dart';
 import '../../provider/category/get_list_category_provider.dart';
 import '../../provider/category/manage_category_provider.dart';
 
@@ -96,29 +97,13 @@ class CategoryIconItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return type == CategoryType.exp
-        ? Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: context.theme.appColors.red.darkest,
-            ),
-            child: Icon(
-              Icons.outbox,
-              size: 24,
-              color: context.theme.appColors.red.lightest,
-            ),
+        ? ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Assets.category.outcome1.image(width: 45, fit: BoxFit.fitHeight),
           )
-        : Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: context.theme.appColors.green.darkest,
-            ),
-            child: Icon(
-              Icons.inbox,
-              size: 24,
-              color: context.theme.appColors.green.lightest,
-            ),
+        : ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Assets.category.income1.image(width: 45, fit: BoxFit.fitHeight),
           );
   }
 }

@@ -23,17 +23,12 @@ class AccountCardWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Container(
-            height: 40,
-            width: 40,
-            padding: const EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              color: context.theme.appColors.sky.light,
-            ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
             child: Image.asset(
               item.assets!,
               fit: BoxFit.fitWidth,
+              width: 45,
             ),
           ),
           FreeSpaceUI.vertical(20),

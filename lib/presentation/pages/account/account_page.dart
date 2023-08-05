@@ -41,8 +41,7 @@ class AccountPage extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const TextUI.smallNormalMedium("My Balance"),
-                    TextUI.smallNoneBold(
-                        listAccount.value!.countValue()!.currency())
+                    TextUI.smallNoneBold(listAccount.value!.countValue()!.currency())
                   ],
                 ),
               ),
@@ -53,10 +52,10 @@ class AccountPage extends ConsumerWidget {
                   itemCount: listAccount.value!.length,
                   padding: EdgeInsets.zero,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 6 / 5,
+                    childAspectRatio: 7 / 6,
                     crossAxisCount: 2,
                     crossAxisSpacing: 16.0,
-                    mainAxisSpacing: 16.0,
+                    mainAxisSpacing: 12.0,
                   ),
                   itemBuilder: (context, index) {
                     var item = listAccount.value![index];

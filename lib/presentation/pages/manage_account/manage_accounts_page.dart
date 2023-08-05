@@ -53,13 +53,13 @@ class ManageAccountsPage extends ConsumerWidget {
                         context.router.push(DetailAccountRoute(data: account, formMode: FormAccountType.update));
                       },
                       contentPadding: EdgeInsets.zero,
-                      leading: Container(
-                        width: 80,
-                        height: 40,
-                        decoration: BoxDecoration(),
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
                         child: Image.asset(
                           account.assets!,
-                          fit: BoxFit.fitHeight,
+                          fit: BoxFit.cover,
+                          width: 60,
+                          height: 60,
                           color: account.isActive! ? null : Colors.grey,
                           colorBlendMode: BlendMode.color,
                         ),

@@ -8,6 +8,7 @@ import 'package:how_much/domain/account.dart';
 import 'package:how_much/gen/assets.gen.dart';
 import 'package:how_much/presentation/provider/account/get_list_account_provider.dart';
 import 'package:how_much/presentation/provider/account/manage_account_provider.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 enum FormAccountType { create, update }
 
@@ -176,30 +177,41 @@ class DetailAccountPage extends HookConsumerWidget {
                             GestureDetector(
                                 onTap: () async {
                                   var pathSelected = await showModalBottomSheet(
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                                     context: context,
                                     builder: (context) {
-                                      return GridView.builder(
-                                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 4,
-                                          crossAxisSpacing: 8,
-                                          mainAxisSpacing: 8,
+                                      return Container(
+                                        padding: EdgeInsets.all(20),
+                                        child: GridView.builder(
+                                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 4,
+                                            crossAxisSpacing: 8,
+                                            mainAxisSpacing: 8,
+                                          ),
+                                          itemCount: Assets.accounts.values.length,
+                                          itemBuilder: (context, index) {
+                                            var path = Assets.accounts.values[index].path;
+                                            return GestureDetector(
+                                                onTap: () {
+                                                  context.router.pop(path);
+                                                },
+                                                child: Image.asset(path, fit: BoxFit.fitWidth));
+                                          },
                                         ),
-                                        itemCount: Assets.accounts.values.length,
-                                        itemBuilder: (context, index) {
-                                          var path = Assets.accounts.values[index].path;
-                                          return GestureDetector(
-                                              onTap: () {
-                                                context.router.pop(path);
-                                              },
-                                              child: Image.asset(path, fit: BoxFit.fitWidth));
-                                        },
                                       );
                                     },
                                   );
 
                                   assetImagePath.value = pathSelected;
                                 },
-                                child: Image.asset(assetImagePath.value))
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(16),
+                                  child: Image.asset(
+                                    assetImagePath.value,
+                                    fit: BoxFit.cover,
+                                    width: 70,
+                                  ),
+                                ))
                           ],
                         ),
                         FreeSpaceUI.vertical(42),

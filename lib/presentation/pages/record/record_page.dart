@@ -32,8 +32,33 @@ class RecordPage extends HookConsumerWidget {
                   child: SegmentedControl(
                     groupValue: controller.segmentedControllerGroupValue,
                     children: [
-                      SegmentedControlValue(label: "Expense"),
-                      SegmentedControlValue(label: "Income"),
+                      SegmentedControlValue(
+                          label: "Expense",
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Icon(
+                                Icons.arrow_circle_up_rounded,
+                                color: context.colors.red.darkest,
+                                size: 20,
+                              ),
+                              const TextUI.tinyNoneMedium("Expense"),
+                            ],
+                          )),
+                      SegmentedControlValue(
+                          label: "Expense",
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              const TextUI.tinyNoneMedium("Incone"),
+                              Icon(
+                                Icons.arrow_circle_down_rounded,
+                                color: context.colors.green.darkest,
+                                size: 20,
+                              ),
+                            ],
+                          )),
+                      // SegmentedControlValue(label: "Income"),
                     ],
                     onValueChanged: (index, value) {
                       controller.segmentedControllerGroupValue = index;
