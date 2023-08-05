@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 final getListAccountProvider = FutureProvider((ref) async {
   final AccountRepository repository = getIt<AccountRepository>();
-  var result = await repository.getAll();
+  var result = await repository.getAll(isActiveOnly: true);
   return result.fold((left) {
     return <Account>[];
   }, (right) => right);
@@ -26,6 +26,13 @@ class ListAccountNotifierProvider extends AsyncNotifier<List<Account>> {
     return result.fold((left) {
       return <Account>[];
     }, (right) => right);
+  }
+
+  Future<void> reload() async {
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() async {
+      return await fetchData();
+    });
   }
 }
 

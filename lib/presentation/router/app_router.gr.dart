@@ -69,6 +69,31 @@ abstract class _$AppRouter extends RootStackRouter {
         child: DetailAccountPage(
           key: args.key,
           data: args.data,
+          formMode: args.formMode,
+        ),
+      );
+    },
+    DetailCategoryRoute.name: (routeData) {
+      final args = routeData.argsAs<DetailCategoryRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: DetailCategoryPage(
+          key: args.key,
+          data: args.data,
+          formMode: args.formMode,
+          label: args.label,
+          type: args.type,
+        ),
+      );
+    },
+    ManageCategoriesRoute.name: (routeData) {
+      final args = routeData.argsAs<ManageCategoriesRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ManageCategoriesPage(
+          key: args.key,
+          label: args.label,
+          type: args.type,
         ),
       );
     },
@@ -202,13 +227,15 @@ class ManageAccountsRoute extends PageRouteInfo<void> {
 class DetailAccountRoute extends PageRouteInfo<DetailAccountRouteArgs> {
   DetailAccountRoute({
     Key? key,
-    required Account data,
+    Account? data,
+    required FormAccountType formMode,
     List<PageRouteInfo>? children,
   }) : super(
           DetailAccountRoute.name,
           args: DetailAccountRouteArgs(
             key: key,
             data: data,
+            formMode: formMode,
           ),
           initialChildren: children,
         );
@@ -222,15 +249,114 @@ class DetailAccountRoute extends PageRouteInfo<DetailAccountRouteArgs> {
 class DetailAccountRouteArgs {
   const DetailAccountRouteArgs({
     this.key,
-    required this.data,
+    this.data,
+    required this.formMode,
   });
 
   final Key? key;
 
-  final Account data;
+  final Account? data;
+
+  final FormAccountType formMode;
 
   @override
   String toString() {
-    return 'DetailAccountRouteArgs{key: $key, data: $data}';
+    return 'DetailAccountRouteArgs{key: $key, data: $data, formMode: $formMode}';
+  }
+}
+
+/// generated route for
+/// [DetailCategoryPage]
+class DetailCategoryRoute extends PageRouteInfo<DetailCategoryRouteArgs> {
+  DetailCategoryRoute({
+    Key? key,
+    Category? data,
+    required FormCategoryType formMode,
+    String? label,
+    required CategoryType type,
+    List<PageRouteInfo>? children,
+  }) : super(
+          DetailCategoryRoute.name,
+          args: DetailCategoryRouteArgs(
+            key: key,
+            data: data,
+            formMode: formMode,
+            label: label,
+            type: type,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'DetailCategoryRoute';
+
+  static const PageInfo<DetailCategoryRouteArgs> page =
+      PageInfo<DetailCategoryRouteArgs>(name);
+}
+
+class DetailCategoryRouteArgs {
+  const DetailCategoryRouteArgs({
+    this.key,
+    this.data,
+    required this.formMode,
+    this.label,
+    required this.type,
+  });
+
+  final Key? key;
+
+  final Category? data;
+
+  final FormCategoryType formMode;
+
+  final String? label;
+
+  final CategoryType type;
+
+  @override
+  String toString() {
+    return 'DetailCategoryRouteArgs{key: $key, data: $data, formMode: $formMode, label: $label, type: $type}';
+  }
+}
+
+/// generated route for
+/// [ManageCategoriesPage]
+class ManageCategoriesRoute extends PageRouteInfo<ManageCategoriesRouteArgs> {
+  ManageCategoriesRoute({
+    Key? key,
+    required String label,
+    required CategoryType type,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ManageCategoriesRoute.name,
+          args: ManageCategoriesRouteArgs(
+            key: key,
+            label: label,
+            type: type,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ManageCategoriesRoute';
+
+  static const PageInfo<ManageCategoriesRouteArgs> page =
+      PageInfo<ManageCategoriesRouteArgs>(name);
+}
+
+class ManageCategoriesRouteArgs {
+  const ManageCategoriesRouteArgs({
+    this.key,
+    required this.label,
+    required this.type,
+  });
+
+  final Key? key;
+
+  final String label;
+
+  final CategoryType type;
+
+  @override
+  String toString() {
+    return 'ManageCategoriesRouteArgs{key: $key, label: $label, type: $type}';
   }
 }

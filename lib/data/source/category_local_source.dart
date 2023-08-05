@@ -8,12 +8,6 @@ class CategoryLocalSource implements BaseLocalSource<CategoryModel> {
   final Isar isar;
   CategoryLocalSource(this.isar);
 
-  @override
-  Future<void> delete(CategoryModel data) {
-    // TODO: implement delete
-    throw UnimplementedError();
-  }
-
   Future<void> clearAll() {
     return isar.categoryModels.clear();
   }
@@ -24,15 +18,32 @@ class CategoryLocalSource implements BaseLocalSource<CategoryModel> {
   }
 
   @override
-  Future<void> store(CategoryModel data) async {
-    isar.writeTxn(() async {
-      await isar.categoryModels.put(data);
+  Future<CategoryModel?> store(CategoryModel data) async {
+    late int id;
+    await isar.writeTxn(() async {
+      id = await isar.categoryModels.put(data);
     });
+    return isar.categoryModels.get(id);
   }
 
   @override
-  Future<void> update(CategoryModel data) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<CategoryModel?> update(CategoryModel data) async {
+    late int id;
+
+    await isar.writeTxn(() async {
+      id = await isar.categoryModels.put(data);
+    });
+    return isar.categoryModels.get(id);
+  }
+
+  @override
+  Future<void> delete(CategoryModel data) async {
+    await isar.writeTxn(() async {
+      isar.categoryModels.filter().idEqualTo(data.id!).deleteFirst();
+    });
+  }
+
+  Future<List<CategoryModel>> isActiveOnly() {
+    return isar.categoryModels.filter().isActiveEqualTo(true).sortByOrder().findAll();
   }
 }

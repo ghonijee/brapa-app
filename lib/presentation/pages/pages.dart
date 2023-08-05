@@ -5,6 +5,8 @@ export 'history/history_page.dart';
 export 'history/record_detail_page.dart';
 export 'manage_account/detail_account_page.dart';
 export 'manage_account/manage_accounts_page.dart';
+export 'manage_category/detail_category_page.dart';
+export 'manage_category/manage_categories_page.dart';
 export 'record/record_page.dart';
 export 'record/widgets/list_account_widget.dart';
 export 'record/widgets/list_category_widget.dart';

@@ -5,22 +5,37 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 final getListCategoryProvider = FutureProvider((ref) async {
   final CategoryRepository repository = getIt<CategoryRepository>();
-  var result = await repository.getAll();
+  var result = await repository.getAll(isActiveOnly: true);
   return result.fold((left) {
     return <Category>[];
   }, (right) => right);
 });
 
-// final expCategoriesProvider = Provider<List<Category>>((ref) {
-//   final categoriesProvider = ref.watch(getListCategoryProvider);
-//   return categoriesProvider.isLoading
-//       ? List<Category>
-//       : categoriesProvider.value?.expenseList();
-// });
+class ListCategoryNotifierProvider extends AsyncNotifier<List<Category>> {
+  final CategoryRepository repository;
 
-// final incomeCategoriesProvider = Provider<List<Category>>((ref) {
-//   final categoriesProvider = ref.watch(getListCategoryProvider);
-//   return categoriesProvider.isLoading
-//       ? List<Category>
-//       : categoriesProvider.value?.incomeList();
-// });
+  ListCategoryNotifierProvider(this.repository);
+
+  @override
+  FutureOr<List<Category>> build() async {
+    return await fetchData();
+  }
+
+  Future<List<Category>> fetchData() async {
+    var result = await repository.getAll();
+    return result.fold((left) {
+      return <Category>[];
+    }, (right) => right);
+  }
+
+  Future<void> reload() async {
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() async {
+      return await fetchData();
+    });
+  }
+}
+
+final listCategoriesProvider = AsyncNotifierProvider<ListCategoryNotifierProvider, List<Category>>(
+  () => ListCategoryNotifierProvider(getIt<CategoryRepository>()),
+);

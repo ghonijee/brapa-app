@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:how_much/presentation/app.dart';
 import '../../domain/account.dart';
+import '../../domain/category.dart';
 import '../../domain/transaction.dart';
 import '../pages/pages.dart';
 
@@ -25,5 +26,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: RecordDetailRoute.page),
         AutoRoute(page: ManageAccountsRoute.page),
         AutoRoute(page: DetailAccountRoute.page),
+        AutoRoute(page: ManageCategoriesRoute.page),
+        AutoRoute(page: DetailCategoryRoute.page),
       ];
 }

@@ -7,6 +7,8 @@ import 'package:how_much/presentation/provider/account/get_list_account_provider
 import 'package:how_much/presentation/provider/transaction/get_list_transaction_provider.dart';
 import 'package:how_much/presentation/router/app_router.dart';
 
+import 'provider/category/get_list_category_provider.dart';
+
 @RoutePage()
 class MainPage extends ConsumerWidget {
   @override
@@ -35,6 +37,9 @@ class MainPage extends ConsumerWidget {
               currentIndex: tabsRouter.activeIndex,
               onTap: (value) {
                 switch (value) {
+                  case 0:
+                    ref.invalidate(getListAccountProvider);
+                    ref.invalidate(getListCategoryProvider);
                   case 1:
                     ref.invalidate(asyncListHistory);
                     break;

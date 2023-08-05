@@ -10,9 +10,14 @@ class AccountLocalSource implements BaseLocalSource<AccountModel> {
   AccountLocalSource(this.isar);
 
   @override
-  Future<void> delete(AccountModel data) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<void> delete(AccountModel data) async {
+    await isar.writeTxn(() async {
+      isar.accountModels.filter().idEqualTo(data.id!).deleteFirst();
+    });
+  }
+
+  Future<List<AccountModel>> isActiveOnly() {
+    return isar.accountModels.filter().isActiveEqualTo(true).sortByOrder().findAll();
   }
 
   @override

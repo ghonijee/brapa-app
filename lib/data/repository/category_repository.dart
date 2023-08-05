@@ -22,9 +22,9 @@ class CategoryRepository {
     }
   }
 
-  Future<Either<String, List<Category>>> getAll() async {
+  Future<Either<String, List<Category>>> getAll({bool isActiveOnly = false}) async {
     try {
-      var result = await localSource.getAll();
+      var result = isActiveOnly ? await localSource.isActiveOnly() : await localSource.getAll();
       if (result.isEmpty) {
         await initialData();
         result = await localSource.getAll();
@@ -35,15 +35,31 @@ class CategoryRepository {
     }
   }
 
-  update() {
-    //
+  Future<Either<String, bool>> update(Category data) async {
+    try {
+      var account = await localSource.update(CategoryModel.fromDomain(data));
+      return const Right(true);
+    } catch (e) {
+      return Left(e.toString());
+    }
   }
 
-  store() {
-    //
+  Future<Either<String, Category>> store(Category data) async {
+    try {
+      var result = await localSource.store(CategoryModel.fromDomain(data));
+      print(result?.name);
+      return Right(result!.toDomain());
+    } catch (e) {
+      return Left(e.toString());
+    }
   }
 
-  destroy() {
-    //
+  Future<Either<String, bool>> destroy(Category data) async {
+    try {
+      var result = await localSource.delete(CategoryModel.fromDomain(data));
+      return const Right(true);
+    } catch (e) {
+      return Left(e.toString());
+    }
   }
 }

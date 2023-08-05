@@ -41,6 +41,24 @@ class Account {
   int get hashCode {
     return id.hashCode ^ name.hashCode ^ assets.hashCode ^ balance.hashCode ^ order.hashCode ^ isActive.hashCode;
   }
+
+  Account copyWith({
+    int? id,
+    String? name,
+    String? assets,
+    int? balance,
+    int? order,
+    bool? isActive,
+  }) {
+    return Account(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      assets: assets ?? this.assets,
+      balance: balance ?? this.balance,
+      order: order ?? this.order,
+      isActive: isActive ?? this.isActive,
+    );
+  }
 }
 
 extension AccountExtension on List<Account> {

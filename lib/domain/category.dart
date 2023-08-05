@@ -29,6 +29,22 @@ class Category {
   int get hashCode {
     return id.hashCode ^ name.hashCode ^ categoryType.hashCode ^ isActive.hashCode ^ order.hashCode;
   }
+
+  Category copyWith({
+    int? id,
+    String? name,
+    CategoryType? categoryType,
+    bool? isActive,
+    int? order,
+  }) {
+    return Category(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      categoryType: categoryType ?? this.categoryType,
+      isActive: isActive ?? this.isActive,
+      order: order ?? this.order,
+    );
+  }
 }
 
 enum CategoryType { exp, inc }

@@ -2,6 +2,7 @@ import 'package:app_ui/app_ui.dart';
 import 'package:app_ui/atom/text_ui.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:how_much/domain/category.dart';
 import 'package:how_much/presentation/router/app_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -48,7 +49,7 @@ class SettingPage extends StatelessWidget {
                   ListTile(
                     contentPadding: EdgeInsets.zero,
                     onTap: () {
-                      //
+                      context.router.push(ManageCategoriesRoute(label: "Expense Categories", type: CategoryType.exp));
                     },
                     leading: const Icon(
                       Icons.upload_rounded,
@@ -64,7 +65,7 @@ class SettingPage extends StatelessWidget {
                   ListTile(
                     contentPadding: EdgeInsets.zero,
                     onTap: () {
-                      //
+                      context.router.push(ManageCategoriesRoute(label: "Income Categories", type: CategoryType.inc));
                     },
                     leading: const Icon(
                       Icons.download_rounded,

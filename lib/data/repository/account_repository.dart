@@ -29,9 +29,9 @@ class AccountRepository {
     }
   }
 
-  Future<Either<String, List<Account>>> getAll() async {
+  Future<Either<String, List<Account>>> getAll({bool isActiveOnly = false}) async {
     try {
-      var result = await localSource.getAll();
+      var result = isActiveOnly ? await localSource.isActiveOnly() : await localSource.getAll();
       if (result.isEmpty) {
         await initialData();
         result = await localSource.getAll();
@@ -60,7 +60,12 @@ class AccountRepository {
     }
   }
 
-  destroy() {
-    //
+  Future<Either<String, bool>> destroy(Account data) async {
+    try {
+      var result = await localSource.delete(AccountModel.fromDomain(data));
+      return const Right(true);
+    } catch (e) {
+      return Left(e.toString());
+    }
   }
 }
