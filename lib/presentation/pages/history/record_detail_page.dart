@@ -259,12 +259,19 @@ class RecordDetailPage extends HookConsumerWidget {
                             FreeSpaceUI.vertical(16),
                             GestureDetector(
                               onTap: () async {
-                                var results = await showCalendarDatePicker2Dialog(
+                                var datePickerResult = await showCalendarDatePicker2Dialog(
                                   context: context,
-                                  config: CalendarDatePicker2WithActionButtonsConfig(),
+                                  config: CalendarDatePicker2WithActionButtonsConfig(
+                                    calendarType: CalendarDatePicker2Type.single,
+                                    currentDate: transaction!.createdAt,
+                                  ),
                                   dialogSize: const Size(325, 400),
                                   borderRadius: BorderRadius.circular(15),
                                 );
+                                controller.dateSelected = datePickerResult?.first;
+                                controller.dateController.text =
+                                    DateFormat("dd MMMM yyyy").format(controller.dateSelected!);
+                                controller.notifyListeners();
                               },
                               child: TextFormField(
                                 style: FigmaTextStyles.smallNormalRegular.copyWith(color: context.colors.onSurface),

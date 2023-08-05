@@ -55,16 +55,16 @@ extension AccountExtension on List<Account> {
 
 List<Account> initListAccount = [
   Account(name: "Cash", assets: Assets.bank.otherAcount.path),
-  Account(name: "BCA", assets: Assets.bank.bcaPng.path),
-  Account(name: "BRI", assets: Assets.bank.briPng.path),
-  Account(name: "Mandiri", assets: Assets.bank.mandiriPng.path),
-  Account(name: "BNI", assets: Assets.bank.bniPng.path),
-  Account(name: "BSI", assets: Assets.bank.bankSyariahIndonesiaPng.path),
-  Account(name: "Jago", assets: Assets.bank.jagoPng.path),
+  Account(name: "BCA", assets: Assets.bank.bca.path),
+  Account(name: "BRI", assets: Assets.bank.bri.path),
+  Account(name: "Mandiri", assets: Assets.bank.mandiri.path),
+  Account(name: "BNI", assets: Assets.bank.bni.path),
+  Account(name: "BSI", assets: Assets.bank.bankSyariahIndonesia.path),
+  Account(name: "Jago", assets: Assets.bank.jago.path),
   Account(name: "SeaBank", assets: Assets.bank.otherAcountAlt.path),
   Account(name: "GoPay", assets: Assets.ewallet.gopayPng.path),
   Account(name: "OVO", assets: Assets.ewallet.ovoPng.path),
   Account(name: "Dana", assets: Assets.ewallet.danaPng.path),
   Account(name: "ShopeePay", assets: Assets.ewallet.shopeepayPng.path),
-  Account(name: "BTN", assets: Assets.bank.btnPng.path),
+  Account(name: "BTN", assets: Assets.bank.btn.path),
 ];

@@ -13,134 +13,68 @@ class $AssetsBankGen {
   const $AssetsBankGen();
 
   /// File path: assets/bank/anz.png
-  AssetGenImage get anzPng => const AssetGenImage('assets/bank/anz.png');
-
-  /// File path: assets/bank/anz.svg
-  String get anzSvg => 'assets/bank/anz.svg';
+  AssetGenImage get anz => const AssetGenImage('assets/bank/anz.png');
 
   /// File path: assets/bank/bank syariah indonesia.png
-  AssetGenImage get bankSyariahIndonesiaPng =>
+  AssetGenImage get bankSyariahIndonesia =>
       const AssetGenImage('assets/bank/bank syariah indonesia.png');
 
-  /// File path: assets/bank/bank syariah indonesia.svg
-  String get bankSyariahIndonesiaSvg =>
-      'assets/bank/bank syariah indonesia.svg';
-
   /// File path: assets/bank/bca.png
-  AssetGenImage get bcaPng => const AssetGenImage('assets/bank/bca.png');
-
-  /// File path: assets/bank/bca.svg
-  String get bcaSvg => 'assets/bank/bca.svg';
+  AssetGenImage get bca => const AssetGenImage('assets/bank/bca.png');
 
   /// File path: assets/bank/bi.png
-  AssetGenImage get biPng => const AssetGenImage('assets/bank/bi.png');
-
-  /// File path: assets/bank/bi.svg
-  String get biSvg => 'assets/bank/bi.svg';
+  AssetGenImage get bi => const AssetGenImage('assets/bank/bi.png');
 
   /// File path: assets/bank/bjb.png
-  AssetGenImage get bjbPng => const AssetGenImage('assets/bank/bjb.png');
-
-  /// File path: assets/bank/bjb.svg
-  String get bjbSvg => 'assets/bank/bjb.svg';
+  AssetGenImage get bjb => const AssetGenImage('assets/bank/bjb.png');
 
   /// File path: assets/bank/bni.png
-  AssetGenImage get bniPng => const AssetGenImage('assets/bank/bni.png');
-
-  /// File path: assets/bank/bni.svg
-  String get bniSvg => 'assets/bank/bni.svg';
+  AssetGenImage get bni => const AssetGenImage('assets/bank/bni.png');
 
   /// File path: assets/bank/bri.png
-  AssetGenImage get briPng => const AssetGenImage('assets/bank/bri.png');
-
-  /// File path: assets/bank/bri.svg
-  String get briSvg => 'assets/bank/bri.svg';
+  AssetGenImage get bri => const AssetGenImage('assets/bank/bri.png');
 
   /// File path: assets/bank/btn.png
-  AssetGenImage get btnPng => const AssetGenImage('assets/bank/btn.png');
-
-  /// File path: assets/bank/btn.svg
-  String get btnSvg => 'assets/bank/btn.svg';
+  AssetGenImage get btn => const AssetGenImage('assets/bank/btn.png');
 
   /// File path: assets/bank/bukopin.png
-  AssetGenImage get bukopinPng =>
-      const AssetGenImage('assets/bank/bukopin.png');
-
-  /// File path: assets/bank/bukopin.svg
-  String get bukopinSvg => 'assets/bank/bukopin.svg';
+  AssetGenImage get bukopin => const AssetGenImage('assets/bank/bukopin.png');
 
   /// File path: assets/bank/cash.png
   AssetGenImage get cash => const AssetGenImage('assets/bank/cash.png');
 
   /// File path: assets/bank/cimb.png
-  AssetGenImage get cimbPng => const AssetGenImage('assets/bank/cimb.png');
-
-  /// File path: assets/bank/cimb.svg
-  String get cimbSvg => 'assets/bank/cimb.svg';
+  AssetGenImage get cimb => const AssetGenImage('assets/bank/cimb.png');
 
   /// File path: assets/bank/citi.png
-  AssetGenImage get citiPng => const AssetGenImage('assets/bank/citi.png');
-
-  /// File path: assets/bank/citi.svg
-  String get citiSvg => 'assets/bank/citi.svg';
+  AssetGenImage get citi => const AssetGenImage('assets/bank/citi.png');
 
   /// File path: assets/bank/danamon.png
-  AssetGenImage get danamonPng =>
-      const AssetGenImage('assets/bank/danamon.png');
-
-  /// File path: assets/bank/danamon.svg
-  String get danamonSvg => 'assets/bank/danamon.svg';
+  AssetGenImage get danamon => const AssetGenImage('assets/bank/danamon.png');
 
   /// File path: assets/bank/digibank.png
-  AssetGenImage get digibankPng =>
-      const AssetGenImage('assets/bank/digibank.png');
-
-  /// File path: assets/bank/digibank.svg
-  String get digibankSvg => 'assets/bank/digibank.svg';
+  AssetGenImage get digibank => const AssetGenImage('assets/bank/digibank.png');
 
   /// File path: assets/bank/hsbc.png
-  AssetGenImage get hsbcPng => const AssetGenImage('assets/bank/hsbc.png');
-
-  /// File path: assets/bank/hsbc.svg
-  String get hsbcSvg => 'assets/bank/hsbc.svg';
+  AssetGenImage get hsbc => const AssetGenImage('assets/bank/hsbc.png');
 
   /// File path: assets/bank/jago.png
-  AssetGenImage get jagoPng => const AssetGenImage('assets/bank/jago.png');
-
-  /// File path: assets/bank/jago.svg
-  String get jagoSvg => 'assets/bank/jago.svg';
+  AssetGenImage get jago => const AssetGenImage('assets/bank/jago.png');
 
   /// File path: assets/bank/jenius.png
-  AssetGenImage get jeniusPng => const AssetGenImage('assets/bank/jenius.png');
-
-  /// File path: assets/bank/jenius.svg
-  String get jeniusSvg => 'assets/bank/jenius.svg';
+  AssetGenImage get jenius => const AssetGenImage('assets/bank/jenius.png');
 
   /// File path: assets/bank/mandiri.png
-  AssetGenImage get mandiriPng =>
-      const AssetGenImage('assets/bank/mandiri.png');
-
-  /// File path: assets/bank/mandiri.svg
-  String get mandiriSvg => 'assets/bank/mandiri.svg';
+  AssetGenImage get mandiri => const AssetGenImage('assets/bank/mandiri.png');
 
   /// File path: assets/bank/maybank.png
-  AssetGenImage get maybankPng =>
-      const AssetGenImage('assets/bank/maybank.png');
-
-  /// File path: assets/bank/maybank.svg
-  String get maybankSvg => 'assets/bank/maybank.svg';
+  AssetGenImage get maybank => const AssetGenImage('assets/bank/maybank.png');
 
   /// File path: assets/bank/mega.png
-  AssetGenImage get megaPng => const AssetGenImage('assets/bank/mega.png');
-
-  /// File path: assets/bank/mega.svg
-  String get megaSvg => 'assets/bank/mega.svg';
+  AssetGenImage get mega => const AssetGenImage('assets/bank/mega.png');
 
   /// File path: assets/bank/ocbc.png
-  AssetGenImage get ocbcPng => const AssetGenImage('assets/bank/ocbc.png');
-
-  /// File path: assets/bank/ocbc.svg
-  String get ocbcSvg => 'assets/bank/ocbc.svg';
+  AssetGenImage get ocbc => const AssetGenImage('assets/bank/ocbc.png');
 
   /// File path: assets/bank/other.png
   AssetGenImage get other => const AssetGenImage('assets/bank/other.png');
@@ -154,85 +88,48 @@ class $AssetsBankGen {
       const AssetGenImage('assets/bank/other_acount_alt.png');
 
   /// File path: assets/bank/panin.png
-  AssetGenImage get paninPng => const AssetGenImage('assets/bank/panin.png');
-
-  /// File path: assets/bank/panin.svg
-  String get paninSvg => 'assets/bank/panin.svg';
+  AssetGenImage get panin => const AssetGenImage('assets/bank/panin.png');
 
   /// File path: assets/bank/permata.png
-  AssetGenImage get permataPng =>
-      const AssetGenImage('assets/bank/permata.png');
-
-  /// File path: assets/bank/permata.svg
-  String get permataSvg => 'assets/bank/permata.svg';
+  AssetGenImage get permata => const AssetGenImage('assets/bank/permata.png');
 
   /// File path: assets/bank/standard chartered.png
-  AssetGenImage get standardCharteredPng =>
+  AssetGenImage get standardChartered =>
       const AssetGenImage('assets/bank/standard chartered.png');
 
-  /// File path: assets/bank/standard chartered.svg
-  String get standardCharteredSvg => 'assets/bank/standard chartered.svg';
-
   /// File path: assets/bank/uob.png
-  AssetGenImage get uobPng => const AssetGenImage('assets/bank/uob.png');
-
-  /// File path: assets/bank/uob.svg
-  String get uobSvg => 'assets/bank/uob.svg';
+  AssetGenImage get uob => const AssetGenImage('assets/bank/uob.png');
 
   /// List of all assets
-  List<dynamic> get values => [
-        anzPng,
-        anzSvg,
-        bankSyariahIndonesiaPng,
-        bankSyariahIndonesiaSvg,
-        bcaPng,
-        bcaSvg,
-        biPng,
-        biSvg,
-        bjbPng,
-        bjbSvg,
-        bniPng,
-        bniSvg,
-        briPng,
-        briSvg,
-        btnPng,
-        btnSvg,
-        bukopinPng,
-        bukopinSvg,
+  List<AssetGenImage> get values => [
+        anz,
+        bankSyariahIndonesia,
+        bca,
+        bi,
+        bjb,
+        bni,
+        bri,
+        btn,
+        bukopin,
         cash,
-        cimbPng,
-        cimbSvg,
-        citiPng,
-        citiSvg,
-        danamonPng,
-        danamonSvg,
-        digibankPng,
-        digibankSvg,
-        hsbcPng,
-        hsbcSvg,
-        jagoPng,
-        jagoSvg,
-        jeniusPng,
-        jeniusSvg,
-        mandiriPng,
-        mandiriSvg,
-        maybankPng,
-        maybankSvg,
-        megaPng,
-        megaSvg,
-        ocbcPng,
-        ocbcSvg,
+        cimb,
+        citi,
+        danamon,
+        digibank,
+        hsbc,
+        jago,
+        jenius,
+        mandiri,
+        maybank,
+        mega,
+        ocbc,
         other,
         otherAcount,
         otherAcountAlt,
-        paninPng,
-        paninSvg,
-        permataPng,
-        permataSvg,
-        standardCharteredPng,
-        standardCharteredSvg,
-        uobPng,
-        uobSvg
+        panin,
+        permata,
+        standardChartered,
+        uob
       ];
 }
 

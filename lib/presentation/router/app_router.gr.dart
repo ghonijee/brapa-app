@@ -56,6 +56,22 @@ abstract class _$AppRouter extends RootStackRouter {
         child: MainPage(),
       );
     },
+    ManageAccountsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ManageAccountsPage(),
+      );
+    },
+    DetailAccountRoute.name: (routeData) {
+      final args = routeData.argsAs<DetailAccountRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: DetailAccountPage(
+          key: args.key,
+          data: args.data,
+        ),
+      );
+    },
   };
 }
 
@@ -165,4 +181,56 @@ class MainRoute extends PageRouteInfo<void> {
   static const String name = 'MainRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ManageAccountsPage]
+class ManageAccountsRoute extends PageRouteInfo<void> {
+  const ManageAccountsRoute({List<PageRouteInfo>? children})
+      : super(
+          ManageAccountsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ManageAccountsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DetailAccountPage]
+class DetailAccountRoute extends PageRouteInfo<DetailAccountRouteArgs> {
+  DetailAccountRoute({
+    Key? key,
+    required Account data,
+    List<PageRouteInfo>? children,
+  }) : super(
+          DetailAccountRoute.name,
+          args: DetailAccountRouteArgs(
+            key: key,
+            data: data,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'DetailAccountRoute';
+
+  static const PageInfo<DetailAccountRouteArgs> page =
+      PageInfo<DetailAccountRouteArgs>(name);
+}
+
+class DetailAccountRouteArgs {
+  const DetailAccountRouteArgs({
+    this.key,
+    required this.data,
+  });
+
+  final Key? key;
+
+  final Account data;
+
+  @override
+  String toString() {
+    return 'DetailAccountRouteArgs{key: $key, data: $data}';
+  }
 }

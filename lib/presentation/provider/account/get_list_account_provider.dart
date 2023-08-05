@@ -10,3 +10,25 @@ final getListAccountProvider = FutureProvider((ref) async {
     return <Account>[];
   }, (right) => right);
 });
+
+class ListAccountNotifierProvider extends AsyncNotifier<List<Account>> {
+  final AccountRepository repository;
+
+  ListAccountNotifierProvider(this.repository);
+
+  @override
+  FutureOr<List<Account>> build() async {
+    return await fetchData();
+  }
+
+  Future<List<Account>> fetchData() async {
+    var result = await repository.getAll();
+    return result.fold((left) {
+      return <Account>[];
+    }, (right) => right);
+  }
+}
+
+final listAccountProvider = AsyncNotifierProvider<ListAccountNotifierProvider, List<Account>>(
+  () => ListAccountNotifierProvider(getIt<AccountRepository>()),
+);

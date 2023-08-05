@@ -2,6 +2,7 @@ import 'package:app_ui/app_ui.dart';
 import 'package:app_ui/atom/text_ui.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:how_much/presentation/router/app_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -31,17 +32,17 @@ class SettingPage extends StatelessWidget {
                   ListTile(
                     contentPadding: EdgeInsets.zero,
                     onTap: () {
-                      //
+                      context.router.push(const ManageAccountsRoute());
                     },
-                    leading: Icon(
+                    leading: const Icon(
                       BoxIcons.bxl_pocket,
                       size: 28,
                     ),
-                    trailing: Icon(
+                    trailing: const Icon(
                       Icons.chevron_right_rounded,
                       size: 28,
                     ),
-                    title: TextUI.regularTightRegular("Accounts"),
+                    title: const TextUI.regularTightRegular("Accounts"),
                   ),
                   FreeSpaceUI.vertical(8),
                   ListTile(
@@ -49,15 +50,15 @@ class SettingPage extends StatelessWidget {
                     onTap: () {
                       //
                     },
-                    leading: Icon(
+                    leading: const Icon(
                       Icons.upload_rounded,
                       size: 28,
                     ),
-                    trailing: Icon(
+                    trailing: const Icon(
                       Icons.chevron_right_rounded,
                       size: 28,
                     ),
-                    title: TextUI.regularTightRegular("Expense Categories"),
+                    title: const TextUI.regularTightRegular("Expense Categories"),
                   ),
                   FreeSpaceUI.vertical(8),
                   ListTile(
@@ -65,15 +66,15 @@ class SettingPage extends StatelessWidget {
                     onTap: () {
                       //
                     },
-                    leading: Icon(
+                    leading: const Icon(
                       Icons.download_rounded,
                       size: 28,
                     ),
-                    trailing: Icon(
+                    trailing: const Icon(
                       Icons.chevron_right_rounded,
                       size: 28,
                     ),
-                    title: TextUI.regularTightRegular("Income Categories"),
+                    title: const TextUI.regularTightRegular("Income Categories"),
                   ),
                 ],
               )
