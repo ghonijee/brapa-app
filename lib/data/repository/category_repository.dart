@@ -37,7 +37,7 @@ class CategoryRepository {
 
   Future<Either<String, bool>> update(Category data) async {
     try {
-      var account = await localSource.update(CategoryModel.fromDomain(data));
+      await localSource.update(CategoryModel.fromDomain(data));
       return const Right(true);
     } catch (e) {
       return Left(e.toString());
@@ -47,7 +47,7 @@ class CategoryRepository {
   Future<Either<String, Category>> store(Category data) async {
     try {
       var result = await localSource.store(CategoryModel.fromDomain(data));
-      print(result?.name);
+
       return Right(result!.toDomain());
     } catch (e) {
       return Left(e.toString());
@@ -56,7 +56,7 @@ class CategoryRepository {
 
   Future<Either<String, bool>> destroy(Category data) async {
     try {
-      var result = await localSource.delete(CategoryModel.fromDomain(data));
+      await localSource.delete(CategoryModel.fromDomain(data));
       return const Right(true);
     } catch (e) {
       return Left(e.toString());

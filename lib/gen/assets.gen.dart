@@ -9,299 +9,296 @@
 
 import 'package:flutter/widgets.dart';
 
-class $AssetsBankGen {
-  const $AssetsBankGen();
+class $AssetsAccountsGen {
+  const $AssetsAccountsGen();
 
-  /// File path: assets/bank/anz.png
-  AssetGenImage get anz => const AssetGenImage('assets/bank/anz.png');
+  /// File path: assets/accounts/bankBlue.png
+  AssetGenImage get bankBlue =>
+      const AssetGenImage('assets/accounts/bankBlue.png');
 
-  /// File path: assets/bank/bank syariah indonesia.png
-  AssetGenImage get bankSyariahIndonesia =>
-      const AssetGenImage('assets/bank/bank syariah indonesia.png');
+  /// File path: assets/accounts/bankGreen.png
+  AssetGenImage get bankGreen =>
+      const AssetGenImage('assets/accounts/bankGreen.png');
 
-  /// File path: assets/bank/bca.png
-  AssetGenImage get bca => const AssetGenImage('assets/bank/bca.png');
+  /// File path: assets/accounts/bankInk.png
+  AssetGenImage get bankInk =>
+      const AssetGenImage('assets/accounts/bankInk.png');
 
-  /// File path: assets/bank/bi.png
-  AssetGenImage get bi => const AssetGenImage('assets/bank/bi.png');
+  /// File path: assets/accounts/bankPrimary.png
+  AssetGenImage get bankPrimary =>
+      const AssetGenImage('assets/accounts/bankPrimary.png');
 
-  /// File path: assets/bank/bjb.png
-  AssetGenImage get bjb => const AssetGenImage('assets/bank/bjb.png');
+  /// File path: assets/accounts/bankRed.png
+  AssetGenImage get bankRed =>
+      const AssetGenImage('assets/accounts/bankRed.png');
 
-  /// File path: assets/bank/bni.png
-  AssetGenImage get bni => const AssetGenImage('assets/bank/bni.png');
+  /// File path: assets/accounts/bankSky.png
+  AssetGenImage get bankSky =>
+      const AssetGenImage('assets/accounts/bankSky.png');
 
-  /// File path: assets/bank/bri.png
-  AssetGenImage get bri => const AssetGenImage('assets/bank/bri.png');
+  /// File path: assets/accounts/bankYellow.png
+  AssetGenImage get bankYellow =>
+      const AssetGenImage('assets/accounts/bankYellow.png');
 
-  /// File path: assets/bank/btn.png
-  AssetGenImage get btn => const AssetGenImage('assets/bank/btn.png');
+  /// File path: assets/accounts/cardBlue.png
+  AssetGenImage get cardBlue =>
+      const AssetGenImage('assets/accounts/cardBlue.png');
 
-  /// File path: assets/bank/bukopin.png
-  AssetGenImage get bukopin => const AssetGenImage('assets/bank/bukopin.png');
+  /// File path: assets/accounts/cardGreen.png
+  AssetGenImage get cardGreen =>
+      const AssetGenImage('assets/accounts/cardGreen.png');
 
-  /// File path: assets/bank/cash.png
-  AssetGenImage get cash => const AssetGenImage('assets/bank/cash.png');
+  /// File path: assets/accounts/cardInk.png
+  AssetGenImage get cardInk =>
+      const AssetGenImage('assets/accounts/cardInk.png');
 
-  /// File path: assets/bank/cimb.png
-  AssetGenImage get cimb => const AssetGenImage('assets/bank/cimb.png');
+  /// File path: assets/accounts/cardPrimary.png
+  AssetGenImage get cardPrimary =>
+      const AssetGenImage('assets/accounts/cardPrimary.png');
 
-  /// File path: assets/bank/citi.png
-  AssetGenImage get citi => const AssetGenImage('assets/bank/citi.png');
+  /// File path: assets/accounts/cardRed.png
+  AssetGenImage get cardRed =>
+      const AssetGenImage('assets/accounts/cardRed.png');
 
-  /// File path: assets/bank/danamon.png
-  AssetGenImage get danamon => const AssetGenImage('assets/bank/danamon.png');
+  /// File path: assets/accounts/cardSky.png
+  AssetGenImage get cardSky =>
+      const AssetGenImage('assets/accounts/cardSky.png');
 
-  /// File path: assets/bank/digibank.png
-  AssetGenImage get digibank => const AssetGenImage('assets/bank/digibank.png');
+  /// File path: assets/accounts/cardYellow.png
+  AssetGenImage get cardYellow =>
+      const AssetGenImage('assets/accounts/cardYellow.png');
 
-  /// File path: assets/bank/hsbc.png
-  AssetGenImage get hsbc => const AssetGenImage('assets/bank/hsbc.png');
+  /// File path: assets/accounts/investBlue.png
+  AssetGenImage get investBlue =>
+      const AssetGenImage('assets/accounts/investBlue.png');
 
-  /// File path: assets/bank/jago.png
-  AssetGenImage get jago => const AssetGenImage('assets/bank/jago.png');
+  /// File path: assets/accounts/investGreen.png
+  AssetGenImage get investGreen =>
+      const AssetGenImage('assets/accounts/investGreen.png');
 
-  /// File path: assets/bank/jenius.png
-  AssetGenImage get jenius => const AssetGenImage('assets/bank/jenius.png');
+  /// File path: assets/accounts/investPrimary.png
+  AssetGenImage get investPrimary =>
+      const AssetGenImage('assets/accounts/investPrimary.png');
 
-  /// File path: assets/bank/mandiri.png
-  AssetGenImage get mandiri => const AssetGenImage('assets/bank/mandiri.png');
+  /// File path: assets/accounts/investRed.png
+  AssetGenImage get investRed =>
+      const AssetGenImage('assets/accounts/investRed.png');
 
-  /// File path: assets/bank/maybank.png
-  AssetGenImage get maybank => const AssetGenImage('assets/bank/maybank.png');
+  /// File path: assets/accounts/investSky.png
+  AssetGenImage get investSky =>
+      const AssetGenImage('assets/accounts/investSky.png');
 
-  /// File path: assets/bank/mega.png
-  AssetGenImage get mega => const AssetGenImage('assets/bank/mega.png');
+  /// File path: assets/accounts/investYellow.png
+  AssetGenImage get investYellow =>
+      const AssetGenImage('assets/accounts/investYellow.png');
 
-  /// File path: assets/bank/ocbc.png
-  AssetGenImage get ocbc => const AssetGenImage('assets/bank/ocbc.png');
+  /// File path: assets/accounts/investink.png
+  AssetGenImage get investink =>
+      const AssetGenImage('assets/accounts/investink.png');
 
-  /// File path: assets/bank/other.png
-  AssetGenImage get other => const AssetGenImage('assets/bank/other.png');
+  /// File path: assets/accounts/moneyBlue.png
+  AssetGenImage get moneyBlue =>
+      const AssetGenImage('assets/accounts/moneyBlue.png');
 
-  /// File path: assets/bank/other_acount.png
-  AssetGenImage get otherAcount =>
-      const AssetGenImage('assets/bank/other_acount.png');
+  /// File path: assets/accounts/moneyGreen.png
+  AssetGenImage get moneyGreen =>
+      const AssetGenImage('assets/accounts/moneyGreen.png');
 
-  /// File path: assets/bank/other_acount_alt.png
-  AssetGenImage get otherAcountAlt =>
-      const AssetGenImage('assets/bank/other_acount_alt.png');
+  /// File path: assets/accounts/moneyInk.png
+  AssetGenImage get moneyInk =>
+      const AssetGenImage('assets/accounts/moneyInk.png');
 
-  /// File path: assets/bank/panin.png
-  AssetGenImage get panin => const AssetGenImage('assets/bank/panin.png');
+  /// File path: assets/accounts/moneyPrimary.png
+  AssetGenImage get moneyPrimary =>
+      const AssetGenImage('assets/accounts/moneyPrimary.png');
 
-  /// File path: assets/bank/permata.png
-  AssetGenImage get permata => const AssetGenImage('assets/bank/permata.png');
+  /// File path: assets/accounts/moneyRed.png
+  AssetGenImage get moneyRed =>
+      const AssetGenImage('assets/accounts/moneyRed.png');
 
-  /// File path: assets/bank/standard chartered.png
-  AssetGenImage get standardChartered =>
-      const AssetGenImage('assets/bank/standard chartered.png');
+  /// File path: assets/accounts/moneySky.png
+  AssetGenImage get moneySky =>
+      const AssetGenImage('assets/accounts/moneySky.png');
 
-  /// File path: assets/bank/uob.png
-  AssetGenImage get uob => const AssetGenImage('assets/bank/uob.png');
+  /// File path: assets/accounts/moneyYellow.png
+  AssetGenImage get moneyYellow =>
+      const AssetGenImage('assets/accounts/moneyYellow.png');
+
+  /// File path: assets/accounts/phoneBlue.png
+  AssetGenImage get phoneBlue =>
+      const AssetGenImage('assets/accounts/phoneBlue.png');
+
+  /// File path: assets/accounts/phoneGreen.png
+  AssetGenImage get phoneGreen =>
+      const AssetGenImage('assets/accounts/phoneGreen.png');
+
+  /// File path: assets/accounts/phoneInk.png
+  AssetGenImage get phoneInk =>
+      const AssetGenImage('assets/accounts/phoneInk.png');
+
+  /// File path: assets/accounts/phonePrimary.png
+  AssetGenImage get phonePrimary =>
+      const AssetGenImage('assets/accounts/phonePrimary.png');
+
+  /// File path: assets/accounts/phoneRed.png
+  AssetGenImage get phoneRed =>
+      const AssetGenImage('assets/accounts/phoneRed.png');
+
+  /// File path: assets/accounts/phoneSky.png
+  AssetGenImage get phoneSky =>
+      const AssetGenImage('assets/accounts/phoneSky.png');
+
+  /// File path: assets/accounts/phoneYellow.png
+  AssetGenImage get phoneYellow =>
+      const AssetGenImage('assets/accounts/phoneYellow.png');
+
+  /// File path: assets/accounts/walletAltBlue.png
+  AssetGenImage get walletAltBlue =>
+      const AssetGenImage('assets/accounts/walletAltBlue.png');
+
+  /// File path: assets/accounts/walletAltGreen.png
+  AssetGenImage get walletAltGreen =>
+      const AssetGenImage('assets/accounts/walletAltGreen.png');
+
+  /// File path: assets/accounts/walletAltInk.png
+  AssetGenImage get walletAltInk =>
+      const AssetGenImage('assets/accounts/walletAltInk.png');
+
+  /// File path: assets/accounts/walletAltPrimary.png
+  AssetGenImage get walletAltPrimary =>
+      const AssetGenImage('assets/accounts/walletAltPrimary.png');
+
+  /// File path: assets/accounts/walletAltRed.png
+  AssetGenImage get walletAltRed =>
+      const AssetGenImage('assets/accounts/walletAltRed.png');
+
+  /// File path: assets/accounts/walletAltSky.png
+  AssetGenImage get walletAltSky =>
+      const AssetGenImage('assets/accounts/walletAltSky.png');
+
+  /// File path: assets/accounts/walletAltYellow.png
+  AssetGenImage get walletAltYellow =>
+      const AssetGenImage('assets/accounts/walletAltYellow.png');
+
+  /// File path: assets/accounts/walletBlue.png
+  AssetGenImage get walletBlue =>
+      const AssetGenImage('assets/accounts/walletBlue.png');
+
+  /// File path: assets/accounts/walletGreen.png
+  AssetGenImage get walletGreen =>
+      const AssetGenImage('assets/accounts/walletGreen.png');
+
+  /// File path: assets/accounts/walletInk.png
+  AssetGenImage get walletInk =>
+      const AssetGenImage('assets/accounts/walletInk.png');
+
+  /// File path: assets/accounts/walletPrimary.png
+  AssetGenImage get walletPrimary =>
+      const AssetGenImage('assets/accounts/walletPrimary.png');
+
+  /// File path: assets/accounts/walletRed.png
+  AssetGenImage get walletRed =>
+      const AssetGenImage('assets/accounts/walletRed.png');
+
+  /// File path: assets/accounts/walletSky.png
+  AssetGenImage get walletSky =>
+      const AssetGenImage('assets/accounts/walletSky.png');
+
+  /// File path: assets/accounts/walletYellow.png
+  AssetGenImage get walletYellow =>
+      const AssetGenImage('assets/accounts/walletYellow.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [
-        anz,
-        bankSyariahIndonesia,
-        bca,
-        bi,
-        bjb,
-        bni,
-        bri,
-        btn,
-        bukopin,
-        cash,
-        cimb,
-        citi,
-        danamon,
-        digibank,
-        hsbc,
-        jago,
-        jenius,
-        mandiri,
-        maybank,
-        mega,
-        ocbc,
-        other,
-        otherAcount,
-        otherAcountAlt,
-        panin,
-        permata,
-        standardChartered,
-        uob
+        bankBlue,
+        bankGreen,
+        bankInk,
+        bankPrimary,
+        bankRed,
+        bankSky,
+        bankYellow,
+        cardBlue,
+        cardGreen,
+        cardInk,
+        cardPrimary,
+        cardRed,
+        cardSky,
+        cardYellow,
+        investBlue,
+        investGreen,
+        investPrimary,
+        investRed,
+        investSky,
+        investYellow,
+        investink,
+        moneyBlue,
+        moneyGreen,
+        moneyInk,
+        moneyPrimary,
+        moneyRed,
+        moneySky,
+        moneyYellow,
+        phoneBlue,
+        phoneGreen,
+        phoneInk,
+        phonePrimary,
+        phoneRed,
+        phoneSky,
+        phoneYellow,
+        walletAltBlue,
+        walletAltGreen,
+        walletAltInk,
+        walletAltPrimary,
+        walletAltRed,
+        walletAltSky,
+        walletAltYellow,
+        walletBlue,
+        walletGreen,
+        walletInk,
+        walletPrimary,
+        walletRed,
+        walletSky,
+        walletYellow
       ];
 }
 
-class $AssetsEwalletGen {
-  const $AssetsEwalletGen();
+class $AssetsCategoryGen {
+  const $AssetsCategoryGen();
 
-  /// File path: assets/ewallet/applepay.png
-  AssetGenImage get applepayPng =>
-      const AssetGenImage('assets/ewallet/applepay.png');
+  /// File path: assets/category/income1.png
+  AssetGenImage get income1 =>
+      const AssetGenImage('assets/category/income1.png');
 
-  /// File path: assets/ewallet/applepay.svg
-  String get applepaySvg => 'assets/ewallet/applepay.svg';
+  /// File path: assets/category/income2.png
+  AssetGenImage get income2 =>
+      const AssetGenImage('assets/category/income2.png');
 
-  /// File path: assets/ewallet/bluepay.png
-  AssetGenImage get bluepayPng =>
-      const AssetGenImage('assets/ewallet/bluepay.png');
+  /// File path: assets/category/income3.png
+  AssetGenImage get income3 =>
+      const AssetGenImage('assets/category/income3.png');
 
-  /// File path: assets/ewallet/bluepay.svg
-  String get bluepaySvg => 'assets/ewallet/bluepay.svg';
+  /// File path: assets/category/outcome1.png
+  AssetGenImage get outcome1 =>
+      const AssetGenImage('assets/category/outcome1.png');
 
-  /// File path: assets/ewallet/cashbac.png
-  AssetGenImage get cashbacPng =>
-      const AssetGenImage('assets/ewallet/cashbac.png');
+  /// File path: assets/category/outcome2.png
+  AssetGenImage get outcome2 =>
+      const AssetGenImage('assets/category/outcome2.png');
 
-  /// File path: assets/ewallet/cashbac.svg
-  String get cashbacSvg => 'assets/ewallet/cashbac.svg';
-
-  /// File path: assets/ewallet/cashlez.png
-  AssetGenImage get cashlezPng =>
-      const AssetGenImage('assets/ewallet/cashlez.png');
-
-  /// File path: assets/ewallet/cashlez.svg
-  String get cashlezSvg => 'assets/ewallet/cashlez.svg';
-
-  /// File path: assets/ewallet/dana.png
-  AssetGenImage get danaPng => const AssetGenImage('assets/ewallet/dana.png');
-
-  /// File path: assets/ewallet/dana.svg
-  String get danaSvg => 'assets/ewallet/dana.svg';
-
-  /// File path: assets/ewallet/flip.png
-  AssetGenImage get flipPng => const AssetGenImage('assets/ewallet/flip.png');
-
-  /// File path: assets/ewallet/flip.svg
-  String get flipSvg => 'assets/ewallet/flip.svg';
-
-  /// File path: assets/ewallet/gopay.png
-  AssetGenImage get gopayPng => const AssetGenImage('assets/ewallet/gopay.png');
-
-  /// File path: assets/ewallet/gopay.svg
-  String get gopaySvg => 'assets/ewallet/gopay.svg';
-
-  /// File path: assets/ewallet/gpay.png
-  AssetGenImage get gpayPng => const AssetGenImage('assets/ewallet/gpay.png');
-
-  /// File path: assets/ewallet/gpay.svg
-  String get gpaySvg => 'assets/ewallet/gpay.svg';
-
-  /// File path: assets/ewallet/kudo.png
-  AssetGenImage get kudoPng => const AssetGenImage('assets/ewallet/kudo.png');
-
-  /// File path: assets/ewallet/kudo.svg
-  String get kudoSvg => 'assets/ewallet/kudo.svg';
-
-  /// File path: assets/ewallet/linkaja.png
-  AssetGenImage get linkajaPng =>
-      const AssetGenImage('assets/ewallet/linkaja.png');
-
-  /// File path: assets/ewallet/linkaja.svg
-  String get linkajaSvg => 'assets/ewallet/linkaja.svg';
-
-  /// File path: assets/ewallet/midtrans.png
-  AssetGenImage get midtransPng =>
-      const AssetGenImage('assets/ewallet/midtrans.png');
-
-  /// File path: assets/ewallet/midtrans.svg
-  String get midtransSvg => 'assets/ewallet/midtrans.svg';
-
-  /// File path: assets/ewallet/ovo.png
-  AssetGenImage get ovoPng => const AssetGenImage('assets/ewallet/ovo.png');
-
-  /// File path: assets/ewallet/ovo.svg
-  String get ovoSvg => 'assets/ewallet/ovo.svg';
-
-  /// File path: assets/ewallet/payfazz.png
-  AssetGenImage get payfazzPng =>
-      const AssetGenImage('assets/ewallet/payfazz.png');
-
-  /// File path: assets/ewallet/payfazz.svg
-  String get payfazzSvg => 'assets/ewallet/payfazz.svg';
-
-  /// File path: assets/ewallet/paypal.png
-  AssetGenImage get paypalPng =>
-      const AssetGenImage('assets/ewallet/paypal.png');
-
-  /// File path: assets/ewallet/paypal.svg
-  String get paypalSvg => 'assets/ewallet/paypal.svg';
-
-  /// File path: assets/ewallet/paypro.png
-  AssetGenImage get payproPng =>
-      const AssetGenImage('assets/ewallet/paypro.png');
-
-  /// File path: assets/ewallet/paypro.svg
-  String get payproSvg => 'assets/ewallet/paypro.svg';
-
-  /// File path: assets/ewallet/paytren.png
-  AssetGenImage get paytrenPng =>
-      const AssetGenImage('assets/ewallet/paytren.png');
-
-  /// File path: assets/ewallet/paytren.svg
-  String get paytrenSvg => 'assets/ewallet/paytren.svg';
-
-  /// File path: assets/ewallet/shopeepay.png
-  AssetGenImage get shopeepayPng =>
-      const AssetGenImage('assets/ewallet/shopeepay.png');
-
-  /// File path: assets/ewallet/shopeepay.svg
-  String get shopeepaySvg => 'assets/ewallet/shopeepay.svg';
-
-  /// File path: assets/ewallet/uangku.png
-  AssetGenImage get uangkuPng =>
-      const AssetGenImage('assets/ewallet/uangku.png');
-
-  /// File path: assets/ewallet/uangku.svg
-  String get uangkuSvg => 'assets/ewallet/uangku.svg';
+  /// File path: assets/category/outcome3.png
+  AssetGenImage get outcome3 =>
+      const AssetGenImage('assets/category/outcome3.png');
 
   /// List of all assets
-  List<dynamic> get values => [
-        applepayPng,
-        applepaySvg,
-        bluepayPng,
-        bluepaySvg,
-        cashbacPng,
-        cashbacSvg,
-        cashlezPng,
-        cashlezSvg,
-        danaPng,
-        danaSvg,
-        flipPng,
-        flipSvg,
-        gopayPng,
-        gopaySvg,
-        gpayPng,
-        gpaySvg,
-        kudoPng,
-        kudoSvg,
-        linkajaPng,
-        linkajaSvg,
-        midtransPng,
-        midtransSvg,
-        ovoPng,
-        ovoSvg,
-        payfazzPng,
-        payfazzSvg,
-        paypalPng,
-        paypalSvg,
-        payproPng,
-        payproSvg,
-        paytrenPng,
-        paytrenSvg,
-        shopeepayPng,
-        shopeepaySvg,
-        uangkuPng,
-        uangkuSvg
-      ];
+  List<AssetGenImage> get values =>
+      [income1, income2, income3, outcome1, outcome2, outcome3];
 }
 
 class Assets {
   Assets._();
 
-  static const $AssetsBankGen bank = $AssetsBankGen();
-  static const $AssetsEwalletGen ewallet = $AssetsEwalletGen();
+  static const $AssetsAccountsGen accounts = $AssetsAccountsGen();
+  static const $AssetsCategoryGen category = $AssetsCategoryGen();
 }
 
 class AssetGenImage {

@@ -89,7 +89,6 @@ class DetailAccountPage extends HookConsumerWidget {
                               controller: nameTextController,
                               style: FigmaTextStyles.smallNormalRegular,
                               keyboardAppearance: Brightness.dark,
-                              inputFormatters: [],
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: context.colors.surface,
@@ -147,7 +146,6 @@ class DetailAccountPage extends HookConsumerWidget {
                             FreeSpaceUI.vertical(16),
                             Switch.adaptive(
                                 value: isActiveState.value,
-                                activeColor: context.colors.primary.light,
                                 onChanged: (value) {
                                   isActiveState.value = !isActiveState.value;
                                 }),

@@ -44,7 +44,7 @@ class AccountRepository {
 
   Future<Either<String, bool>> update(Account data) async {
     try {
-      var account = await localSource.update(AccountModel.fromDomain(data));
+      await localSource.update(AccountModel.fromDomain(data));
       return const Right(true);
     } catch (e) {
       return Left(e.toString());
@@ -62,7 +62,7 @@ class AccountRepository {
 
   Future<Either<String, bool>> destroy(Account data) async {
     try {
-      var result = await localSource.delete(AccountModel.fromDomain(data));
+      await localSource.delete(AccountModel.fromDomain(data));
       return const Right(true);
     } catch (e) {
       return Left(e.toString());

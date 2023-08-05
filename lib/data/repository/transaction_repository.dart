@@ -1,8 +1,4 @@
-import 'dart:developer';
-
 import 'package:fpdart/fpdart.dart';
-import 'package:how_much/domain/account.dart';
-import 'package:how_much/domain/category.dart';
 import 'package:injectable/injectable.dart';
 import '../../domain/transaction.dart';
 import '../models/transaction_model.dart';
@@ -19,7 +15,7 @@ class TransactionRepository {
       var result = await localSource.findAll(keyword: keyword);
 
       return Right(result.toDomaiList());
-    } catch (e, s) {
+    } catch (e) {
       return Left(e.toString());
     }
   }
@@ -30,7 +26,7 @@ class TransactionRepository {
       var result = await localSource.getAll();
 
       return Right(result.toDomaiList());
-    } catch (e, s) {
+    } catch (e) {
       return Left(e.toString());
     }
   }
