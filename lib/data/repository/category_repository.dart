@@ -13,7 +13,7 @@ class CategoryRepository {
     try {
       for (var data in initListCategory) {
         var item = CategoryModel.fromDomain(data);
-        localSource.store(item);
+        await localSource.store(item);
       }
 
       return const Right(true);

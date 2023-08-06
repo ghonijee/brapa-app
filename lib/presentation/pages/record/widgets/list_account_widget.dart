@@ -84,6 +84,7 @@ class ListAccountWidget extends ConsumerWidget {
                       shrinkWrap: true,
                       itemCount: data.length,
                       scrollDirection: Axis.horizontal,
+                      physics: const BouncingScrollPhysics(),
                       itemBuilder: (context, index) {
                         var item = data[index];
                         return AccountChip(

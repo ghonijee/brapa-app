@@ -23,7 +23,7 @@ class InitialApp extends StatelessWidget {
       return MaterialApp.router(
         routerConfig: _appRouter.config(),
         debugShowCheckedModeBanner: false,
-        title: 'How Much',
+        title: 'Brapa App',
         darkTheme: AppTheme.dark,
         themeMode: ThemeMode.dark,
       );

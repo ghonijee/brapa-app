@@ -14,6 +14,7 @@ class MainPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AutoTabsRouter.tabBar(
+      physics: NeverScrollableScrollPhysics(),
       routes: const [
         RecordRoute(),
         HistoryRoute(),

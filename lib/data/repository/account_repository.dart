@@ -20,7 +20,7 @@ class AccountRepository {
           ..assets = data.assets
           ..order = data.order;
 
-        localSource.store(item);
+        await localSource.store(item);
       }
 
       return const Right(true);
