@@ -41,9 +41,10 @@ class ListCategoryWidget extends ConsumerWidget {
                         : listCategory.asData?.value.incomeList();
                     if (listDataShowMore == null) return;
 
-                    WidgetUI.showBottomSheet(
-                        context,
-                        ShowMoreBottomSheet<Category>(
+                    WidgetUI.showBottomSheet(context,
+                        height: MediaQuery.of(context).size.height * 0.7,
+                        child: ShowMoreBottomSheet<Category>(
+                          label: "All Categories",
                           itemBuilder: listDataShowMore.map((item) {
                             return CategoryChip(
                                 label: item.name,

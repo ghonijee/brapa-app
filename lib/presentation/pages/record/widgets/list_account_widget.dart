@@ -40,30 +40,33 @@ class ListAccountWidget extends ConsumerWidget {
                     if (listDataShowMore == null) return;
 
                     WidgetUI.showBottomSheet(
-                        context,
-                        ShowMoreBottomSheet<Account>(
-                          itemBuilder: listDataShowMore.map((item) {
-                            return AccountChip(
-                              width: 150,
-                              alignment: Alignment.center,
-                              assetPath: item.assets!,
-                              label: item.name,
-                              isActive: item == ref.watch(createRecordProvider).accountSelected,
-                              onValueChanged: () {
-                                var index = listDataShowMore.indexOf(item);
-                                ref.watch(createRecordProvider).accountSelected = item;
-                                listAccountScroll.scrollTo(
-                                  index: index < listDataShowMore.length - 2 && index > 0 ? index - 1 : index,
-                                  duration: const Duration(milliseconds: 700),
-                                  curve: Curves.fastLinearToSlowEaseIn,
-                                );
+                      context,
+                      height: MediaQuery.of(context).size.height * 0.7,
+                      child: ShowMoreBottomSheet<Account>(
+                        label: "All Accounts",
+                        itemBuilder: listDataShowMore.map((item) {
+                          return AccountChip(
+                            width: 150,
+                            alignment: Alignment.center,
+                            assetPath: item.assets!,
+                            label: item.name,
+                            isActive: item == ref.watch(createRecordProvider).accountSelected,
+                            onValueChanged: () {
+                              var index = listDataShowMore.indexOf(item);
+                              ref.watch(createRecordProvider).accountSelected = item;
+                              listAccountScroll.scrollTo(
+                                index: index < listDataShowMore.length - 2 && index > 0 ? index - 1 : index,
+                                duration: const Duration(milliseconds: 700),
+                                curve: Curves.fastLinearToSlowEaseIn,
+                              );
 
-                                controller.notifyListeners();
-                                context.router.pop();
-                              },
-                            );
-                          }).toList(),
-                        ));
+                              controller.notifyListeners();
+                              context.router.pop();
+                            },
+                          );
+                        }).toList(),
+                      ),
+                    );
                   },
                   child: TextUI.tinyNoneRegular(
                     "Show more",

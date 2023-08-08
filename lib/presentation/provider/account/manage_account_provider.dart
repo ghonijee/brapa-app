@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:brapa/data/repository/account_repository.dart';
 import 'package:brapa/domain/account.dart';
 import 'package:brapa/gen/injection/injection.dart';
+import 'package:injectable/injectable.dart';
 
 class ManageAccountNotifier extends StateNotifier<Account> {
   final AccountRepository repository;
@@ -42,4 +43,5 @@ class ManageAccountNotifier extends StateNotifier<Account> {
   }
 }
 
+@injectable
 final manageAccountProvider = StateNotifierProvider((ref) => ManageAccountNotifier(getIt<AccountRepository>()));

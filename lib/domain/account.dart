@@ -69,6 +69,10 @@ extension AccountExtension on List<Account> {
     }
     return sum;
   }
+
+  List<Account> except(Account item) {
+    return where((element) => element.id != item.id).toList();
+  }
 }
 
 List<Account> initListAccount = [

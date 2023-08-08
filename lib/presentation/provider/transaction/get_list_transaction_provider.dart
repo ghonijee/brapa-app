@@ -4,11 +4,14 @@ import 'package:brapa/data/repository/transaction_repository.dart';
 import 'package:brapa/domain/account.dart';
 import 'package:brapa/domain/transaction.dart';
 import 'package:brapa/gen/injection/injection.dart';
+import 'package:injectable/injectable.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class AsyncListHistoryTransaction extends AsyncNotifier<List<Transaction>> {
-  final TransactionRepository repository = getIt<TransactionRepository>();
+  final TransactionRepository repository;
   Debouncer? debounce = Debouncer(milliseconds: 1100);
+
+  AsyncListHistoryTransaction(this.repository);
 
   @override
   FutureOr<List<Transaction>> build() async {
@@ -46,8 +49,9 @@ class AsyncListHistoryTransaction extends AsyncNotifier<List<Transaction>> {
   }
 }
 
+@injectable
 final asyncListHistory = AsyncNotifierProvider<AsyncListHistoryTransaction, List<Transaction>>(
-  () => AsyncListHistoryTransaction(),
+  () => AsyncListHistoryTransaction(getIt<TransactionRepository>()),
 );
 
 

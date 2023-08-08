@@ -6,6 +6,7 @@ import 'package:brapa/data/repository/account_repository.dart';
 import 'package:brapa/domain/account.dart';
 import 'package:brapa/domain/category.dart';
 import 'package:brapa/gen/injection/injection.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../data/repository/category_repository.dart';
 import 'get_list_category_provider.dart';
@@ -50,6 +51,7 @@ class ManageCategoryNotifier extends StateNotifier<Category> {
   }
 }
 
+@injectable
 final manageCategoryProvider = StateNotifierProvider((ref) {
   final data = ref.watch(listCategoriesProvider);
 

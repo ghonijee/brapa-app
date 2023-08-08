@@ -27,35 +27,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const RecordPage(),
       );
     },
-    HistoryRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const HistoryPage(),
-      );
-    },
-    RecordDetailRoute.name: (routeData) {
-      final args = routeData.argsAs<RecordDetailRouteArgs>(
-          orElse: () => const RecordDetailRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: RecordDetailPage(
-          key: args.key,
-          transaction: args.transaction,
-        ),
-      );
-    },
-    AccountRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const AccountPage(),
-      );
-    },
-    MainRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: MainPage(),
-      );
-    },
     ManageAccountsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -97,6 +68,35 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    HistoryRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const HistoryPage(),
+      );
+    },
+    RecordDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<RecordDetailRouteArgs>(
+          orElse: () => const RecordDetailRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: RecordDetailPage(
+          key: args.key,
+          transaction: args.transaction,
+        ),
+      );
+    },
+    AccountRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AccountPage(),
+      );
+    },
+    MainRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: MainPage(),
+      );
+    },
   };
 }
 
@@ -124,86 +124,6 @@ class RecordRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'RecordRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [HistoryPage]
-class HistoryRoute extends PageRouteInfo<void> {
-  const HistoryRoute({List<PageRouteInfo>? children})
-      : super(
-          HistoryRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'HistoryRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [RecordDetailPage]
-class RecordDetailRoute extends PageRouteInfo<RecordDetailRouteArgs> {
-  RecordDetailRoute({
-    Key? key,
-    Transaction? transaction,
-    List<PageRouteInfo>? children,
-  }) : super(
-          RecordDetailRoute.name,
-          args: RecordDetailRouteArgs(
-            key: key,
-            transaction: transaction,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'RecordDetailRoute';
-
-  static const PageInfo<RecordDetailRouteArgs> page =
-      PageInfo<RecordDetailRouteArgs>(name);
-}
-
-class RecordDetailRouteArgs {
-  const RecordDetailRouteArgs({
-    this.key,
-    this.transaction,
-  });
-
-  final Key? key;
-
-  final Transaction? transaction;
-
-  @override
-  String toString() {
-    return 'RecordDetailRouteArgs{key: $key, transaction: $transaction}';
-  }
-}
-
-/// generated route for
-/// [AccountPage]
-class AccountRoute extends PageRouteInfo<void> {
-  const AccountRoute({List<PageRouteInfo>? children})
-      : super(
-          AccountRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'AccountRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [MainPage]
-class MainRoute extends PageRouteInfo<void> {
-  const MainRoute({List<PageRouteInfo>? children})
-      : super(
-          MainRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'MainRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -359,4 +279,84 @@ class ManageCategoriesRouteArgs {
   String toString() {
     return 'ManageCategoriesRouteArgs{key: $key, label: $label, type: $type}';
   }
+}
+
+/// generated route for
+/// [HistoryPage]
+class HistoryRoute extends PageRouteInfo<void> {
+  const HistoryRoute({List<PageRouteInfo>? children})
+      : super(
+          HistoryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HistoryRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RecordDetailPage]
+class RecordDetailRoute extends PageRouteInfo<RecordDetailRouteArgs> {
+  RecordDetailRoute({
+    Key? key,
+    Transaction? transaction,
+    List<PageRouteInfo>? children,
+  }) : super(
+          RecordDetailRoute.name,
+          args: RecordDetailRouteArgs(
+            key: key,
+            transaction: transaction,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'RecordDetailRoute';
+
+  static const PageInfo<RecordDetailRouteArgs> page =
+      PageInfo<RecordDetailRouteArgs>(name);
+}
+
+class RecordDetailRouteArgs {
+  const RecordDetailRouteArgs({
+    this.key,
+    this.transaction,
+  });
+
+  final Key? key;
+
+  final Transaction? transaction;
+
+  @override
+  String toString() {
+    return 'RecordDetailRouteArgs{key: $key, transaction: $transaction}';
+  }
+}
+
+/// generated route for
+/// [AccountPage]
+class AccountRoute extends PageRouteInfo<void> {
+  const AccountRoute({List<PageRouteInfo>? children})
+      : super(
+          AccountRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AccountRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [MainPage]
+class MainRoute extends PageRouteInfo<void> {
+  const MainRoute({List<PageRouteInfo>? children})
+      : super(
+          MainRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MainRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }

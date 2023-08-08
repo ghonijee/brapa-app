@@ -1,6 +1,6 @@
 export 'account/account_page.dart';
 export 'account/widgets/account_card_widget.dart';
-export 'account/widgets/account_detail_bottom_sheet.dart';
+export 'account/widgets/account_menu_bottom_sheet.dart';
 export 'history/history_page.dart';
 export 'history/record_detail_page.dart';
 export 'manage_account/detail_account_page.dart';

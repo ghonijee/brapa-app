@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:brapa/data/repository/account_repository.dart';
 import 'package:brapa/data/repository/transaction_repository.dart';
 import 'package:brapa/domain/category.dart';
+import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
 
 import '../../../domain/account.dart';
@@ -42,6 +43,7 @@ class DeleteRecordNotifier extends ChangeNotifier {
   }
 }
 
+@injectable
 final deleteRecordProvider = ChangeNotifierProvider(
   (ref) => DeleteRecordNotifier(
     getIt<TransactionRepository>(),

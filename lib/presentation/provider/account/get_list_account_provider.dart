@@ -1,6 +1,7 @@
 import 'package:brapa/data/repository/account_repository.dart';
 import 'package:brapa/domain/account.dart';
 import 'package:brapa/gen/injection/injection.dart';
+import 'package:injectable/injectable.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 final getListAccountProvider = FutureProvider((ref) async {
@@ -36,6 +37,7 @@ class ListAccountNotifierProvider extends AsyncNotifier<List<Account>> {
   }
 }
 
+@injectable
 final listAccountProvider = AsyncNotifierProvider<ListAccountNotifierProvider, List<Account>>(
   () => ListAccountNotifierProvider(getIt<AccountRepository>()),
 );

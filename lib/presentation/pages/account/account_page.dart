@@ -7,7 +7,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../provider/account/get_list_account_provider.dart';
 import 'widgets/account_card_widget.dart';
-import 'widgets/account_detail_bottom_sheet.dart';
+import 'widgets/account_menu_bottom_sheet.dart';
 
 @RoutePage()
 class AccountPage extends ConsumerWidget {
@@ -61,21 +61,7 @@ class AccountPage extends ConsumerWidget {
                     var item = listAccount.value![index];
                     return GestureDetector(
                         onTap: () {
-                          // showModalBottomSheet(
-                          //   context: context,
-                          //   enableDrag: true,
-                          //   isScrollControlled: true,
-                          //   useRootNavigator: true,
-                          //   backgroundColor: null,
-                          //   shape: const RoundedRectangleBorder(
-                          //       borderRadius: BorderRadius.only(
-                          //     topLeft: Radius.circular(16),
-                          //     topRight: Radius.circular(16),
-                          //   )),
-                          //   builder: (context) {
-                          //     return const AccountDetailBottomSheet();
-                          //   },
-                          // );
+                          WidgetUI.showBottomSheet(context, height: 40.h, child: AccountMenuBottomSheet(item: item));
                         },
                         child: AccountCardWidget(item: item));
                   },

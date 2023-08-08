@@ -1,6 +1,7 @@
 import 'package:brapa/data/repository/category_repository.dart';
 import 'package:brapa/domain/category.dart';
 import 'package:brapa/gen/injection/injection.dart';
+import 'package:injectable/injectable.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 final getListCategoryProvider = FutureProvider((ref) async {
@@ -36,6 +37,7 @@ class ListCategoryNotifierProvider extends AsyncNotifier<List<Category>> {
   }
 }
 
+@injectable
 final listCategoriesProvider = AsyncNotifierProvider<ListCategoryNotifierProvider, List<Category>>(
   () => ListCategoryNotifierProvider(getIt<CategoryRepository>()),
 );

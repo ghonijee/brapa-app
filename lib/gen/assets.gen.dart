@@ -294,11 +294,30 @@ class $AssetsCategoryGen {
       [income1, income2, income3, outcome1, outcome2, outcome3];
 }
 
+class $AssetsLauncherGen {
+  const $AssetsLauncherGen();
+
+  /// File path: assets/launcher/appstore.png
+  AssetGenImage get appstore =>
+      const AssetGenImage('assets/launcher/appstore.png');
+
+  /// File path: assets/launcher/icon.png
+  AssetGenImage get icon => const AssetGenImage('assets/launcher/icon.png');
+
+  /// File path: assets/launcher/playstore.png
+  AssetGenImage get playstore =>
+      const AssetGenImage('assets/launcher/playstore.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [appstore, icon, playstore];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsAccountsGen accounts = $AssetsAccountsGen();
   static const $AssetsCategoryGen category = $AssetsCategoryGen();
+  static const $AssetsLauncherGen launcher = $AssetsLauncherGen();
 }
 
 class AssetGenImage {

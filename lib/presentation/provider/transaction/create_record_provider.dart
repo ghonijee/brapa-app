@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:brapa/data/repository/account_repository.dart';
 import 'package:brapa/data/repository/transaction_repository.dart';
 import 'package:brapa/domain/category.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../domain/account.dart';
 import '../../../domain/transaction.dart';
@@ -61,6 +62,7 @@ class CreateRecordNotifier extends ChangeNotifier {
   }
 }
 
+@injectable
 final createRecordProvider = ChangeNotifierProvider((ref) => CreateRecordNotifier(
       getIt<TransactionRepository>(),
       getIt<AccountRepository>(),
