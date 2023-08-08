@@ -32,6 +32,22 @@ class UpdateRecordNotifier extends ChangeNotifier {
     this.accountRepository,
   );
 
+  void selectedAccount(Account item) {
+    accountSelected = item;
+    notifyListeners();
+  }
+
+  void changeDateTransaction(DateTime date) {
+    dateSelected = date;
+    dateController.text = DateFormat("dd MMMM yyyy").format(date);
+    notifyListeners();
+  }
+
+  void selectedCategory(Category item) {
+    categorySelected = item;
+    notifyListeners();
+  }
+
   void loadTransaction(Transaction item) {
     transaction = item;
     accountSelected = item.account;

@@ -10,7 +10,6 @@ import 'package:brapa/domain/category.dart';
 import 'package:brapa/domain/transaction.dart';
 import 'package:brapa/presentation/provider/transaction/delete_record_provider.dart';
 import 'package:brapa/presentation/provider/transaction/update_record_provider.dart';
-import 'package:intl/intl.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
@@ -158,8 +157,7 @@ class RecordDetailPage extends HookConsumerWidget {
                                               label: item.name,
                                               isActive: item == controller.categorySelected,
                                               onValueChanged: () {
-                                                controller.categorySelected = item;
-                                                controller.notifyListeners();
+                                                controller.selectedCategory(item);
                                               });
                                         },
                                       );
@@ -214,8 +212,7 @@ class RecordDetailPage extends HookConsumerWidget {
                                               label: item.name,
                                               isActive: item.id == controller.accountSelected?.id,
                                               onValueChanged: () {
-                                                controller.accountSelected = item;
-                                                controller.notifyListeners();
+                                                controller.selectedAccount(item);
                                               },
                                             );
                                           },
@@ -266,10 +263,7 @@ class RecordDetailPage extends HookConsumerWidget {
                                   dialogSize: const Size(325, 400),
                                   borderRadius: BorderRadius.circular(15),
                                 );
-                                controller.dateSelected = datePickerResult?.first;
-                                controller.dateController.text =
-                                    DateFormat("dd MMMM yyyy").format(controller.dateSelected!);
-                                controller.notifyListeners();
+                                controller.changeDateTransaction(datePickerResult!.first!);
                               },
                               child: TextFormField(
                                 style: FigmaTextStyles.smallNormalRegular.copyWith(color: context.colors.onSurface),

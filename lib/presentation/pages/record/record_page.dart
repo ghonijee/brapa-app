@@ -66,8 +66,7 @@ class RecordPage extends HookConsumerWidget {
                           // SegmentedControlValue(label: "Income"),
                         ],
                         onValueChanged: (index, value) {
-                          controller.segmentedControllerGroupValue = index;
-                          controller.notifyListeners();
+                          controller.changeSegmentedControlValue(index);
                         },
                       ),
                     ),

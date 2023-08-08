@@ -51,14 +51,12 @@ class ListCategoryWidget extends ConsumerWidget {
                                 isActive: item == ref.watch(createRecordProvider).categorySelected,
                                 onValueChanged: () {
                                   var index = listDataShowMore.indexOf(item);
-                                  ref.watch(createRecordProvider).categorySelected = item;
+                                  controller.selectedCategory(item);
                                   listCategoryScrollItem.scrollTo(
                                     index: index < listDataShowMore.length - 2 && index > 1 ? index - 2 : index,
                                     duration: const Duration(milliseconds: 700),
                                     curve: Curves.fastLinearToSlowEaseIn,
                                   );
-
-                                  controller.notifyListeners();
                                   context.router.pop();
                                 });
                           }).toList(),
@@ -96,8 +94,7 @@ class ListCategoryWidget extends ConsumerWidget {
                           label: item.name,
                           isActive: item == ref.watch(createRecordProvider).categorySelected,
                           onValueChanged: () {
-                            ref.watch(createRecordProvider).categorySelected = item;
-                            controller.notifyListeners();
+                            controller.selectedCategory(item);
                           });
                     },
                   );

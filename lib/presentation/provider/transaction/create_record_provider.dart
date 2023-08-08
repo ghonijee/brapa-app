@@ -27,6 +27,21 @@ class CreateRecordNotifier extends ChangeNotifier {
     this.accountRepository,
   );
 
+  void selectedAccount(Account item) {
+    accountSelected = item;
+    notifyListeners();
+  }
+
+  void selectedCategory(Category item) {
+    categorySelected = item;
+    notifyListeners();
+  }
+
+  void changeSegmentedControlValue(int value) {
+    segmentedControllerGroupValue = value;
+    notifyListeners();
+  }
+
   Future<void> save() async {
     try {
       var transaction = Transaction(

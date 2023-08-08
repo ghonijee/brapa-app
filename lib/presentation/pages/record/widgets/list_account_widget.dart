@@ -53,14 +53,12 @@ class ListAccountWidget extends ConsumerWidget {
                             isActive: item == ref.watch(createRecordProvider).accountSelected,
                             onValueChanged: () {
                               var index = listDataShowMore.indexOf(item);
-                              ref.watch(createRecordProvider).accountSelected = item;
+                              controller.selectedAccount(item);
                               listAccountScroll.scrollTo(
                                 index: index < listDataShowMore.length - 2 && index > 0 ? index - 1 : index,
                                 duration: const Duration(milliseconds: 700),
                                 curve: Curves.fastLinearToSlowEaseIn,
                               );
-
-                              controller.notifyListeners();
                               context.router.pop();
                             },
                           );
@@ -96,8 +94,7 @@ class ListAccountWidget extends ConsumerWidget {
                           label: item.name,
                           isActive: item == ref.watch(createRecordProvider).accountSelected,
                           onValueChanged: () {
-                            ref.watch(createRecordProvider).accountSelected = item;
-                            controller.notifyListeners();
+                            controller.selectedAccount(item);
                           },
                         );
                       },
