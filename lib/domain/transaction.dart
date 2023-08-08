@@ -42,7 +42,7 @@ class Transaction {
 
   String subtitle() {
     var value = account.name;
-    if (memo != null) {
+    if (memo != null && memo!.isNotEmpty) {
       value += " - ${memo!.trim()}";
     }
     return value;

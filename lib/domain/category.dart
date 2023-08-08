@@ -45,6 +45,9 @@ class Category {
       order: order ?? this.order,
     );
   }
+
+  factory Category.transferIn() => Category(name: "Transfer", categoryType: CategoryType.inc);
+  factory Category.transferOut() => Category(name: "Transfer", categoryType: CategoryType.exp);
 }
 
 enum CategoryType { exp, inc }

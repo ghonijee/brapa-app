@@ -1,7 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:app_ui/app_ui.dart';
 import 'package:brapa/data/repository/account_repository.dart';
+import 'package:brapa/data/repository/transaction_repository.dart';
 import 'package:brapa/domain/account.dart';
+import 'package:brapa/domain/category.dart';
+import 'package:brapa/domain/transaction.dart';
 import 'package:brapa/gen/injection/injection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
@@ -32,7 +35,8 @@ class TransferAccountState {
 
 class TransferAccountNotifier extends StateNotifier<TransferAccountState> {
   final AccountRepository repository;
-  TransferAccountNotifier(this.repository) : super(TransferAccountState());
+  final TransactionRepository transactionRepository;
+  TransferAccountNotifier(this.repository, this.transactionRepository) : super(TransferAccountState());
 
   initTransfer(Account from) {
     state = state.copyWith(from: from);
@@ -55,10 +59,29 @@ class TransferAccountNotifier extends StateNotifier<TransferAccountState> {
     }
 
     try {
+      // From
       state.from!.decrease(state.amount);
       await repository.update(state.from!);
+      await transactionRepository.store(Transaction(
+        type: TransactionType.exp,
+        value: state.amount,
+        category: Category.transferOut(),
+        account: state.from!,
+        createdAt: DateTime.now(),
+        memo: "Transfer to ${state.to!.name}",
+      ));
+
+      // To
       state.to!.increase(state.amount);
       await repository.update(state.to!);
+      await transactionRepository.store(Transaction(
+        type: TransactionType.inc,
+        value: state.amount,
+        category: Category.transferIn(),
+        account: state.to!,
+        createdAt: DateTime.now(),
+        memo: "Transfer from ${state.from!.name}",
+      ));
     } catch (e) {
       return false;
     }
@@ -68,4 +91,8 @@ class TransferAccountNotifier extends StateNotifier<TransferAccountState> {
 
 @injectable
 final transferAccountProvider = StateNotifierProvider<TransferAccountNotifier, TransferAccountState>(
-    (ref) => TransferAccountNotifier(getIt<AccountRepository>()));
+  (ref) => TransferAccountNotifier(
+    getIt<AccountRepository>(),
+    getIt<TransactionRepository>(),
+  ),
+);

@@ -55,6 +55,7 @@ class TransferValueBottomSheet extends HookConsumerWidget {
             ),
             FreeSpaceUI.vertical(20),
             TextFormField(
+              autofocus: true,
               style: FigmaTextStyles.largeNormalBold,
               controller: valueTextController,
               keyboardType: TextInputType.number,
@@ -105,9 +106,12 @@ class TransferValueBottomSheet extends HookConsumerWidget {
                   ? null
                   : () async {
                       transferController.setAmount(valueTextController.text);
-                      transferController.transfer().then((value) => {
-                            if (value) {context.router.popUntilRoot()}
-                          });
+                      transferController.transfer().then<void>((value) {
+                        if (value) {
+                          context.router.popUntilRoot();
+                          ref.invalidate(getListAccountProvider);
+                        }
+                      });
                     },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size.fromHeight(48),
