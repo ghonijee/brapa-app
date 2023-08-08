@@ -8,7 +8,6 @@ import 'package:brapa/domain/account.dart';
 import 'package:brapa/gen/assets.gen.dart';
 import 'package:brapa/presentation/provider/account/get_list_account_provider.dart';
 import 'package:brapa/presentation/provider/account/manage_account_provider.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 enum FormAccountType { create, update }
 
@@ -90,7 +89,6 @@ class DetailAccountPage extends HookConsumerWidget {
                               controller: nameTextController,
                               style: FigmaTextStyles.smallNormalRegular,
                               keyboardAppearance: Brightness.dark,
-                              inputFormatters: [],
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: context.colors.surface,
@@ -181,7 +179,7 @@ class DetailAccountPage extends HookConsumerWidget {
                                     context: context,
                                     builder: (context) {
                                       return Container(
-                                        padding: EdgeInsets.all(20),
+                                        padding: const EdgeInsets.all(20),
                                         child: GridView.builder(
                                           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 4,

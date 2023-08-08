@@ -40,12 +40,10 @@ class TransferAccountNotifier extends StateNotifier<TransferAccountState> {
 
   initTransfer(Account from) {
     state = state.copyWith(from: from);
-    print(state.from!.name);
   }
 
   selectedTargetAccount(Account target) {
     state = state.copyWith(to: target);
-    print(state.to!.name);
   }
 
   setAmount(String value) {

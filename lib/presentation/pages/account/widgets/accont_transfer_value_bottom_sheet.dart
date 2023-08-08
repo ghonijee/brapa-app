@@ -1,5 +1,4 @@
 import 'package:app_ui/app_ui.dart';
-import 'package:app_ui/molecules/account_chip.dart';
 import 'package:app_ui/token/figma_token.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +19,7 @@ class TransferValueBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final listAccount = ref.watch(getListAccountProvider);
+    // final listAccount = ref.watch(getListAccountProvider);
     final transferController = ref.watch(transferAccountProvider.notifier);
     final transferState = ref.watch(transferAccountProvider);
     final valueTextController = useTextEditingController();

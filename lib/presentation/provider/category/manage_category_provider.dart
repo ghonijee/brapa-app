@@ -1,9 +1,4 @@
-import 'dart:developer';
-
-import 'package:app_ui/app_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:brapa/data/repository/account_repository.dart';
-import 'package:brapa/domain/account.dart';
 import 'package:brapa/domain/category.dart';
 import 'package:brapa/gen/injection/injection.dart';
 import 'package:injectable/injectable.dart';
@@ -19,7 +14,6 @@ class ManageCategoryNotifier extends StateNotifier<Category> {
 
   show(Category data) {
     state = data;
-    print(state.order);
   }
 
   saveUpdate({

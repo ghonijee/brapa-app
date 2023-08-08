@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:brapa/domain/category.dart';
 import 'package:brapa/presentation/pages/pages.dart';
-import 'package:brapa/presentation/provider/account/manage_account_provider.dart';
 import 'package:brapa/presentation/router/app_router.dart';
 
 import '../../../gen/assets.gen.dart';

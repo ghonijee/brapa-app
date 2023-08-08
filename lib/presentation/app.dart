@@ -11,10 +11,12 @@ import 'provider/category/get_list_category_provider.dart';
 
 @RoutePage()
 class MainPage extends ConsumerWidget {
+  const MainPage({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AutoTabsRouter.tabBar(
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       routes: const [
         RecordRoute(),
         HistoryRoute(),

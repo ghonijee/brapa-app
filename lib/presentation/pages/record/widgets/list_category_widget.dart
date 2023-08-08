@@ -90,10 +90,10 @@ class ListCategoryWidget extends ConsumerWidget {
                     scrollDirection: Axis.horizontal,
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
-                      var item = result?[index];
+                      var item = result[index];
                       return CategoryChip(
                           alignment: Alignment.center,
-                          label: item!.name,
+                          label: item.name,
                           isActive: item == ref.watch(createRecordProvider).categorySelected,
                           onValueChanged: () {
                             ref.watch(createRecordProvider).categorySelected = item;

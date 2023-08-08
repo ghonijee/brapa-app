@@ -53,10 +53,9 @@ class ManageAccountsPage extends ConsumerWidget {
                         context.router.push(DetailAccountRoute(data: account, formMode: FormAccountType.update));
                       },
                       contentPadding: EdgeInsets.zero,
-                      leading: Container(
+                      leading: SizedBox(
                         width: 80,
                         height: 40,
-                        decoration: BoxDecoration(),
                         child: Image.asset(
                           account.assets!,
                           fit: BoxFit.fitHeight,

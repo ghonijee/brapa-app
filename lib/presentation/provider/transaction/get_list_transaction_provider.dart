@@ -1,7 +1,5 @@
 import 'package:app_ui/app_ui.dart';
-import 'package:flutter/material.dart';
 import 'package:brapa/data/repository/transaction_repository.dart';
-import 'package:brapa/domain/account.dart';
 import 'package:brapa/domain/transaction.dart';
 import 'package:brapa/gen/injection/injection.dart';
 import 'package:injectable/injectable.dart';
@@ -45,7 +43,6 @@ class AsyncListHistoryTransaction extends AsyncNotifier<List<Transaction>> {
     state = await AsyncValue.guard(() async {
       return _getData();
     });
-    print(state.asData?.value.first.account.name.toString());
   }
 }
 
