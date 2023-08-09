@@ -35,6 +35,17 @@ class ListCategoryNotifierProvider extends AsyncNotifier<List<Category>> {
       return await fetchData();
     });
   }
+
+  void reorderData(List<Category> data) {
+    state = AsyncValue.data(data);
+  }
+
+  Future<void> saveReorder() async {
+    for (var (index, item) in state.asData!.value.indexed) {
+      await repository.update(item.copyWith(order: index + 1));
+    }
+    reload();
+  }
 }
 
 @injectable

@@ -55,7 +55,8 @@ class ManageAccountsPage extends HookConsumerWidget {
                                   children: [
                                     const TextUI.regularNormalBold("Manage Account Tips"),
                                     FreeSpaceUI.vertical(20),
-                                    const TextUI.smallNoneRegular("Press and hold the item to active reoder feature"),
+                                    const TextUI.smallNoneRegular(
+                                        "Press and hold the item to active reoder list feature"),
                                   ],
                                 ),
                               ));

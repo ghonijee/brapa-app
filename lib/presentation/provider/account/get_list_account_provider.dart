@@ -44,6 +44,7 @@ class ListAccountNotifierProvider extends AsyncNotifier<List<Account>> {
     for (var (index, accountItem) in state.asData!.value.indexed) {
       await repository.update(accountItem.copyWith(order: index + 1));
     }
+    reload();
   }
 }
 
