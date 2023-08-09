@@ -35,6 +35,16 @@ class ListAccountNotifierProvider extends AsyncNotifier<List<Account>> {
       return await fetchData();
     });
   }
+
+  void reorderData(List<Account> data) {
+    state = AsyncValue.data(data);
+  }
+
+  Future<void> saveReorder() async {
+    for (var (index, accountItem) in state.asData!.value.indexed) {
+      await repository.update(accountItem.copyWith(order: index + 1));
+    }
+  }
 }
 
 @injectable
