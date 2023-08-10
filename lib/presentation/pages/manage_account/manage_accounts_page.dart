@@ -49,13 +49,11 @@ class ManageAccountsPage extends HookConsumerWidget {
                               height: 20.h,
                               child: Container(
                                 width: double.infinity,
-                                padding:
-                                    const EdgeInsets.fromLTRB(24, 24, 24, 48),
+                                padding: const EdgeInsets.fromLTRB(24, 24, 24, 48),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const TextUI.regularNormalBold(
-                                        "Manage Account Tips"),
+                                    const TextUI.regularNormalBold("Manage Account Tips"),
                                     FreeSpaceUI.vertical(20),
                                     const TextUI.smallNoneRegular(
                                         "Press and hold the item to active reoder list feature"),
@@ -70,8 +68,7 @@ class ManageAccountsPage extends HookConsumerWidget {
                       ),
                       FreeSpaceUI.horizontal(16),
                       GestureDetector(
-                        onTap: () => context.router.push(DetailAccountRoute(
-                            formMode: FormAccountType.create)),
+                        onTap: () => context.router.push(DetailAccountRoute(formMode: FormAccountType.create)),
                         child: Icon(
                           Icons.add_card,
                           color: context.colors.onBackground,
@@ -114,9 +111,7 @@ class ManageAccountsPage extends HookConsumerWidget {
                         ),
                         title: TextUI.regularTightBold(
                           account.name,
-                          color: account.isActive!
-                              ? context.colors.onBackground
-                              : context.colors.ink.light,
+                          color: account.isActive! ? context.colors.onBackground : context.colors.ink.light,
                         ),
                         subtitle: TextUI.smallNoneRegular(
                           account.balance.currency(),
@@ -142,11 +137,8 @@ class ManageAccountsPage extends HookConsumerWidget {
                     return ListTile(
                       onLongPress: () => reorderListActive.value = true,
                       onTap: () {
-                        ref
-                            .watch(manageAccountProvider.notifier)
-                            .showAccount(account);
-                        context.router.push(DetailAccountRoute(
-                            data: account, formMode: FormAccountType.update));
+                        ref.watch(manageAccountProvider.notifier).showAccount(account);
+                        context.router.push(DetailAccountRoute(data: account, formMode: FormAccountType.update));
                       },
                       contentPadding: EdgeInsets.zero,
                       leading: ClipRRect(
@@ -162,14 +154,10 @@ class ManageAccountsPage extends HookConsumerWidget {
                       ),
                       title: TextUI.regularTightBold(
                         account.name,
-                        color: account.isActive!
-                            ? context.colors.onBackground
-                            : context.colors.ink.light,
+                        color: account.isActive! ? context.colors.onBackground : context.colors.ink.light,
                       ),
                       subtitle: TextUI.smallNoneRegular(
-                        account.balance != null
-                            ? account.balance!.currency()
-                            : "-",
+                        account.balance.currency(),
                         color: context.colors.sky.base,
                       ),
                     );
@@ -177,8 +165,7 @@ class ManageAccountsPage extends HookConsumerWidget {
                 );
               }, error: (e, s) {
                 return const SizedBox(
-                  child: TextUI.regularNoneRegular(
-                      "Something wrong, please try later!"),
+                  child: TextUI.regularNoneRegular("Something wrong, please try later!"),
                 );
               }, loading: () {
                 return const Center(

@@ -52,7 +52,7 @@ class TransferAccountNotifier extends StateNotifier<TransferAccountState> {
 
   Future<bool> transfer() async {
     // 1. Check Saldo From Account
-    if (state.from!.balance! < state.amount) {
+    if (state.from!.balance < state.amount) {
       return false;
     }
 
