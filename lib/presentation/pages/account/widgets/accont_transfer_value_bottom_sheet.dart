@@ -63,7 +63,7 @@ class TransferValueBottomSheet extends HookConsumerWidget {
                   return;
                 }
 
-                if (transferState.from!.balance! < value.toNumber()!) {
+                if (transferState.from!.balance < value.toNumber()!) {
                   disableTransfer.value = true;
                   return;
                 }
@@ -77,7 +77,9 @@ class TransferValueBottomSheet extends HookConsumerWidget {
                 prefixText: "Rp. ",
                 filled: true,
                 fillColor: context.colors.ink.dark,
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide.none),
               ),
             ),
             FreeSpaceUI.vertical(20),
@@ -96,7 +98,8 @@ class TransferValueBottomSheet extends HookConsumerWidget {
                     ],
                   ),
                 ),
-                TextUI.regularNormalBold(transferState.from!.balance!.currency()),
+                TextUI.regularNormalBold(
+                    transferState.from!.balance.currency()),
               ],
             ),
             FreeSpaceUI.vertical(20),

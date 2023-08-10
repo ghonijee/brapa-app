@@ -20,9 +20,11 @@ class DetailAccountPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final nameTextController = useTextEditingController(text: data?.name);
-    final balanceTextController = useTextEditingController(text: data?.balance!.toThousandSeparator());
+    final balanceTextController =
+        useTextEditingController(text: data?.balance.toThousandSeparator());
     final isActiveState = useState(data?.isActive ?? true);
-    final assetImagePath = useState(data?.assets ?? Assets.accounts.walletAltGreen.path);
+    final assetImagePath =
+        useState(data?.assets ?? Assets.accounts.walletAltGreen.path);
 
     final controller = ref.watch(manageAccountProvider.notifier);
 
@@ -53,8 +55,13 @@ class DetailAccountPage extends HookConsumerWidget {
                             context: context,
                             builder: (context) {
                               return AlertDeleteItemUI(onConfirm: () {
-                                ref.watch(manageAccountProvider.notifier).delete().then<void>((value) {
-                                  ref.watch(listAccountProvider.notifier).reload();
+                                ref
+                                    .watch(manageAccountProvider.notifier)
+                                    .delete()
+                                    .then<void>((value) {
+                                  ref
+                                      .watch(listAccountProvider.notifier)
+                                      .reload();
                                   context.router.popForced();
                                   context.router.pop();
                                 });
@@ -75,7 +82,9 @@ class DetailAccountPage extends HookConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         FreeSpaceUI.vertical(20),
-                        TextUI.titleRegular(formMode == FormAccountType.create ? "Create Account" : "Account Details"),
+                        TextUI.titleRegular(formMode == FormAccountType.create
+                            ? "Create Account"
+                            : "Account Details"),
                         FreeSpaceUI.vertical(32),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,7 +102,8 @@ class DetailAccountPage extends HookConsumerWidget {
                                 filled: true,
                                 fillColor: context.colors.surface,
                                 border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide.none),
                               ),
                             )
                           ],
@@ -119,7 +129,8 @@ class DetailAccountPage extends HookConsumerWidget {
                                 filled: true,
                                 fillColor: context.colors.surface,
                                 border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide.none),
                               ),
                             )
                           ],
@@ -175,25 +186,31 @@ class DetailAccountPage extends HookConsumerWidget {
                             GestureDetector(
                                 onTap: () async {
                                   var pathSelected = await showModalBottomSheet(
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(12)),
                                     context: context,
                                     builder: (context) {
                                       return Container(
                                         padding: const EdgeInsets.all(20),
                                         child: GridView.builder(
-                                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                          gridDelegate:
+                                              const SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 4,
                                             crossAxisSpacing: 8,
                                             mainAxisSpacing: 8,
                                           ),
-                                          itemCount: Assets.accounts.values.length,
+                                          itemCount:
+                                              Assets.accounts.values.length,
                                           itemBuilder: (context, index) {
-                                            var path = Assets.accounts.values[index].path;
+                                            var path = Assets
+                                                .accounts.values[index].path;
                                             return GestureDetector(
                                                 onTap: () {
                                                   context.router.pop(path);
                                                 },
-                                                child: Image.asset(path, fit: BoxFit.fitWidth));
+                                                child: Image.asset(path,
+                                                    fit: BoxFit.fitWidth));
                                           },
                                         ),
                                       );
@@ -223,7 +240,9 @@ class DetailAccountPage extends HookConsumerWidget {
                                       isActive: isActiveState.value,
                                       assetsPath: assetImagePath.value)
                                   .then((value) {
-                                ref.watch(listAccountProvider.notifier).reload();
+                                ref
+                                    .watch(listAccountProvider.notifier)
+                                    .reload();
 
                                 context.router.pop();
                               });
@@ -235,7 +254,9 @@ class DetailAccountPage extends HookConsumerWidget {
                                       isActive: isActiveState.value,
                                       assetsPath: assetImagePath.value)
                                   .then((value) {
-                                ref.watch(listAccountProvider.notifier).reload();
+                                ref
+                                    .watch(listAccountProvider.notifier)
+                                    .reload();
                                 context.router.pop();
                               });
                             }

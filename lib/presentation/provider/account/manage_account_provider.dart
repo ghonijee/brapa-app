@@ -20,7 +20,11 @@ class ManageAccountNotifier extends StateNotifier<Account> {
     required bool isActive,
     required String assetsPath,
   }) async {
-    state = state.copyWith(name: name, balance: balance.toNumber(), isActive: isActive, assets: assetsPath);
+    state = state.copyWith(
+        name: name,
+        balance: balance.toNumber(),
+        isActive: isActive,
+        assets: assetsPath);
 
     await repository.update(state);
   }
@@ -31,7 +35,11 @@ class ManageAccountNotifier extends StateNotifier<Account> {
     required bool isActive,
     required String assetsPath,
   }) async {
-    state = Account(name: name, balance: balance.toNumber(), isActive: isActive, assets: assetsPath);
+    state = Account(
+        name: name,
+        balance: balance.toNumber() ?? 0,
+        isActive: isActive,
+        assets: assetsPath);
 
     await repository.store(state);
   }
@@ -42,4 +50,5 @@ class ManageAccountNotifier extends StateNotifier<Account> {
 }
 
 @injectable
-final manageAccountProvider = StateNotifierProvider((ref) => ManageAccountNotifier(getIt<AccountRepository>()));
+final manageAccountProvider = StateNotifierProvider(
+    (ref) => ManageAccountNotifier(getIt<AccountRepository>()));

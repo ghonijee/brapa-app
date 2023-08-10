@@ -34,7 +34,7 @@ class AccountModel {
   Account toDomain() => Account(
         name: name!,
         id: id,
-        balance: balance,
+        balance: balance ?? 0,
         order: order,
         isActive: isActive,
         assets: assets,
@@ -49,7 +49,7 @@ extension AccountModelExt on List<AccountModel> {
           isActive: e.isActive,
           order: e.order,
           assets: e.assets,
-          balance: e.balance,
+          balance: e.balance ?? 0,
         ),
       ).toList();
 }

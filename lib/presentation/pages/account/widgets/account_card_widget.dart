@@ -32,7 +32,7 @@ class AccountCardWidget extends StatelessWidget {
             ),
           ),
           FreeSpaceUI.vertical(20),
-          TextUI.smallNoneBold(item.balance!.currency()),
+          TextUI.smallNoneBold(item.balance.currency()),
           FreeSpaceUI.vertical(8),
           TextUI.smallNoneMedium(
             item.name,

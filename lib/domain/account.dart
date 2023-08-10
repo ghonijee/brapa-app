@@ -5,7 +5,7 @@ class Account {
   final int? id;
   final String name;
   final String? assets;
-  int? balance;
+  int balance;
   final int? order;
   bool? isActive;
   Account({
@@ -18,11 +18,11 @@ class Account {
   });
 
   decrease(int value) {
-    balance = balance! - value;
+    balance = balance - value;
   }
 
   increase(int value) {
-    balance = balance! + value;
+    balance = balance + value;
   }
 
   @override
@@ -39,7 +39,12 @@ class Account {
 
   @override
   int get hashCode {
-    return id.hashCode ^ name.hashCode ^ assets.hashCode ^ balance.hashCode ^ order.hashCode ^ isActive.hashCode;
+    return id.hashCode ^
+        name.hashCode ^
+        assets.hashCode ^
+        balance.hashCode ^
+        order.hashCode ^
+        isActive.hashCode;
   }
 
   Account copyWith({
@@ -65,7 +70,7 @@ extension AccountExtension on List<Account> {
   num? countValue() {
     num sum = 0;
     for (var item in this) {
-      sum += item.balance ?? 0;
+      sum += item.balance;
     }
     return sum;
   }
