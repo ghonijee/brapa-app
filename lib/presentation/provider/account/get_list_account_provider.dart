@@ -4,7 +4,7 @@ import 'package:brapa/gen/injection/injection.dart';
 import 'package:injectable/injectable.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final getListAccountProvider = FutureProvider((ref) async {
+final getListAccountProvider = FutureProvider.autoDispose((ref) async {
   final AccountRepository repository = getIt<AccountRepository>();
   var result = await repository.getAll(isActiveOnly: true);
   return result.fold((left) {
@@ -12,7 +12,7 @@ final getListAccountProvider = FutureProvider((ref) async {
   }, (right) => right);
 });
 
-class ListAccountNotifierProvider extends AsyncNotifier<List<Account>> {
+class ListAccountNotifierProvider extends AutoDisposeAsyncNotifier<List<Account>> {
   final AccountRepository repository;
 
   ListAccountNotifierProvider(this.repository);
@@ -49,6 +49,6 @@ class ListAccountNotifierProvider extends AsyncNotifier<List<Account>> {
 }
 
 @injectable
-final listAccountProvider = AsyncNotifierProvider<ListAccountNotifierProvider, List<Account>>(
+final listAccountProvider = AutoDisposeAsyncNotifierProvider<ListAccountNotifierProvider, List<Account>>(
   () => ListAccountNotifierProvider(getIt<AccountRepository>()),
 );
