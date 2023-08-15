@@ -1,3 +1,4 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:brapa/data/services/isar_service.dart';
 import 'package:injectable/injectable.dart';
@@ -22,6 +23,9 @@ abstract class RegisterModule {
 
   @preResolve
   Future<Isar> get isar => IsarService.init();
+
+  FlutterSecureStorage get secureStorage =>
+      const FlutterSecureStorage(aOptions: AndroidOptions(encryptedSharedPreferences: true));
 
   // url here will be injected
   // @lazySingleton

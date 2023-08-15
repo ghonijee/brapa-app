@@ -27,5 +27,8 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: DetailAccountRoute.page),
         AutoRoute(page: ManageCategoriesRoute.page),
         AutoRoute(page: DetailCategoryRoute.page),
+        AutoRoute(page: SecurityRoute.page),
+        AutoRoute(page: ChangePINRoute.page),
+        AutoRoute(page: PinAuthRoute.page),
       ];
 }
