@@ -52,8 +52,7 @@ class SecurityPage extends HookConsumerWidget {
                 color: state.secureAppActive ? context.colors.onBackground : context.colors.ink.light,
               ),
               onTap: () {
-                context.router.push(const PinAuthRoute());
-                // context.router.push(const ChangePINRoute());
+                context.router.push(const ChangePINRoute());
                 // print("hallo");
               },
             ),

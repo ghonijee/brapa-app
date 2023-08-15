@@ -10,6 +10,7 @@ export 'manage_account/manage_accounts_page.dart';
 export 'manage_category/detail_category_page.dart';
 export 'manage_category/manage_categories_page.dart';
 export 'pin_auth/pin_auth_page.dart';
+export 'pin_auth/splash_page.dart';
 export 'record/record_page.dart';
 export 'record/widgets/list_account_widget.dart';
 export 'record/widgets/list_category_widget.dart';

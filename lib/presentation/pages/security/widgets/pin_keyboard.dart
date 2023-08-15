@@ -9,10 +9,12 @@ class PinKeyboardWidget extends StatefulWidget {
     required this.controller,
     this.leftKey,
     this.rightKey,
+    this.pinLenght = 4,
   });
   final TextEditingController controller;
   final Widget? leftKey;
   final Widget? rightKey;
+  final int pinLenght;
 
   @override
   State<PinKeyboardWidget> createState() => _PinKeyboardWidgetState();
@@ -68,10 +70,12 @@ class _PinKeyboardWidgetState extends State<PinKeyboardWidget> {
   }
 
   onPress(String value) {
+    if (widget.controller.text.length == widget.pinLenght) return;
     widget.controller.text += value;
   }
 
   onBackspace() {
+    if (widget.controller.text.isEmpty) return;
     widget.controller.text = widget.controller.text.substring(0, widget.controller.text.length - 1);
   }
 }

@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/data/repository/security_repository.dart';
+import 'package:brapa/gen/injection/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:brapa/presentation/app.dart';
+import 'package:injectable/injectable.dart';
 import '../../domain/account.dart';
 import '../../domain/category.dart';
 import '../../domain/transaction.dart';
@@ -12,9 +15,9 @@ part 'app_router.gr.dart';
 class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
+        AutoRoute(initial: true, page: SplashRouteRoute.page),
         AutoRoute(
           page: MainRoute.page,
-          initial: true,
           children: [
             AutoRoute(page: RecordRoute.page, maintainState: true),
             AutoRoute(page: AccountRoute.page),
@@ -31,4 +34,22 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: ChangePINRoute.page),
         AutoRoute(page: PinAuthRoute.page),
       ];
+}
+
+@injectable
+class SecureAppIsActive extends AutoRouteGuard {
+  final SecurityRepository securityRepository;
+
+  SecureAppIsActive(this.securityRepository);
+
+  @override
+  void onNavigation(NavigationResolver resolver, StackRouter router) async {
+    var securAppValue = await securityRepository.getSecureApp();
+    if (securAppValue) {
+      router.push(PinAuthRoute());
+      return;
+    }
+
+    resolver.next(true);
+  }
 }

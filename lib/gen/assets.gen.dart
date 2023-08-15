@@ -311,8 +311,13 @@ class $AssetsLauncherGen {
   AssetGenImage get playstore =>
       const AssetGenImage('assets/launcher/playstore.png');
 
+  /// File path: assets/launcher/round_launcher.png
+  AssetGenImage get roundLauncher =>
+      const AssetGenImage('assets/launcher/round_launcher.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [appstore, banner, icon, playstore];
+  List<AssetGenImage> get values =>
+      [appstore, banner, icon, playstore, roundLauncher];
 }
 
 class Assets {

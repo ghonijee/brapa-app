@@ -22,7 +22,8 @@ import '../../data/services/secure_storage_service.dart' as _i5;
 import '../../data/source/account_local_source.dart' as _i9;
 import '../../data/source/category_local_source.dart' as _i11;
 import '../../data/source/transaction_local_source.dart' as _i7;
-import 'injection.dart' as _i13;
+import '../../presentation/router/app_router.dart' as _i13;
+import 'injection.dart' as _i14;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -43,8 +44,8 @@ extension GetItInjectableX on _i1.GetIt {
     );
     gh.factory<_i5.SecureStorageService>(
         () => _i5.SecureStorageService(gh<_i3.FlutterSecureStorage>()));
-    gh.factory<_i6.SecurityRepository>(
-        () => _i6.SecurityRepository(gh<_i5.SecureStorageService>()));
+    gh.singleton<_i6.SecurityRepository>(
+        _i6.SecurityRepository(gh<_i5.SecureStorageService>()));
     gh.factory<String>(
       () => registerModule.baseUrl,
       instanceName: 'BaseUrl',
@@ -61,8 +62,10 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i11.CategoryLocalSource(gh<_i4.Isar>()));
     gh.factory<_i12.CategoryRepository>(
         () => _i12.CategoryRepository(gh<_i11.CategoryLocalSource>()));
+    gh.factory<_i13.SecureAppIsActive>(
+        () => _i13.SecureAppIsActive(gh<_i6.SecurityRepository>()));
     return this;
   }
 }
 
-class _$RegisterModule extends _i13.RegisterModule {}
+class _$RegisterModule extends _i14.RegisterModule {}

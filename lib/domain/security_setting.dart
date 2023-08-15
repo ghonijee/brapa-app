@@ -29,7 +29,12 @@ class SecuritySetting {
     print(secureAppActive);
   }
 
-  toggleUseBiometrik() {
+  void toggleUseBiometrik() {
     useBiometriLock = !useBiometriLock;
+  }
+
+  bool pinValidate(String value) {
+    print(pin);
+    return value == pin;
   }
 }

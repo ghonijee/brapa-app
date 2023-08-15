@@ -115,6 +115,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const PinAuthPage(),
       );
     },
+    SplashRouteRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SplashScreenPage(),
+      );
+    },
   };
 }
 
@@ -417,6 +423,20 @@ class PinAuthRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'PinAuthRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SplashScreenPage]
+class SplashRouteRoute extends PageRouteInfo<void> {
+  const SplashRouteRoute({List<PageRouteInfo>? children})
+      : super(
+          SplashRouteRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SplashRouteRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
