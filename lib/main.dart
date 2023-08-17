@@ -9,6 +9,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   // Initial Injection
   configureDependencies();
+
   runApp(ProviderScope(child: InitialApp()));
 }
 
