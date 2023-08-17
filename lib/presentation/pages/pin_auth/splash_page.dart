@@ -14,11 +14,8 @@ class SplashScreenPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(pinAuthProvider);
-    Future.delayed(const Duration(seconds: 1), () {
-      // context.router.replace(const MainRoute());
-
+    Future.delayed(const Duration(milliseconds: 1500), () {
       if (state.secureAppActive) {
-        // context.router.popUntilRoot();
         context.router.replace(const PinAuthRoute());
       } else {
         context.router.popUntilRoot();

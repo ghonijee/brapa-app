@@ -8,6 +8,7 @@
 
 #include <flutter_secure_storage_windows/flutter_secure_storage_windows_plugin.h>
 #include <isar_flutter_libs/isar_flutter_libs_plugin.h>
+#include <local_auth_windows/local_auth_plugin.h>
 #include <smart_auth/smart_auth_plugin.h>
 
 void RegisterPlugins(flutter::PluginRegistry* registry) {
@@ -15,6 +16,8 @@ void RegisterPlugins(flutter::PluginRegistry* registry) {
       registry->GetRegistrarForPlugin("FlutterSecureStorageWindowsPlugin"));
   IsarFlutterLibsPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("IsarFlutterLibsPlugin"));
+  LocalAuthPluginRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("LocalAuthPlugin"));
   SmartAuthPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("SmartAuthPlugin"));
 }

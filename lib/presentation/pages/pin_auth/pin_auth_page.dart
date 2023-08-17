@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:app_ui/app_ui.dart';
 import 'package:app_ui/token/figma_token.dart';
 import 'package:auto_route/auto_route.dart';
@@ -9,6 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:pinput/pinput.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -23,6 +26,7 @@ class PinAuthPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final pinTextController = useTextEditingController();
     final pinAuthState = ref.watch(pinAuthProvider);
+    final pinAuthController = ref.watch(pinAuthProvider.notifier);
     final errorPin = useState(false);
 
     return Scaffold(
@@ -49,7 +53,6 @@ class PinAuthPage extends HookConsumerWidget {
               errorTextStyle: FigmaTextStyles.largeTightRegular.copyWith(color: context.colors.red.darkest),
               onChanged: (value) {
                 errorPin.value = false;
-                print(value);
               },
               obscuringWidget: Container(
                 width: 16,
@@ -91,28 +94,49 @@ class PinAuthPage extends HookConsumerWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: PinKeyboardWidget(
                 controller: pinTextController,
-                leftKey: InkWell(
-                  customBorder: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(90),
-                  ),
-                  child: Container(
-                    width: 20.w,
-                    height: 20.w,
-                    decoration: BoxDecoration(
-                      // color: context.colors.ink.darker,
-                      borderRadius: BorderRadius.circular(90),
-                    ),
-                    child: Center(
-                        child: Icon(
-                      IonIcons.finger_print,
-                      size: 36,
-                      color: context.colors.primary.darkest,
-                    )),
-                  ),
-                  onTap: () {
-                    //
-                  },
-                ),
+                leftKey: pinAuthController.deviceSupportBiometrik ?? false
+                    ? InkWell(
+                        customBorder: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(90),
+                        ),
+                        child: Container(
+                          width: 20.w,
+                          height: 20.w,
+                          decoration: BoxDecoration(
+                            // color: context.colors.ink.darker,
+                            borderRadius: BorderRadius.circular(90),
+                          ),
+                          child: Center(
+                              child: Icon(
+                            IonIcons.finger_print,
+                            size: 36,
+                            color: context.colors.primary.darkest,
+                          )),
+                        ),
+                        onTap: () async {
+                          final LocalAuthentication localAuth = LocalAuthentication();
+                          final bool canAuthenticateWithBiometrics = await localAuth.canCheckBiometrics;
+                          if (!canAuthenticateWithBiometrics) {
+                            return;
+                          }
+                          bool authenticated = await localAuth.authenticate(
+                              localizedReason: "Scan for enable biometrik",
+                              options: const AuthenticationOptions(
+                                biometricOnly: true,
+                                useErrorDialogs: true,
+                                stickyAuth: false,
+                              ));
+                          if (authenticated) {
+                            context.router.replace(const MainRoute());
+                          } else {
+                            errorPin.value = true;
+                          }
+                        },
+                      )
+                    : SizedBox(
+                        width: 20.w,
+                        height: 20.w,
+                      ),
               ),
             ),
             FreeSpaceUI.vertical(60),
