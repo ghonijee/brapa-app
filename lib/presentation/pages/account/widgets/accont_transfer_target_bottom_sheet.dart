@@ -32,7 +32,7 @@ class TransferTargetBottomSheet extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const TextUI.titleRegular("Transfer to"),
+              const TextUI.largeNormalBold("Transfer to"),
               IconButton(
                 onPressed: () {
                   context.router.popUntilRoot();

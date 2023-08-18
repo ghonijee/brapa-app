@@ -15,6 +15,18 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    SplashRouteRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SplashScreenPage(),
+      );
+    },
+    PinAuthRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const PinAuthPage(),
+      );
+    },
     SettingRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -109,19 +121,46 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const MainPage(),
       );
     },
-    PinAuthRoute.name: (routeData) {
+    TransferDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<TransferDetailRouteArgs>(
+          orElse: () => const TransferDetailRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const PinAuthPage(),
-      );
-    },
-    SplashRouteRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SplashScreenPage(),
+        child: TransferDetailPage(
+          key: args.key,
+          transaction: args.transaction,
+        ),
       );
     },
   };
+}
+
+/// generated route for
+/// [SplashScreenPage]
+class SplashRouteRoute extends PageRouteInfo<void> {
+  const SplashRouteRoute({List<PageRouteInfo>? children})
+      : super(
+          SplashRouteRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SplashRouteRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [PinAuthPage]
+class PinAuthRoute extends PageRouteInfo<void> {
+  const PinAuthRoute({List<PageRouteInfo>? children})
+      : super(
+          PinAuthRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PinAuthRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -414,29 +453,39 @@ class MainRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [PinAuthPage]
-class PinAuthRoute extends PageRouteInfo<void> {
-  const PinAuthRoute({List<PageRouteInfo>? children})
-      : super(
-          PinAuthRoute.name,
+/// [TransferDetailPage]
+class TransferDetailRoute extends PageRouteInfo<TransferDetailRouteArgs> {
+  TransferDetailRoute({
+    Key? key,
+    Transaction? transaction,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TransferDetailRoute.name,
+          args: TransferDetailRouteArgs(
+            key: key,
+            transaction: transaction,
+          ),
           initialChildren: children,
         );
 
-  static const String name = 'PinAuthRoute';
+  static const String name = 'TransferDetailRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<TransferDetailRouteArgs> page =
+      PageInfo<TransferDetailRouteArgs>(name);
 }
 
-/// generated route for
-/// [SplashScreenPage]
-class SplashRouteRoute extends PageRouteInfo<void> {
-  const SplashRouteRoute({List<PageRouteInfo>? children})
-      : super(
-          SplashRouteRoute.name,
-          initialChildren: children,
-        );
+class TransferDetailRouteArgs {
+  const TransferDetailRouteArgs({
+    this.key,
+    this.transaction,
+  });
 
-  static const String name = 'SplashRouteRoute';
+  final Key? key;
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  final Transaction? transaction;
+
+  @override
+  String toString() {
+    return 'TransferDetailRouteArgs{key: $key, transaction: $transaction}';
+  }
 }

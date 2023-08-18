@@ -1,5 +1,6 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/presentation/provider/account/update_transfer_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -140,10 +141,19 @@ class HistoryPage extends HookConsumerWidget {
                                   var transactionItem = groupItem.transactions[index];
                                   return ListTile(
                                     onTap: () {
-                                      // WidgetUI.showBottomSheet(context, TransactionEditBottomSheet());
-                                      ref.watch(updateRecordProvider).loadTransaction(transactionItem);
+                                      if ([TransactionType.transferIn, TransactionType.transferOut]
+                                          .contains(transactionItem.type)) {
+                                        ref.watch(updateTransferProvider.notifier).loadTransfer(transactionItem);
+                                        context.router.push(TransferDetailRoute(transaction: transactionItem));
+                                      } else {
+                                        // WidgetUI.showBottomSheet(context, TransactionEditBottomSheet());
+                                        ref.watch(updateRecordProvider).loadTransaction(transactionItem);
 
-                                      context.router.push(RecordDetailRoute(transaction: transactionItem));
+                                        context.router.push(RecordDetailRoute(transaction: transactionItem));
+                                      }
+                                      // ref.watch(updateRecordProvider).loadTransaction(transactionItem);
+
+                                      // context.router.push(RecordDetailRoute(transaction: transactionItem));
                                     },
                                     contentPadding: EdgeInsets.zero,
                                     leading: HistoryIconItemWidget(
@@ -186,14 +196,35 @@ class HistoryIconItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return type == TransactionType.exp
-        ? ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Assets.category.outcome1.image(width: 45, fit: BoxFit.fitHeight),
-          )
-        : ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Assets.category.income1.image(width: 45, fit: BoxFit.fitHeight),
-          );
+    switch (type) {
+      case TransactionType.exp:
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Assets.category.outcome3.image(width: 45, fit: BoxFit.fitHeight),
+        );
+      case TransactionType.inc:
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Assets.category.income3.image(width: 45, fit: BoxFit.fitHeight),
+        );
+      case TransactionType.transferOut:
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Assets.category.transferOut1.image(width: 45, fit: BoxFit.fitHeight),
+        );
+      case TransactionType.transferIn:
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Assets.category.transferIn1.image(width: 45, fit: BoxFit.fitHeight),
+        );
+      default:
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: const SizedBox(
+            width: 45,
+            height: 45,
+          ),
+        );
+    }
   }
 }

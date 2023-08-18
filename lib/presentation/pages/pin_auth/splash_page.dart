@@ -8,13 +8,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 @RoutePage()
-class SplashScreenPage extends HookConsumerWidget {
+class SplashScreenPage extends ConsumerWidget {
   const SplashScreenPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(pinAuthProvider);
     Future.delayed(const Duration(milliseconds: 1500), () {
+      final state = ref.watch(pinAuthProvider);
       if (state.secureAppActive) {
         context.router.replace(const PinAuthRoute());
       } else {

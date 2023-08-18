@@ -29,7 +29,7 @@ class AccountMenuBottomSheet extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextUI.titleRegular(item.name),
+              TextUI.largeNormalBold(item.name),
               IconButton(
                 onPressed: () {
                   context.router.pop();

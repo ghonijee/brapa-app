@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:brapa/data/repository/security_repository.dart';
-import 'package:brapa/gen/injection/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:brapa/presentation/app.dart';
 import 'package:injectable/injectable.dart';
@@ -19,13 +18,14 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: MainRoute.page,
           children: [
-            AutoRoute(page: RecordRoute.page, maintainState: true),
+            AutoRoute(page: RecordRoute.page),
             AutoRoute(page: AccountRoute.page),
             AutoRoute(page: HistoryRoute.page),
             AutoRoute(page: SettingRoute.page),
           ],
         ),
         AutoRoute(page: RecordDetailRoute.page),
+        AutoRoute(page: TransferDetailRoute.page),
         AutoRoute(page: ManageAccountsRoute.page),
         AutoRoute(page: DetailAccountRoute.page),
         AutoRoute(page: ManageCategoriesRoute.page),
@@ -46,7 +46,7 @@ class SecureAppIsActive extends AutoRouteGuard {
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
     var securAppValue = await securityRepository.getSecureApp();
     if (securAppValue) {
-      router.push(PinAuthRoute());
+      router.push(const PinAuthRoute());
       return;
     }
 

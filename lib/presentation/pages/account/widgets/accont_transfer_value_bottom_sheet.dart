@@ -35,7 +35,7 @@ class TransferValueBottomSheet extends HookConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextUI.titleRegular(account.name),
+                TextUI.largeNormalBold(account.name),
                 IconButton(
                   onPressed: () {
                     context.router.popUntilRoot();
@@ -63,7 +63,7 @@ class TransferValueBottomSheet extends HookConsumerWidget {
                   return;
                 }
 
-                if (transferState.from!.balance < value.toNumber()!) {
+                if (transferState.fromAccount!.balance < value.toNumber()!) {
                   disableTransfer.value = true;
                   return;
                 }
@@ -77,9 +77,7 @@ class TransferValueBottomSheet extends HookConsumerWidget {
                 prefixText: "Rp. ",
                 filled: true,
                 fillColor: context.colors.ink.dark,
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide.none),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
               ),
             ),
             FreeSpaceUI.vertical(20),
@@ -92,14 +90,13 @@ class TransferValueBottomSheet extends HookConsumerWidget {
                     style: FigmaTextStyles.regularNoneRegular,
                     children: [
                       TextSpan(
-                        text: transferState.from!.name,
+                        text: transferState.fromAccount!.name,
                         style: FigmaTextStyles.regularNoneBold,
                       ),
                     ],
                   ),
                 ),
-                TextUI.regularNormalBold(
-                    transferState.from!.balance.currency()),
+                TextUI.regularNormalBold(transferState.fromAccount!.balance.currency()),
               ],
             ),
             FreeSpaceUI.vertical(20),

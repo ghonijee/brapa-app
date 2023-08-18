@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 
 import '../services/secure_storage_service.dart';
 
-@singleton
+@injectable
 class SecurityRepository {
   final SecureStorageService storageService;
   SecurityRepository(this.storageService);
