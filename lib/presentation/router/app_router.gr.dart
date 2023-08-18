@@ -138,6 +138,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const RecordFormPage(),
       );
     },
+    TransferFormRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TransferFormPage(),
+      );
+    },
   };
 }
 
@@ -506,6 +512,20 @@ class RecordFormRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'RecordFormRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TransferFormPage]
+class TransferFormRoute extends PageRouteInfo<void> {
+  const TransferFormRoute({List<PageRouteInfo>? children})
+      : super(
+          TransferFormRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TransferFormRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

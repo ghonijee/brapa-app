@@ -134,13 +134,13 @@ class RecordFormPage extends HookConsumerWidget {
                                     "Category",
                                     color: context.colors.sky.dark,
                                   ),
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: TextUI.tinyNoneRegular(
-                                      "Show more",
-                                      color: context.colors.primary.base,
-                                    ),
-                                  )
+                                  // GestureDetector(
+                                  //   onTap: () {},
+                                  //   child: TextUI.tinyNoneRegular(
+                                  //     "Show more",
+                                  //     color: context.colors.primary.base,
+                                  //   ),
+                                  // )
                                 ],
                               ),
                               FreeSpaceUI.vertical(16),
@@ -195,13 +195,13 @@ class RecordFormPage extends HookConsumerWidget {
                                     "Account",
                                     color: context.colors.sky.dark,
                                   ),
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: TextUI.tinyNoneRegular(
-                                      "Show more",
-                                      color: context.colors.primary.base,
-                                    ),
-                                  )
+                                  // GestureDetector(
+                                  //   onTap: () {},
+                                  //   child: TextUI.tinyNoneRegular(
+                                  //     "Show more",
+                                  //     color: context.colors.primary.base,
+                                  //   ),
+                                  // )
                                 ],
                               ),
                               FreeSpaceUI.vertical(16.sp),

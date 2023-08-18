@@ -213,22 +213,22 @@ class HistoryIconItemWidget extends StatelessWidget {
       case TransactionType.exp:
         return ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: Assets.category.outcome3.image(width: 45, fit: BoxFit.fitHeight),
+          child: Assets.category.outcome4.image(width: 45, fit: BoxFit.fitHeight),
         );
       case TransactionType.inc:
         return ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: Assets.category.income3.image(width: 45, fit: BoxFit.fitHeight),
+          child: Assets.category.income4.image(width: 45, fit: BoxFit.fitHeight),
         );
       case TransactionType.transferOut:
         return ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: Assets.category.transferOut1.image(width: 45, fit: BoxFit.fitHeight),
+          child: Assets.category.transferOut4.image(width: 45, fit: BoxFit.fitHeight),
         );
       case TransactionType.transferIn:
         return ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: Assets.category.transferIn1.image(width: 45, fit: BoxFit.fitHeight),
+          child: Assets.category.transferIn4.image(width: 45, fit: BoxFit.fitHeight),
         );
       default:
         return ClipRRect(

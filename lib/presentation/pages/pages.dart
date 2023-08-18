@@ -7,6 +7,7 @@ export 'history/history_page.dart';
 export 'history/record_detail_page.dart';
 export 'history/record_form_page.dart';
 export 'history/transfer_detail_page.dart';
+export 'history/transfer_form_page.dart';
 export 'history/widgets/history_menu_bottom_sheet.dart';
 export 'manage_account/detail_account_page.dart';
 export 'manage_account/manage_accounts_page.dart';

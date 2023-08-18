@@ -8,8 +8,10 @@ import 'package:brapa/domain/category.dart';
 import 'package:brapa/domain/transaction.dart';
 import 'package:brapa/domain/transfer_log.dart';
 import 'package:brapa/gen/injection/injection.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 
 class TransferAccountState {
   Account? from;
@@ -39,6 +41,9 @@ class TransferAccountNotifier extends StateNotifier<TransferLog> {
   final AccountRepository repository;
   final TransactionRepository transactionRepository;
   final TransferLogRepository transferLogRepository;
+  final TextEditingController amountController = TextEditingController();
+  final TextEditingController createdAtController = TextEditingController();
+  DateTime? dateSelected;
   TransferAccountNotifier(this.repository, this.transactionRepository, this.transferLogRepository)
       : super(TransferLog());
 
@@ -48,6 +53,12 @@ class TransferAccountNotifier extends StateNotifier<TransferLog> {
 
   selectedTargetAccount(Account target) {
     state = state.copyWith(toAccount: target);
+  }
+
+  void changeDateTransaction(DateTime date) {
+    dateSelected = date;
+    createdAtController.text = DateFormat("dd MMMM yyyy").format(date);
+    state = state.copyWith(createdAt: dateSelected);
   }
 
   setAmount(String value) {
@@ -69,7 +80,7 @@ class TransferAccountNotifier extends StateNotifier<TransferLog> {
         value: state.amount!,
         category: Category.transferOut(),
         account: state.fromAccount!,
-        createdAt: DateTime.now(),
+        createdAt: dateSelected ?? DateTime.now(),
         memo: "Transfer to ${state.toAccount!.name}",
       );
 
@@ -81,7 +92,7 @@ class TransferAccountNotifier extends StateNotifier<TransferLog> {
         value: state.amount ?? 0,
         category: Category.transferIn(),
         account: state.toAccount!,
-        createdAt: DateTime.now(),
+        createdAt: dateSelected ?? DateTime.now(),
         memo: "Transfer from ${state.fromAccount!.name}",
       );
 
@@ -94,10 +105,17 @@ class TransferAccountNotifier extends StateNotifier<TransferLog> {
       );
 
       await transferLogRepository.store(state);
+      reset();
     } catch (e) {
       return false;
     }
     return true;
+  }
+
+  void reset() {
+    amountController.clear();
+    createdAtController.clear();
+    state = TransferLog();
   }
 }
 

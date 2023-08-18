@@ -67,7 +67,10 @@ class HistoryMenuBottomSheet extends ConsumerWidget {
                   color: context.colors.sky.dark,
                   size: 32,
                 ),
-                onTap: () {},
+                onTap: () {
+                  context.router.pop();
+                  context.router.push(const TransferFormRoute());
+                },
                 subtitle: TextUI.tinyNoneRegular(
                   "Send to other account with form",
                   color: context.colors.sky.dark,

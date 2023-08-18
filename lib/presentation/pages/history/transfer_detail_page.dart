@@ -92,13 +92,13 @@ class TransferDetailPage extends HookConsumerWidget {
                                     "Account Source",
                                     color: context.colors.sky.dark,
                                   ),
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: TextUI.tinyNoneRegular(
-                                      "Show more",
-                                      color: context.colors.primary.base,
-                                    ),
-                                  )
+                                  // GestureDetector(
+                                  //   onTap: () {},
+                                  //   child: TextUI.tinyNoneRegular(
+                                  //     "Show more",
+                                  //     color: context.colors.primary.base,
+                                  //   ),
+                                  // )
                                 ],
                               ),
                               FreeSpaceUI.vertical(16.sp),

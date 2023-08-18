@@ -277,6 +277,10 @@ class $AssetsCategoryGen {
   AssetGenImage get income3 =>
       const AssetGenImage('assets/category/income3.png');
 
+  /// File path: assets/category/income4.png
+  AssetGenImage get income4 =>
+      const AssetGenImage('assets/category/income4.png');
+
   /// File path: assets/category/outcome1.png
   AssetGenImage get outcome1 =>
       const AssetGenImage('assets/category/outcome1.png');
@@ -288,6 +292,10 @@ class $AssetsCategoryGen {
   /// File path: assets/category/outcome3.png
   AssetGenImage get outcome3 =>
       const AssetGenImage('assets/category/outcome3.png');
+
+  /// File path: assets/category/outcome4.png
+  AssetGenImage get outcome4 =>
+      const AssetGenImage('assets/category/outcome4.png');
 
   /// File path: assets/category/transferIn1.png
   AssetGenImage get transferIn1 =>
@@ -301,6 +309,10 @@ class $AssetsCategoryGen {
   AssetGenImage get transferIn3 =>
       const AssetGenImage('assets/category/transferIn3.png');
 
+  /// File path: assets/category/transferIn4.png
+  AssetGenImage get transferIn4 =>
+      const AssetGenImage('assets/category/transferIn4.png');
+
   /// File path: assets/category/transferOut1.png
   AssetGenImage get transferOut1 =>
       const AssetGenImage('assets/category/transferOut1.png');
@@ -313,20 +325,28 @@ class $AssetsCategoryGen {
   AssetGenImage get transferOut3 =>
       const AssetGenImage('assets/category/transferOut3.png');
 
+  /// File path: assets/category/transferOut4.png
+  AssetGenImage get transferOut4 =>
+      const AssetGenImage('assets/category/transferOut4.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         income1,
         income2,
         income3,
+        income4,
         outcome1,
         outcome2,
         outcome3,
+        outcome4,
         transferIn1,
         transferIn2,
         transferIn3,
+        transferIn4,
         transferOut1,
         transferOut2,
-        transferOut3
+        transferOut3,
+        transferOut4
       ];
 }
 
