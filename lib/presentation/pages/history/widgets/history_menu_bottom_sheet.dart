@@ -1,5 +1,6 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/presentation/router/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -49,7 +50,10 @@ class HistoryMenuBottomSheet extends ConsumerWidget {
                   color: context.colors.sky.dark,
                   size: 32,
                 ),
-                onTap: () {},
+                onTap: () {
+                  context.router.pop();
+                  context.router.push(const RecordFormRoute());
+                },
                 subtitle: TextUI.tinyNoneRegular(
                   "Record new transaction with form",
                   color: context.colors.sky.dark,

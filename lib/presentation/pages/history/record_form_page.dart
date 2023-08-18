@@ -7,25 +7,21 @@ import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:brapa/domain/category.dart';
-import 'package:brapa/domain/transaction.dart';
-import 'package:brapa/presentation/provider/transaction/delete_record_provider.dart';
-import 'package:brapa/presentation/provider/transaction/update_record_provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../provider/account/get_list_account_provider.dart';
 import '../../provider/category/get_list_category_provider.dart';
+import '../../provider/transaction/create_record_provider.dart';
 import '../../provider/transaction/get_list_transaction_provider.dart';
 
 @RoutePage()
-class RecordDetailPage extends HookConsumerWidget {
-  const RecordDetailPage({super.key, this.transaction});
-
-  final Transaction? transaction;
+class RecordFormPage extends HookConsumerWidget {
+  const RecordFormPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var controller = ref.watch(updateRecordProvider);
+    var controller = ref.watch(createRecordProvider);
 
     var getListCategory = ref.watch(getListCategoryProvider);
     final listAccount = ref.watch(getListAccountProvider);
@@ -43,36 +39,12 @@ class RecordDetailPage extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // AppBarAction
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () => context.router.pop(),
-                      child: Icon(
-                        Icons.arrow_back_rounded,
-                        color: context.colors.onBackground,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDeleteItemUI(onConfirm: () {
-                                ref.watch(deleteRecordProvider).delete(controller.transaction).then<void>((value) {
-                                  ref.watch(asyncListHistory.notifier).reload();
-                                  context.router.popForced();
-                                  context.router.pop();
-                                });
-                              }, onCancel: () {
-                                context.router.pop();
-                              });
-                            });
-                      },
-                      icon: const Icon(Icons.delete_rounded),
-                      color: context.colors.onBackground,
-                    ),
-                  ],
+                GestureDetector(
+                  onTap: () => context.router.pop(),
+                  child: Icon(
+                    Icons.arrow_back_rounded,
+                    color: context.colors.onBackground,
+                  ),
                 ),
                 // Body COntent
                 Expanded(
@@ -81,8 +53,48 @@ class RecordDetailPage extends HookConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         FreeSpaceUI.vertical(20),
-                        const TextUI.titleRegular("Transaction Details"),
+                        const TextUI.titleRegular("Create Transaction"),
                         FreeSpaceUI.vertical(32),
+                        Center(
+                          child: SegmentedControl(
+                            groupValue: controller.segmentedControllerGroupValue,
+                            children: [
+                              SegmentedControlValue(
+                                  label: "Expense",
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.arrow_circle_up_rounded,
+                                        color: context.colors.red.base,
+                                        size: 20,
+                                      ),
+                                      FreeSpaceUI.horizontal(8),
+                                      const TextUI.tinyNoneBold("Expense"),
+                                    ],
+                                  )),
+                              SegmentedControlValue(
+                                  label: "Income",
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const TextUI.tinyNoneBold("Income"),
+                                      FreeSpaceUI.horizontal(8),
+                                      Icon(
+                                        Icons.arrow_circle_down_rounded,
+                                        color: context.colors.green.base,
+                                        size: 20,
+                                      ),
+                                    ],
+                                  )),
+                              // SegmentedControlValue(label: "Income"),
+                            ],
+                            onValueChanged: (index, value) {
+                              controller.changeSegmentedControlValue(index);
+                            },
+                          ),
+                        ),
+                        FreeSpaceUI.vertical(20),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -138,7 +150,7 @@ class RecordDetailPage extends HookConsumerWidget {
                                           child: CircularProgressIndicator(),
                                         ),
                                     data: (listCategory) {
-                                      var result = transaction!.type == TransactionType.exp
+                                      var result = controller.segmentedControllerGroupValue == 0
                                           ? listCategory.expenseList()
                                           : listCategory.incomeList();
 
@@ -233,7 +245,7 @@ class RecordDetailPage extends HookConsumerWidget {
                             TextFormField(
                               style: FigmaTextStyles.smallNormalRegular,
                               controller: controller.memoController,
-                              maxLines: 2,
+                              maxLines: 3,
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: context.colors.surface,
@@ -258,7 +270,7 @@ class RecordDetailPage extends HookConsumerWidget {
                                   context: context,
                                   config: CalendarDatePicker2WithActionButtonsConfig(
                                     calendarType: CalendarDatePicker2Type.single,
-                                    currentDate: transaction!.createdAt,
+                                    currentDate: controller.createdAt,
                                   ),
                                   dialogSize: const Size(325, 400),
                                   borderRadius: BorderRadius.circular(15),

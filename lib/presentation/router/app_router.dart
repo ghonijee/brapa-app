@@ -25,6 +25,7 @@ class AppRouter extends _$AppRouter {
           ],
         ),
         AutoRoute(page: RecordDetailRoute.page),
+        AutoRoute(page: RecordFormRoute.page),
         AutoRoute(page: TransferDetailRoute.page),
         AutoRoute(page: ManageAccountsRoute.page),
         AutoRoute(page: DetailAccountRoute.page),

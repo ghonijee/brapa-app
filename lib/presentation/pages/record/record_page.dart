@@ -44,7 +44,7 @@ class RecordPage extends HookConsumerWidget {
                                 children: [
                                   Icon(
                                     Icons.arrow_circle_up_rounded,
-                                    color: context.colors.red.darkest,
+                                    color: context.colors.red.base,
                                     size: 20,
                                   ),
                                   const TextUI.tinyNoneMedium("Expense"),
@@ -58,7 +58,7 @@ class RecordPage extends HookConsumerWidget {
                                   const TextUI.tinyNoneMedium("Income"),
                                   Icon(
                                     Icons.arrow_circle_down_rounded,
-                                    color: context.colors.green.darkest,
+                                    color: context.colors.green.base,
                                     size: 20,
                                   ),
                                 ],

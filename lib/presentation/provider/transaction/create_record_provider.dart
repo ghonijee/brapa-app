@@ -5,6 +5,7 @@ import 'package:brapa/data/repository/account_repository.dart';
 import 'package:brapa/data/repository/transaction_repository.dart';
 import 'package:brapa/domain/category.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 
 import '../../../domain/account.dart';
 import '../../../domain/transaction.dart';
@@ -14,8 +15,10 @@ class CreateRecordNotifier extends ChangeNotifier {
   Account? accountSelected;
   Category? categorySelected;
   late Transaction transaction;
+  DateTime? createdAt;
   final TextEditingController amountController = TextEditingController();
   final TextEditingController memoController = TextEditingController();
+  final TextEditingController dateController = TextEditingController();
   int segmentedControllerGroupValue = 0;
   final FocusNode focusNode = FocusNode();
 
@@ -37,6 +40,12 @@ class CreateRecordNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  void changeDateTransaction(DateTime date) {
+    createdAt = date;
+    dateController.text = DateFormat("dd MMMM yyyy").format(date);
+    notifyListeners();
+  }
+
   void changeSegmentedControlValue(int value) {
     segmentedControllerGroupValue = value;
     notifyListeners();
@@ -49,7 +58,7 @@ class CreateRecordNotifier extends ChangeNotifier {
         value: amountController.text.toNumber() ?? 0,
         memo: memoController.text,
         category: categorySelected!,
-        createdAt: DateTime.now(),
+        createdAt: createdAt ?? DateTime.now(),
         account: accountSelected!,
       );
 
@@ -73,6 +82,7 @@ class CreateRecordNotifier extends ChangeNotifier {
     categorySelected = null;
     amountController.clear();
     memoController.clear();
+    dateController.clear();
     notifyListeners();
   }
 }
