@@ -35,7 +35,7 @@ class TransferValueBottomSheet extends HookConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextUI.largeNormalBold(account.name),
+                TextUI.regularNormalBold(account.name),
                 IconButton(
                   onPressed: () {
                     context.router.popUntilRoot();
@@ -55,7 +55,7 @@ class TransferValueBottomSheet extends HookConsumerWidget {
             FreeSpaceUI.vertical(20),
             TextFormField(
               autofocus: true,
-              style: FigmaTextStyles.largeNormalBold,
+              style: FigmaTextStyles.regularNormalBold,
               controller: valueTextController,
               keyboardType: TextInputType.number,
               onChanged: (value) {
@@ -87,16 +87,16 @@ class TransferValueBottomSheet extends HookConsumerWidget {
                 RichText(
                   text: TextSpan(
                     text: "From: ",
-                    style: FigmaTextStyles.regularNoneRegular,
+                    style: FigmaTextStyles.smallNormalRegular,
                     children: [
                       TextSpan(
                         text: transferState.fromAccount!.name,
-                        style: FigmaTextStyles.regularNoneBold,
+                        style: FigmaTextStyles.smallNormalBold,
                       ),
                     ],
                   ),
                 ),
-                TextUI.regularNormalBold(transferState.fromAccount!.balance.currency()),
+                TextUI.smallNormalBold(transferState.fromAccount!.balance.currency()),
               ],
             ),
             FreeSpaceUI.vertical(20),

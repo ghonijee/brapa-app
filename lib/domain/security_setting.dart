@@ -26,7 +26,6 @@ class SecuritySetting {
 
   void toggleSecureActive() {
     secureAppActive = !secureAppActive;
-    print(secureAppActive);
   }
 
   void toggleUseBiometrik() {
@@ -34,7 +33,6 @@ class SecuritySetting {
   }
 
   bool pinValidate(String value) {
-    print(pin);
     return value == pin;
   }
 }

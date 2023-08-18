@@ -1,5 +1,6 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/presentation/pages/history/widgets/history_menu_bottom_sheet.dart';
 import 'package:brapa/presentation/provider/account/update_transfer_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -36,10 +37,22 @@ class HistoryPage extends HookConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const TextUI.titleRegular("History"),
-                  GestureDetector(
-                    onTap: () => searchMode.value = !searchMode.value,
-                    child:
-                        searchMode.value ? const TextUI.smallNormalRegular('Cancel') : const Icon(Icons.search_rounded),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () => searchMode.value = !searchMode.value,
+                        child: searchMode.value
+                            ? const TextUI.smallNormalRegular('Cancel')
+                            : const Icon(Icons.search_rounded),
+                      ),
+                      FreeSpaceUI.horizontal(16),
+                      GestureDetector(
+                        onTap: () {
+                          WidgetUI.showBottomSheet(context, height: 40.h, child: const HistoryMenuBottomSheet());
+                        },
+                        child: const Icon(Icons.more_vert_rounded),
+                      ),
+                    ],
                   )
                 ],
               ),
