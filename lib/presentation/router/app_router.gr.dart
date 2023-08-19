@@ -15,6 +15,18 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    SplashRouteRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SplashScreenPage(),
+      );
+    },
+    PinAuthRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const PinAuthPage(),
+      );
+    },
     SettingRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -27,21 +39,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const RecordPage(),
       );
     },
-    ManageAccountsRoute.name: (routeData) {
+    ChangePINRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ManageAccountsPage(),
+        child: const ChangePINPage(),
       );
     },
-    DetailAccountRoute.name: (routeData) {
-      final args = routeData.argsAs<DetailAccountRouteArgs>();
+    SecurityRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: DetailAccountPage(
-          key: args.key,
-          data: args.data,
-          formMode: args.formMode,
-        ),
+        child: const SecurityPage(),
       );
     },
     DetailCategoryRoute.name: (routeData) {
@@ -91,13 +98,81 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AccountPage(),
       );
     },
+    ManageAccountsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ManageAccountsPage(),
+      );
+    },
+    DetailAccountRoute.name: (routeData) {
+      final args = routeData.argsAs<DetailAccountRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: DetailAccountPage(
+          key: args.key,
+          data: args.data,
+          formMode: args.formMode,
+        ),
+      );
+    },
     MainRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: MainPage(),
+        child: const MainPage(),
+      );
+    },
+    TransferDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<TransferDetailRouteArgs>(
+          orElse: () => const TransferDetailRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: TransferDetailPage(
+          key: args.key,
+          transaction: args.transaction,
+        ),
+      );
+    },
+    RecordFormRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RecordFormPage(),
+      );
+    },
+    TransferFormRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TransferFormPage(),
       );
     },
   };
+}
+
+/// generated route for
+/// [SplashScreenPage]
+class SplashRouteRoute extends PageRouteInfo<void> {
+  const SplashRouteRoute({List<PageRouteInfo>? children})
+      : super(
+          SplashRouteRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SplashRouteRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [PinAuthPage]
+class PinAuthRoute extends PageRouteInfo<void> {
+  const PinAuthRoute({List<PageRouteInfo>? children})
+      : super(
+          PinAuthRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PinAuthRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -129,60 +204,31 @@ class RecordRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ManageAccountsPage]
-class ManageAccountsRoute extends PageRouteInfo<void> {
-  const ManageAccountsRoute({List<PageRouteInfo>? children})
+/// [ChangePINPage]
+class ChangePINRoute extends PageRouteInfo<void> {
+  const ChangePINRoute({List<PageRouteInfo>? children})
       : super(
-          ManageAccountsRoute.name,
+          ChangePINRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'ManageAccountsRoute';
+  static const String name = 'ChangePINRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
-/// [DetailAccountPage]
-class DetailAccountRoute extends PageRouteInfo<DetailAccountRouteArgs> {
-  DetailAccountRoute({
-    Key? key,
-    Account? data,
-    required FormAccountType formMode,
-    List<PageRouteInfo>? children,
-  }) : super(
-          DetailAccountRoute.name,
-          args: DetailAccountRouteArgs(
-            key: key,
-            data: data,
-            formMode: formMode,
-          ),
+/// [SecurityPage]
+class SecurityRoute extends PageRouteInfo<void> {
+  const SecurityRoute({List<PageRouteInfo>? children})
+      : super(
+          SecurityRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'DetailAccountRoute';
+  static const String name = 'SecurityRoute';
 
-  static const PageInfo<DetailAccountRouteArgs> page =
-      PageInfo<DetailAccountRouteArgs>(name);
-}
-
-class DetailAccountRouteArgs {
-  const DetailAccountRouteArgs({
-    this.key,
-    this.data,
-    required this.formMode,
-  });
-
-  final Key? key;
-
-  final Account? data;
-
-  final FormAccountType formMode;
-
-  @override
-  String toString() {
-    return 'DetailAccountRouteArgs{key: $key, data: $data, formMode: $formMode}';
-  }
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -348,6 +394,63 @@ class AccountRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ManageAccountsPage]
+class ManageAccountsRoute extends PageRouteInfo<void> {
+  const ManageAccountsRoute({List<PageRouteInfo>? children})
+      : super(
+          ManageAccountsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ManageAccountsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DetailAccountPage]
+class DetailAccountRoute extends PageRouteInfo<DetailAccountRouteArgs> {
+  DetailAccountRoute({
+    Key? key,
+    Account? data,
+    required FormAccountType formMode,
+    List<PageRouteInfo>? children,
+  }) : super(
+          DetailAccountRoute.name,
+          args: DetailAccountRouteArgs(
+            key: key,
+            data: data,
+            formMode: formMode,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'DetailAccountRoute';
+
+  static const PageInfo<DetailAccountRouteArgs> page =
+      PageInfo<DetailAccountRouteArgs>(name);
+}
+
+class DetailAccountRouteArgs {
+  const DetailAccountRouteArgs({
+    this.key,
+    this.data,
+    required this.formMode,
+  });
+
+  final Key? key;
+
+  final Account? data;
+
+  final FormAccountType formMode;
+
+  @override
+  String toString() {
+    return 'DetailAccountRouteArgs{key: $key, data: $data, formMode: $formMode}';
+  }
+}
+
+/// generated route for
 /// [MainPage]
 class MainRoute extends PageRouteInfo<void> {
   const MainRoute({List<PageRouteInfo>? children})
@@ -357,6 +460,72 @@ class MainRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MainRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TransferDetailPage]
+class TransferDetailRoute extends PageRouteInfo<TransferDetailRouteArgs> {
+  TransferDetailRoute({
+    Key? key,
+    Transaction? transaction,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TransferDetailRoute.name,
+          args: TransferDetailRouteArgs(
+            key: key,
+            transaction: transaction,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'TransferDetailRoute';
+
+  static const PageInfo<TransferDetailRouteArgs> page =
+      PageInfo<TransferDetailRouteArgs>(name);
+}
+
+class TransferDetailRouteArgs {
+  const TransferDetailRouteArgs({
+    this.key,
+    this.transaction,
+  });
+
+  final Key? key;
+
+  final Transaction? transaction;
+
+  @override
+  String toString() {
+    return 'TransferDetailRouteArgs{key: $key, transaction: $transaction}';
+  }
+}
+
+/// generated route for
+/// [RecordFormPage]
+class RecordFormRoute extends PageRouteInfo<void> {
+  const RecordFormRoute({List<PageRouteInfo>? children})
+      : super(
+          RecordFormRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RecordFormRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TransferFormPage]
+class TransferFormRoute extends PageRouteInfo<void> {
+  const TransferFormRoute({List<PageRouteInfo>? children})
+      : super(
+          TransferFormRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TransferFormRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

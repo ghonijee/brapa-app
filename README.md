@@ -60,8 +60,6 @@ To get Brapa app up and running, follow these steps:
 
 Now you're all set! Brapa app should be up and running on your device or emulator. Feel free to explore and make the most of its financial management features.
 
-If you encounter any issues or have questions, don't hesitate to reach out by [opening an issue](https://github.com/ghonijee/brapa-app/issues). We're here to assist you on your Brapa journey!
-
 
 ## Contributing
 
@@ -80,4 +78,3 @@ Thank you for choosing Brapa App as your financial companion. We hope this app s
 Best regards,
 
 Yunus Afghoni 
-Brapa App

@@ -35,7 +35,7 @@ class TransferValueBottomSheet extends HookConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextUI.titleRegular(account.name),
+                TextUI.regularNormalBold(account.name),
                 IconButton(
                   onPressed: () {
                     context.router.popUntilRoot();
@@ -55,7 +55,7 @@ class TransferValueBottomSheet extends HookConsumerWidget {
             FreeSpaceUI.vertical(20),
             TextFormField(
               autofocus: true,
-              style: FigmaTextStyles.largeNormalBold,
+              style: FigmaTextStyles.regularNormalBold,
               controller: valueTextController,
               keyboardType: TextInputType.number,
               onChanged: (value) {
@@ -63,7 +63,7 @@ class TransferValueBottomSheet extends HookConsumerWidget {
                   return;
                 }
 
-                if (transferState.from!.balance < value.toNumber()!) {
+                if (transferState.fromAccount!.balance < value.toNumber()!) {
                   disableTransfer.value = true;
                   return;
                 }
@@ -77,9 +77,7 @@ class TransferValueBottomSheet extends HookConsumerWidget {
                 prefixText: "Rp. ",
                 filled: true,
                 fillColor: context.colors.ink.dark,
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide.none),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
               ),
             ),
             FreeSpaceUI.vertical(20),
@@ -89,17 +87,16 @@ class TransferValueBottomSheet extends HookConsumerWidget {
                 RichText(
                   text: TextSpan(
                     text: "From: ",
-                    style: FigmaTextStyles.regularNoneRegular,
+                    style: FigmaTextStyles.smallNormalRegular,
                     children: [
                       TextSpan(
-                        text: transferState.from!.name,
-                        style: FigmaTextStyles.regularNoneBold,
+                        text: transferState.fromAccount!.name,
+                        style: FigmaTextStyles.smallNormalBold,
                       ),
                     ],
                   ),
                 ),
-                TextUI.regularNormalBold(
-                    transferState.from!.balance.currency()),
+                TextUI.smallNormalBold(transferState.fromAccount!.balance.currency()),
               ],
             ),
             FreeSpaceUI.vertical(20),

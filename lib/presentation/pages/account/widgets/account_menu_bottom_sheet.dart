@@ -29,7 +29,7 @@ class AccountMenuBottomSheet extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextUI.titleRegular(item.name),
+              TextUI.regularNoneBold(item.name),
               IconButton(
                 onPressed: () {
                   context.router.pop();
@@ -53,7 +53,7 @@ class AccountMenuBottomSheet extends ConsumerWidget {
             children: [
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                title: const TextUI.regularTightRegular("Transfer"),
+                title: const TextUI.smallNormalRegular("Transfer"),
                 trailing: Icon(
                   Icons.chevron_right_rounded,
                   color: context.colors.sky.dark,
@@ -68,7 +68,7 @@ class AccountMenuBottomSheet extends ConsumerWidget {
                     child: TransferTargetBottomSheet(account: item),
                   );
                 },
-                subtitle: TextUI.smallTightRegular(
+                subtitle: TextUI.tinyNoneRegular(
                   "Send balance to other account",
                   color: context.colors.sky.dark,
                 ),

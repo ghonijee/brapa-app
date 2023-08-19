@@ -277,6 +277,10 @@ class $AssetsCategoryGen {
   AssetGenImage get income3 =>
       const AssetGenImage('assets/category/income3.png');
 
+  /// File path: assets/category/income4.png
+  AssetGenImage get income4 =>
+      const AssetGenImage('assets/category/income4.png');
+
   /// File path: assets/category/outcome1.png
   AssetGenImage get outcome1 =>
       const AssetGenImage('assets/category/outcome1.png');
@@ -289,9 +293,61 @@ class $AssetsCategoryGen {
   AssetGenImage get outcome3 =>
       const AssetGenImage('assets/category/outcome3.png');
 
+  /// File path: assets/category/outcome4.png
+  AssetGenImage get outcome4 =>
+      const AssetGenImage('assets/category/outcome4.png');
+
+  /// File path: assets/category/transferIn1.png
+  AssetGenImage get transferIn1 =>
+      const AssetGenImage('assets/category/transferIn1.png');
+
+  /// File path: assets/category/transferIn2.png
+  AssetGenImage get transferIn2 =>
+      const AssetGenImage('assets/category/transferIn2.png');
+
+  /// File path: assets/category/transferIn3.png
+  AssetGenImage get transferIn3 =>
+      const AssetGenImage('assets/category/transferIn3.png');
+
+  /// File path: assets/category/transferIn4.png
+  AssetGenImage get transferIn4 =>
+      const AssetGenImage('assets/category/transferIn4.png');
+
+  /// File path: assets/category/transferOut1.png
+  AssetGenImage get transferOut1 =>
+      const AssetGenImage('assets/category/transferOut1.png');
+
+  /// File path: assets/category/transferOut2.png
+  AssetGenImage get transferOut2 =>
+      const AssetGenImage('assets/category/transferOut2.png');
+
+  /// File path: assets/category/transferOut3.png
+  AssetGenImage get transferOut3 =>
+      const AssetGenImage('assets/category/transferOut3.png');
+
+  /// File path: assets/category/transferOut4.png
+  AssetGenImage get transferOut4 =>
+      const AssetGenImage('assets/category/transferOut4.png');
+
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [income1, income2, income3, outcome1, outcome2, outcome3];
+  List<AssetGenImage> get values => [
+        income1,
+        income2,
+        income3,
+        income4,
+        outcome1,
+        outcome2,
+        outcome3,
+        outcome4,
+        transferIn1,
+        transferIn2,
+        transferIn3,
+        transferIn4,
+        transferOut1,
+        transferOut2,
+        transferOut3,
+        transferOut4
+      ];
 }
 
 class $AssetsLauncherGen {
@@ -301,6 +357,9 @@ class $AssetsLauncherGen {
   AssetGenImage get appstore =>
       const AssetGenImage('assets/launcher/appstore.png');
 
+  /// File path: assets/launcher/banner.png
+  AssetGenImage get banner => const AssetGenImage('assets/launcher/banner.png');
+
   /// File path: assets/launcher/icon.png
   AssetGenImage get icon => const AssetGenImage('assets/launcher/icon.png');
 
@@ -308,8 +367,13 @@ class $AssetsLauncherGen {
   AssetGenImage get playstore =>
       const AssetGenImage('assets/launcher/playstore.png');
 
+  /// File path: assets/launcher/round_launcher.png
+  AssetGenImage get roundLauncher =>
+      const AssetGenImage('assets/launcher/round_launcher.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [appstore, icon, playstore];
+  List<AssetGenImage> get values =>
+      [appstore, banner, icon, playstore, roundLauncher];
 }
 
 class Assets {

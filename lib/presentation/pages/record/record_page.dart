@@ -3,6 +3,7 @@ import 'package:app_ui/token/figma_token.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:brapa/presentation/provider/transaction/create_record_provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -44,7 +45,7 @@ class RecordPage extends HookConsumerWidget {
                                 children: [
                                   Icon(
                                     Icons.arrow_circle_up_rounded,
-                                    color: context.colors.red.darkest,
+                                    color: context.colors.red.base,
                                     size: 20,
                                   ),
                                   const TextUI.tinyNoneMedium("Expense"),
@@ -58,7 +59,7 @@ class RecordPage extends HookConsumerWidget {
                                   const TextUI.tinyNoneMedium("Income"),
                                   Icon(
                                     Icons.arrow_circle_down_rounded,
-                                    color: context.colors.green.darkest,
+                                    color: context.colors.green.base,
                                     size: 20,
                                   ),
                                 ],
@@ -101,20 +102,32 @@ class RecordPage extends HookConsumerWidget {
                         onKeyboardTap: (value) {
                           var oldValue = controller.amountController.text;
                           var newValue = oldValue + value;
-                          controller.amountController.text = newValue.currency(prefix: '');
+                          controller.onChangeAmountValue(newValue);
                         },
                         textStyle: FigmaTextStyles.largeNormalMedium,
                         rightButtonFn: () async {
-                          // On Submit
-                          await controller.save();
+                          if (controller.validate() == false) {
+                            return;
+                          }
+                          await controller.save().then((value) {
+                            Fluttertoast.showToast(
+                              msg: "Save record success!",
+                              backgroundColor: context.colors.green.darkest,
+                              textColor: context.colors.sky.base,
+                            );
+                            // On Submit
+                          });
                         },
-                        rightIcon: const Icon(
-                          Icons.check,
+                        rightIcon: Icon(
+                          Icons.check_circle,
+                          color: controller.validate() ? context.colors.green.base : context.colors.ink.base,
+                          size: 28,
                         ),
                         leftButtonFn: () {
-                          controller.amountController.text = controller.amountController.text
+                          var newvalue = controller.amountController.text
                               .substring(0, controller.amountController.text.length - 1)
                               .currency(prefix: "");
+                          controller.onChangeAmountValue(newvalue);
                         },
                         leftIcon: const Icon(
                           Icons.backspace,

@@ -5,6 +5,7 @@ import 'package:brapa/data/repository/account_repository.dart';
 import 'package:brapa/data/repository/transaction_repository.dart';
 import 'package:brapa/domain/category.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 
 import '../../../domain/account.dart';
 import '../../../domain/transaction.dart';
@@ -14,8 +15,10 @@ class CreateRecordNotifier extends ChangeNotifier {
   Account? accountSelected;
   Category? categorySelected;
   late Transaction transaction;
+  DateTime? createdAt;
   final TextEditingController amountController = TextEditingController();
   final TextEditingController memoController = TextEditingController();
+  final TextEditingController dateController = TextEditingController();
   int segmentedControllerGroupValue = 0;
   final FocusNode focusNode = FocusNode();
 
@@ -25,7 +28,15 @@ class CreateRecordNotifier extends ChangeNotifier {
   CreateRecordNotifier(
     this.repository,
     this.accountRepository,
-  );
+  ) {
+    createdAt = DateTime.now();
+    dateController.text = DateFormat("dd MMMM yyyy").format(createdAt!);
+  }
+
+  onChangeAmountValue(String value) {
+    amountController.text = value.currency(prefix: '');
+    notifyListeners();
+  }
 
   void selectedAccount(Account item) {
     accountSelected = item;
@@ -34,6 +45,12 @@ class CreateRecordNotifier extends ChangeNotifier {
 
   void selectedCategory(Category item) {
     categorySelected = item;
+    notifyListeners();
+  }
+
+  void changeDateTransaction(DateTime date) {
+    createdAt = date;
+    dateController.text = DateFormat("dd MMMM yyyy").format(date);
     notifyListeners();
   }
 
@@ -49,7 +66,7 @@ class CreateRecordNotifier extends ChangeNotifier {
         value: amountController.text.toNumber() ?? 0,
         memo: memoController.text,
         category: categorySelected!,
-        createdAt: DateTime.now(),
+        createdAt: createdAt ?? DateTime.now(),
         account: accountSelected!,
       );
 
@@ -73,7 +90,19 @@ class CreateRecordNotifier extends ChangeNotifier {
     categorySelected = null;
     amountController.clear();
     memoController.clear();
+    dateController.clear();
     notifyListeners();
+  }
+
+  bool validate() {
+    if (amountController.text.isEmpty ||
+        amountController.text == "0" ||
+        categorySelected == null ||
+        accountSelected == null) {
+      return false;
+    }
+
+    return true;
   }
 }
 

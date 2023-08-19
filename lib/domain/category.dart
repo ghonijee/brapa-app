@@ -50,7 +50,10 @@ class Category {
   factory Category.transferOut() => Category(name: "Transfer", categoryType: CategoryType.exp);
 }
 
-enum CategoryType { exp, inc }
+enum CategoryType {
+  exp,
+  inc,
+}
 
 extension CategoryExtension on List<Category> {
   List<Category> expenseList() => where((e) => e.isExpense()).toList();
