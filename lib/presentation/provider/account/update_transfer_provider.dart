@@ -46,6 +46,10 @@ class UpdateTransferNotifier extends AutoDisposeNotifier<TransferLog> {
   }
 
   setAmount(String value) {
+    if (value.isEmpty) {
+      state = state.copyWith(amount: 0);
+      return;
+    }
     state = state.copyWith(amount: value.toNumber());
   }
 

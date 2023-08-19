@@ -49,4 +49,11 @@ class TransferLog {
       amount: amount ?? this.amount,
     );
   }
+
+  bool formValidate() {
+    if (fromAccount == null || toAccount == null || amount == null || amount == 0) {
+      return false;
+    }
+    return true;
+  }
 }

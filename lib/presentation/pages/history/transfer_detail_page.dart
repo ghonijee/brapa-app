@@ -5,6 +5,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:brapa/presentation/provider/account/update_transfer_provider.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:brapa/domain/transaction.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -320,12 +321,19 @@ class TransferDetailPage extends HookConsumerWidget {
                         ),
                         FreeSpaceUI.vertical(42),
                         ElevatedButton(
-                          onPressed: () async {
-                            controller.save().then((value) {
-                              ref.watch(asyncListHistory.notifier).reload();
-                              context.router.pop();
-                            });
-                          },
+                          onPressed: state.formValidate()
+                              ? () async {
+                                  controller.save().then((value) {
+                                    ref.watch(asyncListHistory.notifier).reload();
+                                    context.router.pop();
+                                    Fluttertoast.showToast(
+                                      msg: "Save transfer success!",
+                                      backgroundColor: context.colors.green.darkest,
+                                      textColor: context.colors.sky.base,
+                                    );
+                                  });
+                                }
+                              : null,
                           style: ElevatedButton.styleFrom(
                             minimumSize: Size.fromHeight(48.px),
                             backgroundColor: context.colors.primary.base,

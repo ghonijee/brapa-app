@@ -81,7 +81,7 @@ class CreateRecordNotifier extends ChangeNotifier {
 
       reset();
     } catch (e) {
-      print(e.toString());
+      //
     }
   }
 
@@ -95,20 +95,14 @@ class CreateRecordNotifier extends ChangeNotifier {
   }
 
   bool validate() {
-    var isValid = <bool>[];
-    if (amountController.text.isEmpty || amountController.text == "0") {
-      isValid.add(false);
+    if (amountController.text.isEmpty ||
+        amountController.text == "0" ||
+        categorySelected == null ||
+        accountSelected == null) {
+      return false;
     }
 
-    if (categorySelected == null) {
-      isValid.add(false);
-    }
-
-    if (accountSelected == null) {
-      isValid.add(false);
-    }
-
-    return isValid.contains(false) == false;
+    return true;
   }
 }
 

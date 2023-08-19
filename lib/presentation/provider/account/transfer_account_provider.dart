@@ -13,30 +13,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
 
-class TransferAccountState {
-  Account? from;
-  Account? to;
-  int amount;
-
-  TransferAccountState({
-    this.from,
-    this.to,
-    this.amount = 0,
-  });
-
-  TransferAccountState copyWith({
-    Account? from,
-    Account? to,
-    int? amount,
-  }) {
-    return TransferAccountState(
-      from: from ?? this.from,
-      to: to ?? this.to,
-      amount: amount ?? this.amount,
-    );
-  }
-}
-
 class TransferAccountNotifier extends StateNotifier<TransferLog> {
   final AccountRepository repository;
   final TransactionRepository transactionRepository;
@@ -45,7 +21,9 @@ class TransferAccountNotifier extends StateNotifier<TransferLog> {
   final TextEditingController createdAtController = TextEditingController();
   DateTime? dateSelected;
   TransferAccountNotifier(this.repository, this.transactionRepository, this.transferLogRepository)
-      : super(TransferLog());
+      : super(TransferLog()) {
+    changeDateTransaction(DateTime.now());
+  }
 
   initTransfer(Account from) {
     state = state.copyWith(fromAccount: from);
@@ -62,6 +40,10 @@ class TransferAccountNotifier extends StateNotifier<TransferLog> {
   }
 
   setAmount(String value) {
+    if (value.isEmpty) {
+      state = state.copyWith(amount: 0);
+      return;
+    }
     state = state.copyWith(amount: value.toNumber());
   }
 
@@ -115,12 +97,13 @@ class TransferAccountNotifier extends StateNotifier<TransferLog> {
   void reset() {
     amountController.clear();
     createdAtController.clear();
+    dateSelected = null;
     state = TransferLog();
   }
 }
 
 @injectable
-final transferAccountProvider = StateNotifierProvider<TransferAccountNotifier, TransferLog>(
+final transferAccountProvider = AutoDisposeStateNotifierProvider<TransferAccountNotifier, TransferLog>(
   (ref) => TransferAccountNotifier(
     getIt<AccountRepository>(),
     getIt<TransactionRepository>(),

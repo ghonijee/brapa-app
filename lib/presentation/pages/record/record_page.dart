@@ -3,6 +3,7 @@ import 'package:app_ui/token/figma_token.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:brapa/presentation/provider/transaction/create_record_provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -108,8 +109,14 @@ class RecordPage extends HookConsumerWidget {
                           if (controller.validate() == false) {
                             return;
                           }
-                          await controller.save();
-                          // On Submit
+                          await controller.save().then((value) {
+                            Fluttertoast.showToast(
+                              msg: "Save record success!",
+                              backgroundColor: context.colors.green.darkest,
+                              textColor: context.colors.sky.base,
+                            );
+                            // On Submit
+                          });
                         },
                         rightIcon: Icon(
                           Icons.check_circle,
