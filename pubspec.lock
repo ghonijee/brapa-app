@@ -28,9 +28,11 @@ packages:
   app_ui:
     dependency: "direct main"
     description:
-      path: "../app_ui"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: e4b33fe9bc1774c4755557f1b4183ff471f47798
+      url: "git@github.com:ghonijee/app-ui.git"
+    source: git
     version: "0.0.1"
   archive:
     dependency: transitive

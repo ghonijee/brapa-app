@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   auto_route: ^7.7.1
   app_ui:
-    path: ../app_ui
+    git: git@github.com:ghonijee/app-ui.git
   icons_plus: ^4.0.0
   responsive_sizer: ^3.2.0
   get_it: ^7.6.0
