@@ -13,6 +13,7 @@ import 'package:brapa/presentation/provider/transaction/update_record_provider.d
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
+import '../../../domain/account.dart';
 import '../../provider/account/get_list_account_provider.dart';
 import '../../provider/category/get_list_category_provider.dart';
 import '../../provider/transaction/get_list_transaction_provider.dart';
@@ -122,13 +123,41 @@ class RecordDetailPage extends HookConsumerWidget {
                                     "Category",
                                     color: context.colors.sky.dark,
                                   ),
-                                  // GestureDetector(
-                                  //   onTap: () {},
-                                  //   child: TextUI.tinyNoneRegular(
-                                  //     "Show more",
-                                  //     color: context.colors.primary.base,
-                                  //   ),
-                                  // )
+                                  GestureDetector(
+                                    onTap: () {
+                                      var listDataShowMore = controller.segmentedControllerGroupValue == 0
+                                          ? getListCategory.asData?.value.expenseList()
+                                          : getListCategory.asData?.value.incomeList();
+                                      if (listDataShowMore == null) return;
+
+                                      WidgetUI.showBottomSheet(context,
+                                          height: MediaQuery.of(context).size.height * 0.7,
+                                          child: ShowMoreBottomSheet<Category>(
+                                            label: "All Categories",
+                                            itemBuilder: listDataShowMore.map((item) {
+                                              return CategoryChip(
+                                                  label: item.name,
+                                                  isActive: item == controller.categorySelected,
+                                                  onValueChanged: () {
+                                                    var index = listDataShowMore.indexOf(item);
+                                                    controller.selectedCategory(item);
+                                                    listCategoryScroll.scrollTo(
+                                                      index: index < listDataShowMore.length - 2 && index > 1
+                                                          ? index - 2
+                                                          : index,
+                                                      duration: const Duration(milliseconds: 700),
+                                                      curve: Curves.fastLinearToSlowEaseIn,
+                                                    );
+                                                    context.router.pop();
+                                                  });
+                                            }).toList(),
+                                          ));
+                                    },
+                                    child: TextUI.tinyNoneRegular(
+                                      "Show more",
+                                      color: context.colors.primary.base,
+                                    ),
+                                  )
                                 ],
                               ),
                               FreeSpaceUI.vertical(16),
@@ -183,13 +212,46 @@ class RecordDetailPage extends HookConsumerWidget {
                                     "Account",
                                     color: context.colors.sky.dark,
                                   ),
-                                  // GestureDetector(
-                                  //   onTap: () {},
-                                  //   child: TextUI.tinyNoneRegular(
-                                  //     "Show more",
-                                  //     color: context.colors.primary.base,
-                                  //   ),
-                                  // )
+                                  GestureDetector(
+                                    onTap: () {
+                                      var listDataShowMore = listAccount.asData?.value;
+
+                                      if (listDataShowMore == null) return;
+
+                                      WidgetUI.showBottomSheet(
+                                        context,
+                                        height: MediaQuery.of(context).size.height * 0.7,
+                                        child: ShowMoreBottomSheet<Account>(
+                                          label: "All Accounts",
+                                          itemBuilder: listDataShowMore.map((item) {
+                                            return AccountChip(
+                                              width: 150,
+                                              alignment: Alignment.center,
+                                              assetPath: item.assets!,
+                                              label: item.name,
+                                              isActive: item == controller.accountSelected,
+                                              onValueChanged: () {
+                                                var index = listDataShowMore.indexOf(item);
+                                                controller.selectedAccount(item);
+                                                listAccountScroll.scrollTo(
+                                                  index: index < listDataShowMore.length - 2 && index > 0
+                                                      ? index - 1
+                                                      : index,
+                                                  duration: const Duration(milliseconds: 700),
+                                                  curve: Curves.fastLinearToSlowEaseIn,
+                                                );
+                                                context.router.pop();
+                                              },
+                                            );
+                                          }).toList(),
+                                        ),
+                                      );
+                                    },
+                                    child: TextUI.tinyNoneRegular(
+                                      "Show more",
+                                      color: context.colors.primary.base,
+                                    ),
+                                  )
                                 ],
                               ),
                               FreeSpaceUI.vertical(16.sp),

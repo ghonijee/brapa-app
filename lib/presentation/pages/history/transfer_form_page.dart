@@ -9,6 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
+import '../../../domain/account.dart';
 import '../../provider/account/get_list_account_provider.dart';
 import '../../provider/transaction/get_list_transaction_provider.dart';
 
@@ -70,13 +71,47 @@ class TransferFormPage extends HookConsumerWidget {
                                     "Account Source",
                                     color: context.colors.sky.dark,
                                   ),
-                                  // GestureDetector(
-                                  //   onTap: () {},
-                                  //   child: TextUI.tinyNoneRegular(
-                                  //     "Show more",
-                                  //     color: context.colors.primary.base,
-                                  //   ),
-                                  // )
+                                  GestureDetector(
+                                    onTap: () {
+                                      var listDataShowMore = listAccount.asData?.value;
+
+                                      if (listDataShowMore == null) return;
+
+                                      WidgetUI.showBottomSheet(
+                                        context,
+                                        height: MediaQuery.of(context).size.height * 0.7,
+                                        child: ShowMoreBottomSheet<Account>(
+                                          label: "All Accounts",
+                                          itemBuilder: listDataShowMore.map((item) {
+                                            return AccountChip(
+                                              width: 150,
+                                              alignment: Alignment.center,
+                                              assetPath: item.assets!,
+                                              label: item.name,
+                                              isActive: item.id == state.fromAccount?.id,
+                                              onValueChanged: () {
+                                                var index = listDataShowMore.indexOf(item);
+                                                controller.initTransfer(item);
+
+                                                listAccountFromScroll.scrollTo(
+                                                  index: index < listDataShowMore.length - 2 && index > 0
+                                                      ? index - 1
+                                                      : index,
+                                                  duration: const Duration(milliseconds: 700),
+                                                  curve: Curves.fastLinearToSlowEaseIn,
+                                                );
+                                                context.router.pop();
+                                              },
+                                            );
+                                          }).toList(),
+                                        ),
+                                      );
+                                    },
+                                    child: TextUI.tinyNoneRegular(
+                                      "Show more",
+                                      color: context.colors.primary.base,
+                                    ),
+                                  )
                                 ],
                               ),
                               FreeSpaceUI.vertical(16.sp),
@@ -122,13 +157,47 @@ class TransferFormPage extends HookConsumerWidget {
                                     "Account Target",
                                     color: context.colors.sky.dark,
                                   ),
-                                  // GestureDetector(
-                                  //   onTap: () {},
-                                  //   child: TextUI.tinyNoneRegular(
-                                  //     "Show more",
-                                  //     color: context.colors.primary.base,
-                                  //   ),
-                                  // )
+                                  GestureDetector(
+                                    onTap: () {
+                                      var listDataShowMore = listAccount.asData?.value;
+
+                                      if (listDataShowMore == null) return;
+
+                                      WidgetUI.showBottomSheet(
+                                        context,
+                                        height: MediaQuery.of(context).size.height * 0.7,
+                                        child: ShowMoreBottomSheet<Account>(
+                                          label: "All Accounts",
+                                          itemBuilder: listDataShowMore.map((item) {
+                                            return AccountChip(
+                                              width: 150,
+                                              alignment: Alignment.center,
+                                              assetPath: item.assets!,
+                                              label: item.name,
+                                              isActive: item.id == state.toAccount?.id,
+                                              onValueChanged: () {
+                                                var index = listDataShowMore.indexOf(item);
+                                                controller.selectedTargetAccount(item);
+
+                                                listAccountToScroll.scrollTo(
+                                                  index: index < listDataShowMore.length - 2 && index > 0
+                                                      ? index - 1
+                                                      : index,
+                                                  duration: const Duration(milliseconds: 700),
+                                                  curve: Curves.fastLinearToSlowEaseIn,
+                                                );
+                                                context.router.pop();
+                                              },
+                                            );
+                                          }).toList(),
+                                        ),
+                                      );
+                                    },
+                                    child: TextUI.tinyNoneRegular(
+                                      "Show more",
+                                      color: context.colors.primary.base,
+                                    ),
+                                  )
                                 ],
                               ),
                               FreeSpaceUI.vertical(16.sp),
@@ -183,6 +252,7 @@ class TransferFormPage extends HookConsumerWidget {
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: context.colors.surface,
+                                hintText: "0",
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
                               ),
