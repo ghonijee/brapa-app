@@ -28,7 +28,15 @@ class CreateRecordNotifier extends ChangeNotifier {
   CreateRecordNotifier(
     this.repository,
     this.accountRepository,
-  );
+  ) {
+    createdAt = DateTime.now();
+    dateController.text = DateFormat("dd MMMM yyyy").format(createdAt!);
+  }
+
+  onChangeAmountValue(String value) {
+    amountController.text = value.currency(prefix: '');
+    notifyListeners();
+  }
 
   void selectedAccount(Account item) {
     accountSelected = item;
@@ -73,7 +81,7 @@ class CreateRecordNotifier extends ChangeNotifier {
 
       reset();
     } catch (e) {
-      //
+      print(e.toString());
     }
   }
 
@@ -84,6 +92,23 @@ class CreateRecordNotifier extends ChangeNotifier {
     memoController.clear();
     dateController.clear();
     notifyListeners();
+  }
+
+  bool validate() {
+    var isValid = <bool>[];
+    if (amountController.text.isEmpty || amountController.text == "0") {
+      isValid.add(false);
+    }
+
+    if (categorySelected == null) {
+      isValid.add(false);
+    }
+
+    if (accountSelected == null) {
+      isValid.add(false);
+    }
+
+    return isValid.contains(false) == false;
   }
 }
 

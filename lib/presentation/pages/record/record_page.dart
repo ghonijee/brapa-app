@@ -101,20 +101,26 @@ class RecordPage extends HookConsumerWidget {
                         onKeyboardTap: (value) {
                           var oldValue = controller.amountController.text;
                           var newValue = oldValue + value;
-                          controller.amountController.text = newValue.currency(prefix: '');
+                          controller.onChangeAmountValue(newValue);
                         },
                         textStyle: FigmaTextStyles.largeNormalMedium,
                         rightButtonFn: () async {
-                          // On Submit
+                          if (controller.validate() == false) {
+                            return;
+                          }
                           await controller.save();
+                          // On Submit
                         },
-                        rightIcon: const Icon(
-                          Icons.check,
+                        rightIcon: Icon(
+                          Icons.check_circle,
+                          color: controller.validate() ? context.colors.green.base : context.colors.ink.base,
+                          size: 28,
                         ),
                         leftButtonFn: () {
-                          controller.amountController.text = controller.amountController.text
+                          var newvalue = controller.amountController.text
                               .substring(0, controller.amountController.text.length - 1)
                               .currency(prefix: "");
+                          controller.onChangeAmountValue(newvalue);
                         },
                         leftIcon: const Icon(
                           Icons.backspace,
