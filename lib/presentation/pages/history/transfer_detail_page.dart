@@ -1,38 +1,34 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:app_ui/molecules/account_chip.dart';
-import 'package:app_ui/molecules/category_chip.dart';
 import 'package:app_ui/token/figma_token.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/presentation/provider/account/update_transfer_provider.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:brapa/domain/category.dart';
 import 'package:brapa/domain/transaction.dart';
-import 'package:brapa/presentation/provider/transaction/delete_record_provider.dart';
-import 'package:brapa/presentation/provider/transaction/update_record_provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../../domain/account.dart';
 import '../../provider/account/get_list_account_provider.dart';
-import '../../provider/category/get_list_category_provider.dart';
 import '../../provider/transaction/get_list_transaction_provider.dart';
 
 @RoutePage()
-class RecordDetailPage extends HookConsumerWidget {
-  const RecordDetailPage({super.key, this.transaction});
+class TransferDetailPage extends HookConsumerWidget {
+  const TransferDetailPage({super.key, this.transaction});
 
   final Transaction? transaction;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var controller = ref.watch(updateRecordProvider);
+    var controller = ref.watch(updateTransferProvider.notifier);
+    var state = ref.watch(updateTransferProvider);
 
-    var getListCategory = ref.watch(getListCategoryProvider);
     final listAccount = ref.watch(getListAccountProvider);
-    final listCategoryScroll = ItemScrollController();
-    final listAccountScroll = ItemScrollController();
+    final listAccountFromScroll = ItemScrollController();
+    final listAccountToScroll = ItemScrollController();
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -61,7 +57,7 @@ class RecordDetailPage extends HookConsumerWidget {
                             context: context,
                             builder: (context) {
                               return AlertDeleteItemUI(onConfirm: () {
-                                ref.watch(deleteRecordProvider).delete(controller.transaction).then<void>((value) {
+                                controller.delete().then<void>((value) {
                                   ref.watch(asyncListHistory.notifier).reload();
                                   context.router.popForced();
                                   context.router.pop();
@@ -83,125 +79,7 @@ class RecordDetailPage extends HookConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         FreeSpaceUI.vertical(20),
-                        const TextUI.titleRegular("Transaction Details"),
-                        FreeSpaceUI.vertical(32),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            TextUI.smallTightRegular(
-                              "Amount value",
-                              color: context.colors.sky.dark,
-                            ),
-                            FreeSpaceUI.vertical(16),
-                            TextFormField(
-                              controller: controller.amountController,
-                              style: FigmaTextStyles.smallNormalRegular,
-                              keyboardType: TextInputType.number,
-                              keyboardAppearance: Brightness.dark,
-                              onChanged: (value) {
-                                controller.onChangeAmountValue(value);
-                              },
-                              inputFormatters: [
-                                ThousandsFormatter(),
-                              ],
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: context.colors.surface,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
-                              ),
-                            )
-                          ],
-                        ),
-                        FreeSpaceUI.vertical(20),
-                        SizedBox(
-                          height: 64,
-                          width: double.infinity,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  TextUI.smallNoneRegular(
-                                    "Category",
-                                    color: context.colors.sky.dark,
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      var listDataShowMore = controller.segmentedControllerGroupValue == 0
-                                          ? getListCategory.asData?.value.expenseList()
-                                          : getListCategory.asData?.value.incomeList();
-                                      if (listDataShowMore == null) return;
-
-                                      WidgetUI.showBottomSheet(context,
-                                          height: MediaQuery.of(context).size.height * 0.7,
-                                          child: ShowMoreBottomSheet<Category>(
-                                            label: "All Categories",
-                                            itemBuilder: listDataShowMore.map((item) {
-                                              return CategoryChip(
-                                                  label: item.name,
-                                                  isActive: item == controller.categorySelected,
-                                                  onValueChanged: () {
-                                                    var index = listDataShowMore.indexOf(item);
-                                                    controller.selectedCategory(item);
-                                                    listCategoryScroll.scrollTo(
-                                                      index: index < listDataShowMore.length - 2 && index > 1
-                                                          ? index - 2
-                                                          : index,
-                                                      duration: const Duration(milliseconds: 700),
-                                                      curve: Curves.fastLinearToSlowEaseIn,
-                                                    );
-                                                    context.router.pop();
-                                                  });
-                                            }).toList(),
-                                          ));
-                                    },
-                                    child: TextUI.tinyNoneRegular(
-                                      "Show more",
-                                      color: context.colors.primary.base,
-                                    ),
-                                  )
-                                ],
-                              ),
-                              FreeSpaceUI.vertical(16),
-                              Expanded(
-                                child: getListCategory.maybeWhen(
-                                    loading: () => const Center(
-                                          child: CircularProgressIndicator(),
-                                        ),
-                                    data: (listCategory) {
-                                      var result = transaction!.type == TransactionType.exp
-                                          ? listCategory.expenseList()
-                                          : listCategory.incomeList();
-
-                                      return ScrollablePositionedList.separated(
-                                        itemScrollController: listCategoryScroll,
-                                        separatorBuilder: (context, index) => FreeSpaceUI.horizontal(8),
-                                        shrinkWrap: true,
-                                        itemCount: result.length,
-                                        scrollDirection: Axis.horizontal,
-                                        physics: const BouncingScrollPhysics(),
-                                        itemBuilder: (context, index) {
-                                          var item = result[index];
-
-                                          return CategoryChip(
-                                              alignment: Alignment.center,
-                                              label: item.name,
-                                              isActive: item == controller.categorySelected,
-                                              onValueChanged: () {
-                                                controller.selectedCategory(item);
-                                              });
-                                        },
-                                      );
-                                    },
-                                    orElse: () {
-                                      return const SizedBox();
-                                    }),
-                              ),
-                            ],
-                          ),
-                        ),
+                        const TextUI.titleRegular("Transfer Details"),
                         FreeSpaceUI.vertical(32),
                         SizedBox(
                           height: 72,
@@ -213,7 +91,7 @@ class RecordDetailPage extends HookConsumerWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   TextUI.smallNoneRegular(
-                                    "Account",
+                                    "Account Source",
                                     color: context.colors.sky.dark,
                                   ),
                                   GestureDetector(
@@ -233,11 +111,12 @@ class RecordDetailPage extends HookConsumerWidget {
                                               alignment: Alignment.center,
                                               assetPath: item.assets!,
                                               label: item.name,
-                                              isActive: item == controller.accountSelected,
+                                              isActive: item.id == state.fromAccount?.id,
                                               onValueChanged: () {
                                                 var index = listDataShowMore.indexOf(item);
-                                                controller.selectedAccount(item);
-                                                listAccountScroll.scrollTo(
+                                                controller.setAccountFrom(item);
+
+                                                listAccountFromScroll.scrollTo(
                                                   index: index < listDataShowMore.length - 2 && index > 0
                                                       ? index - 1
                                                       : index,
@@ -263,7 +142,7 @@ class RecordDetailPage extends HookConsumerWidget {
                                 child: listAccount.maybeWhen(
                                     orElse: () => const SizedBox(),
                                     data: (data) => ScrollablePositionedList.separated(
-                                          itemScrollController: listAccountScroll,
+                                          itemScrollController: listAccountFromScroll,
                                           separatorBuilder: (context, index) => FreeSpaceUI.horizontal(8),
                                           addSemanticIndexes: true,
                                           shrinkWrap: true,
@@ -276,9 +155,95 @@ class RecordDetailPage extends HookConsumerWidget {
                                               alignment: Alignment.center,
                                               assetPath: item.assets!,
                                               label: item.name,
-                                              isActive: item.id == controller.accountSelected?.id,
+                                              isActive: item.id == state.fromAccount?.id,
                                               onValueChanged: () {
-                                                controller.selectedAccount(item);
+                                                controller.setAccountFrom(item);
+                                              },
+                                            );
+                                          },
+                                        )),
+                              )
+                            ],
+                          ),
+                        ),
+                        FreeSpaceUI.vertical(32),
+                        SizedBox(
+                          height: 72,
+                          width: double.infinity,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  TextUI.smallNoneRegular(
+                                    "Account Target",
+                                    color: context.colors.sky.dark,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      var listDataShowMore = listAccount.asData?.value;
+
+                                      if (listDataShowMore == null) return;
+
+                                      WidgetUI.showBottomSheet(
+                                        context,
+                                        height: MediaQuery.of(context).size.height * 0.7,
+                                        child: ShowMoreBottomSheet<Account>(
+                                          label: "All Accounts",
+                                          itemBuilder: listDataShowMore.map((item) {
+                                            return AccountChip(
+                                              width: 150,
+                                              alignment: Alignment.center,
+                                              assetPath: item.assets!,
+                                              label: item.name,
+                                              isActive: item.id == state.toAccount?.id,
+                                              onValueChanged: () {
+                                                var index = listDataShowMore.indexOf(item);
+                                                controller.setAccountTo(item);
+
+                                                listAccountToScroll.scrollTo(
+                                                  index: index < listDataShowMore.length - 2 && index > 0
+                                                      ? index - 1
+                                                      : index,
+                                                  duration: const Duration(milliseconds: 700),
+                                                  curve: Curves.fastLinearToSlowEaseIn,
+                                                );
+                                                context.router.pop();
+                                              },
+                                            );
+                                          }).toList(),
+                                        ),
+                                      );
+                                    },
+                                    child: TextUI.tinyNoneRegular(
+                                      "Show more",
+                                      color: context.colors.primary.base,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              FreeSpaceUI.vertical(16.sp),
+                              Expanded(
+                                child: listAccount.maybeWhen(
+                                    orElse: () => const SizedBox(),
+                                    data: (data) => ScrollablePositionedList.separated(
+                                          itemScrollController: listAccountToScroll,
+                                          separatorBuilder: (context, index) => FreeSpaceUI.horizontal(8),
+                                          addSemanticIndexes: true,
+                                          shrinkWrap: true,
+                                          itemCount: data.length,
+                                          scrollDirection: Axis.horizontal,
+                                          itemBuilder: (context, index) {
+                                            var item = data[index];
+
+                                            return AccountChip(
+                                              alignment: Alignment.center,
+                                              assetPath: item.assets!,
+                                              label: item.name,
+                                              isActive: item.id == state.toAccount?.id,
+                                              onValueChanged: () {
+                                                controller.setAccountTo(item);
                                               },
                                             );
                                           },
@@ -292,14 +257,21 @@ class RecordDetailPage extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextUI.smallTightRegular(
-                              "Memo",
+                              "Amount value",
                               color: context.colors.sky.dark,
                             ),
                             FreeSpaceUI.vertical(16),
                             TextFormField(
+                              controller: controller.amountController,
                               style: FigmaTextStyles.smallNormalRegular,
-                              controller: controller.memoController,
-                              maxLines: 2,
+                              keyboardType: TextInputType.number,
+                              keyboardAppearance: Brightness.dark,
+                              onChanged: (value) {
+                                controller.setAmount(value);
+                              },
+                              inputFormatters: [
+                                ThousandsFormatter(),
+                              ],
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: context.colors.surface,
@@ -324,7 +296,7 @@ class RecordDetailPage extends HookConsumerWidget {
                                   context: context,
                                   config: CalendarDatePicker2WithActionButtonsConfig(
                                     calendarType: CalendarDatePicker2Type.single,
-                                    currentDate: transaction!.createdAt,
+                                    currentDate: state.createdAt,
                                   ),
                                   dialogSize: const Size(325, 400),
                                   borderRadius: BorderRadius.circular(15),
@@ -349,13 +321,13 @@ class RecordDetailPage extends HookConsumerWidget {
                         ),
                         FreeSpaceUI.vertical(42),
                         ElevatedButton(
-                          onPressed: controller.validate()
+                          onPressed: state.formValidate()
                               ? () async {
                                   controller.save().then((value) {
                                     ref.watch(asyncListHistory.notifier).reload();
                                     context.router.pop();
                                     Fluttertoast.showToast(
-                                      msg: "Save record success!",
+                                      msg: "Save transfer success!",
                                       backgroundColor: context.colors.green.darkest,
                                       textColor: context.colors.sky.base,
                                     );

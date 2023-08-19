@@ -15,6 +15,18 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    SplashRouteRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SplashScreenPage(),
+      );
+    },
+    PinAuthRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const PinAuthPage(),
+      );
+    },
     SettingRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -109,19 +121,58 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const MainPage(),
       );
     },
-    PinAuthRoute.name: (routeData) {
+    TransferDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<TransferDetailRouteArgs>(
+          orElse: () => const TransferDetailRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const PinAuthPage(),
+        child: TransferDetailPage(
+          key: args.key,
+          transaction: args.transaction,
+        ),
       );
     },
-    SplashRouteRoute.name: (routeData) {
+    RecordFormRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const SplashScreenPage(),
+        child: const RecordFormPage(),
+      );
+    },
+    TransferFormRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TransferFormPage(),
       );
     },
   };
+}
+
+/// generated route for
+/// [SplashScreenPage]
+class SplashRouteRoute extends PageRouteInfo<void> {
+  const SplashRouteRoute({List<PageRouteInfo>? children})
+      : super(
+          SplashRouteRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SplashRouteRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [PinAuthPage]
+class PinAuthRoute extends PageRouteInfo<void> {
+  const PinAuthRoute({List<PageRouteInfo>? children})
+      : super(
+          PinAuthRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PinAuthRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -414,29 +465,67 @@ class MainRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [PinAuthPage]
-class PinAuthRoute extends PageRouteInfo<void> {
-  const PinAuthRoute({List<PageRouteInfo>? children})
-      : super(
-          PinAuthRoute.name,
+/// [TransferDetailPage]
+class TransferDetailRoute extends PageRouteInfo<TransferDetailRouteArgs> {
+  TransferDetailRoute({
+    Key? key,
+    Transaction? transaction,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TransferDetailRoute.name,
+          args: TransferDetailRouteArgs(
+            key: key,
+            transaction: transaction,
+          ),
           initialChildren: children,
         );
 
-  static const String name = 'PinAuthRoute';
+  static const String name = 'TransferDetailRoute';
+
+  static const PageInfo<TransferDetailRouteArgs> page =
+      PageInfo<TransferDetailRouteArgs>(name);
+}
+
+class TransferDetailRouteArgs {
+  const TransferDetailRouteArgs({
+    this.key,
+    this.transaction,
+  });
+
+  final Key? key;
+
+  final Transaction? transaction;
+
+  @override
+  String toString() {
+    return 'TransferDetailRouteArgs{key: $key, transaction: $transaction}';
+  }
+}
+
+/// generated route for
+/// [RecordFormPage]
+class RecordFormRoute extends PageRouteInfo<void> {
+  const RecordFormRoute({List<PageRouteInfo>? children})
+      : super(
+          RecordFormRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RecordFormRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
-/// [SplashScreenPage]
-class SplashRouteRoute extends PageRouteInfo<void> {
-  const SplashRouteRoute({List<PageRouteInfo>? children})
+/// [TransferFormPage]
+class TransferFormRoute extends PageRouteInfo<void> {
+  const TransferFormRoute({List<PageRouteInfo>? children})
       : super(
-          SplashRouteRoute.name,
+          TransferFormRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'SplashRouteRoute';
+  static const String name = 'TransferFormRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

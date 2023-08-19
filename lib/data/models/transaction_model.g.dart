@@ -135,10 +135,14 @@ P _transactionModelDeserializeProp<P>(
 const _TransactionModeltypeEnumValueMap = {
   'exp': 0,
   'inc': 1,
+  'transferIn': 2,
+  'transferOut': 3,
 };
 const _TransactionModeltypeValueEnumMap = {
   0: TransactionType.exp,
   1: TransactionType.inc,
+  2: TransactionType.transferIn,
+  3: TransactionType.transferOut,
 };
 
 Id _transactionModelGetId(TransactionModel object) {

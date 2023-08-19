@@ -1,5 +1,7 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/presentation/pages/history/widgets/history_menu_bottom_sheet.dart';
+import 'package:brapa/presentation/provider/account/update_transfer_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -35,10 +37,22 @@ class HistoryPage extends HookConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const TextUI.titleRegular("History"),
-                  GestureDetector(
-                    onTap: () => searchMode.value = !searchMode.value,
-                    child:
-                        searchMode.value ? const TextUI.smallNormalRegular('Cancel') : const Icon(Icons.search_rounded),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () => searchMode.value = !searchMode.value,
+                        child: searchMode.value
+                            ? const TextUI.smallNormalRegular('Cancel')
+                            : const Icon(Icons.search_rounded),
+                      ),
+                      FreeSpaceUI.horizontal(16),
+                      GestureDetector(
+                        onTap: () {
+                          WidgetUI.showBottomSheet(context, height: 40.h, child: const HistoryMenuBottomSheet());
+                        },
+                        child: const Icon(Icons.more_vert_rounded),
+                      ),
+                    ],
                   )
                 ],
               ),
@@ -140,10 +154,19 @@ class HistoryPage extends HookConsumerWidget {
                                   var transactionItem = groupItem.transactions[index];
                                   return ListTile(
                                     onTap: () {
-                                      // WidgetUI.showBottomSheet(context, TransactionEditBottomSheet());
-                                      ref.watch(updateRecordProvider).loadTransaction(transactionItem);
+                                      if ([TransactionType.transferIn, TransactionType.transferOut]
+                                          .contains(transactionItem.type)) {
+                                        ref.watch(updateTransferProvider.notifier).loadTransfer(transactionItem);
+                                        context.router.push(TransferDetailRoute(transaction: transactionItem));
+                                      } else {
+                                        // WidgetUI.showBottomSheet(context, TransactionEditBottomSheet());
+                                        ref.watch(updateRecordProvider).loadTransaction(transactionItem);
 
-                                      context.router.push(RecordDetailRoute(transaction: transactionItem));
+                                        context.router.push(RecordDetailRoute(transaction: transactionItem));
+                                      }
+                                      // ref.watch(updateRecordProvider).loadTransaction(transactionItem);
+
+                                      // context.router.push(RecordDetailRoute(transaction: transactionItem));
                                     },
                                     contentPadding: EdgeInsets.zero,
                                     leading: HistoryIconItemWidget(
@@ -186,14 +209,35 @@ class HistoryIconItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return type == TransactionType.exp
-        ? ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Assets.category.outcome1.image(width: 45, fit: BoxFit.fitHeight),
-          )
-        : ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Assets.category.income1.image(width: 45, fit: BoxFit.fitHeight),
-          );
+    switch (type) {
+      case TransactionType.exp:
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Assets.category.outcome4.image(width: 45, fit: BoxFit.fitHeight),
+        );
+      case TransactionType.inc:
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Assets.category.income4.image(width: 45, fit: BoxFit.fitHeight),
+        );
+      case TransactionType.transferOut:
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Assets.category.transferOut4.image(width: 45, fit: BoxFit.fitHeight),
+        );
+      case TransactionType.transferIn:
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Assets.category.transferIn4.image(width: 45, fit: BoxFit.fitHeight),
+        );
+      default:
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: const SizedBox(
+            width: 45,
+            height: 45,
+          ),
+        );
+    }
   }
 }

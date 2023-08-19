@@ -37,6 +37,10 @@ class UpdateRecordNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  onChangeAmountValue(String value) {
+    notifyListeners();
+  }
+
   void changeDateTransaction(DateTime date) {
     dateSelected = date;
     dateController.text = DateFormat("dd MMMM yyyy").format(date);
@@ -100,7 +104,19 @@ class UpdateRecordNotifier extends ChangeNotifier {
     categorySelected = null;
     amountController.clear();
     memoController.clear();
+    dateController.clear();
     notifyListeners();
+  }
+
+  bool validate() {
+    if (amountController.text.isEmpty ||
+        amountController.text == "0" ||
+        categorySelected == null ||
+        accountSelected == null) {
+      return false;
+    }
+
+    return true;
   }
 }
 

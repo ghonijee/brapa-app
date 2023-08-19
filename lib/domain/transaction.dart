@@ -47,8 +47,8 @@ class Transaction {
     return value;
   }
 
-  bool isExpense() => type == TransactionType.exp;
-  bool isIncome() => type == TransactionType.inc;
+  bool isExpense() => type == TransactionType.exp || type == TransactionType.transferOut;
+  bool isIncome() => type == TransactionType.inc || type == TransactionType.transferIn;
 
   Transaction copyWith({
     int? id,
@@ -127,4 +127,4 @@ extension TransactionExtension on List<Transaction> {
   }
 }
 
-enum TransactionType { exp, inc }
+enum TransactionType { exp, inc, transferIn, transferOut }
