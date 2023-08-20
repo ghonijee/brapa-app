@@ -102,6 +102,7 @@ class RecordPage extends HookConsumerWidget {
                         onKeyboardTap: (value) {
                           var oldValue = controller.amountController.text;
                           var newValue = oldValue + value;
+                          controller.amountController.text = newValue.currency(prefix: '');
                           controller.onChangeAmountValue(newValue);
                         },
                         textStyle: FigmaTextStyles.largeNormalMedium,
@@ -124,10 +125,11 @@ class RecordPage extends HookConsumerWidget {
                           size: 28,
                         ),
                         leftButtonFn: () {
-                          var newvalue = controller.amountController.text
+                          var newValue = controller.amountController.text
                               .substring(0, controller.amountController.text.length - 1)
                               .currency(prefix: "");
-                          controller.onChangeAmountValue(newvalue);
+                          controller.amountController.text = newValue.currency(prefix: '');
+                          controller.onChangeAmountValue(newValue);
                         },
                         leftIcon: const Icon(
                           Icons.backspace,
