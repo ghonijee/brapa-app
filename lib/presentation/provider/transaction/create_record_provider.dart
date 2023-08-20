@@ -34,7 +34,6 @@ class CreateRecordNotifier extends ChangeNotifier {
   }
 
   onChangeAmountValue(String value) {
-    amountController.text = value.currency(prefix: '');
     notifyListeners();
   }
 
