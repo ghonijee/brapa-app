@@ -90,6 +90,7 @@ class CreateRecordNotifier extends ChangeNotifier {
     amountController.clear();
     memoController.clear();
     dateController.clear();
+    createdAt = DateTime.now();
     notifyListeners();
   }
 
