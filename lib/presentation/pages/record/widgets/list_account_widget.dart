@@ -1,6 +1,7 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:app_ui/molecules/account_chip.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/gen/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:brapa/domain/account.dart';
@@ -30,7 +31,7 @@ class ListAccountWidget extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextUI.smallNoneRegular(
-                  "Account",
+                  S.of(context).account,
                   color: context.colors.sky.dark,
                 ),
                 GestureDetector(
@@ -43,7 +44,7 @@ class ListAccountWidget extends ConsumerWidget {
                       context,
                       height: MediaQuery.of(context).size.height * 0.7,
                       child: ShowMoreBottomSheet<Account>(
-                        label: "All Accounts",
+                        label: S.of(context).allAccount,
                         itemBuilder: listDataShowMore.map((item) {
                           return AccountChip(
                             width: 150,
@@ -67,7 +68,7 @@ class ListAccountWidget extends ConsumerWidget {
                     );
                   },
                   child: TextUI.tinyNoneRegular(
-                    "Show more",
+                    S.of(context).showMore,
                     color: context.colors.primary.base,
                   ),
                 )

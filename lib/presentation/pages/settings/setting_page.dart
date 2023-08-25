@@ -1,5 +1,6 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/gen/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:brapa/domain/category.dart';
 import 'package:brapa/presentation/router/app_router.dart';
@@ -24,33 +25,45 @@ class SettingPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               FreeSpaceUI.vertical(8.h),
-              const TextUI.titleRegular("Settings"),
+              TextUI.titleRegular(S.of(context).settings),
               FreeSpaceUI.vertical(20.sp),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SettingMenuItem(
-                    label: "Accounts",
+                  SettingMenuItem(
+                    label: S.of(context).security,
                     iconData: BoxIcons.bxl_pocket,
-                    onTapPushPage: ManageAccountsRoute(),
+                    onTapPushPage: const ManageAccountsRoute(),
                   ),
                   FreeSpaceUI.vertical(8),
                   SettingMenuItem(
-                    label: "Expense Categories",
+                    label: S.of(context).expenseCategories,
                     iconData: Icons.upload_rounded,
-                    onTapPushPage: ManageCategoriesRoute(label: "Expense Categories", type: CategoryType.exp),
+                    onTapPushPage: ManageCategoriesRoute(
+                      label: S.of(context).expenseCategories,
+                      type: CategoryType.exp,
+                    ),
                   ),
                   FreeSpaceUI.vertical(8),
                   SettingMenuItem(
-                    label: "Income Categories",
+                    label: S.of(context).incomeCategories,
                     iconData: Icons.download_rounded,
-                    onTapPushPage: ManageCategoriesRoute(label: "Income Categories", type: CategoryType.inc),
+                    onTapPushPage: ManageCategoriesRoute(
+                      label: S.of(context).incomeCategories,
+                      type: CategoryType.inc,
+                    ),
                   ),
                   FreeSpaceUI.vertical(8),
-                  const SettingMenuItem(
-                    label: "Security",
+                  SettingMenuItem(
+                    label: S.of(context).security,
                     iconData: BoxIcons.bxs_lock_alt,
-                    onTapPushPage: SecurityRoute(),
+                    onTapPushPage: const SecurityRoute(),
+                  ),
+                  FreeSpaceUI.vertical(8),
+                  SettingMenuItem(
+                    label: S.of(context).language,
+                    iconData: Icons.translate_rounded,
+                    onTapPushPage: const LanguageRoute(),
                   ),
                 ],
               )

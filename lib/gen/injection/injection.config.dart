@@ -16,6 +16,7 @@ import 'package:isar/isar.dart' as _i4;
 
 import '../../data/repository/account_repository.dart' as _i12;
 import '../../data/repository/category_repository.dart' as _i14;
+import '../../data/repository/language_repository.dart' as _i15;
 import '../../data/repository/security_repository.dart' as _i6;
 import '../../data/repository/transaction_repository.dart' as _i8;
 import '../../data/repository/transfer_log_repository.dart' as _i10;
@@ -24,9 +25,9 @@ import '../../data/source/account_local_source.dart' as _i11;
 import '../../data/source/category_local_source.dart' as _i13;
 import '../../data/source/transaction_local_source.dart' as _i7;
 import '../../data/source/transfer_log_local_source.dart' as _i9;
-import '../../presentation/provider/pin_auth/pin_auth_provider.dart' as _i15;
-import '../../presentation/router/app_router.dart' as _i16;
-import 'injection.dart' as _i17;
+import '../../presentation/provider/pin_auth/pin_auth_provider.dart' as _i16;
+import '../../presentation/router/app_router.dart' as _i17;
+import 'injection.dart' as _i18;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -45,8 +46,8 @@ extension GetItInjectableX on _i1.GetIt {
       () => registerModule.isar,
       preResolve: true,
     );
-    gh.factory<_i5.SecureStorageService>(
-        () => _i5.SecureStorageService(gh<_i3.FlutterSecureStorage>()));
+    gh.singleton<_i5.SecureStorageService>(
+        _i5.SecureStorageService(gh<_i3.FlutterSecureStorage>()));
     gh.factory<_i6.SecurityRepository>(
         () => _i6.SecurityRepository(gh<_i5.SecureStorageService>()));
     gh.factory<String>(
@@ -69,12 +70,14 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i13.CategoryLocalSource(gh<_i4.Isar>()));
     gh.factory<_i14.CategoryRepository>(
         () => _i14.CategoryRepository(gh<_i13.CategoryLocalSource>()));
-    gh.factory<_i15.PinAuthSecurityNotifier>(
-        () => _i15.PinAuthSecurityNotifier(gh<_i6.SecurityRepository>()));
-    gh.factory<_i16.SecureAppIsActive>(
-        () => _i16.SecureAppIsActive(gh<_i6.SecurityRepository>()));
+    gh.factory<_i15.LanguageRepository>(
+        () => _i15.LanguageRepository(gh<_i5.SecureStorageService>()));
+    gh.factory<_i16.PinAuthSecurityNotifier>(
+        () => _i16.PinAuthSecurityNotifier(gh<_i6.SecurityRepository>()));
+    gh.factory<_i17.SecureAppIsActive>(
+        () => _i17.SecureAppIsActive(gh<_i6.SecurityRepository>()));
     return this;
   }
 }
 
-class _$RegisterModule extends _i17.RegisterModule {}
+class _$RegisterModule extends _i18.RegisterModule {}

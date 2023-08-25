@@ -1,5 +1,6 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/gen/l10n.dart';
 import 'package:brapa/presentation/provider/setting/security_provider.dart';
 import 'package:brapa/presentation/router/app_router.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +15,10 @@ class SecurityPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var state = ref.watch(securitySettingProvider);
     var controller = ref.read(securitySettingProvider.notifier);
-
+    var reason = S.of(context).hintBiometric;
     return Scaffold(
       appBar: AppBar(
-        title: const TextUI.largeNoneBold("Security"),
+        title: TextUI.largeNoneBold(S.of(context).security),
         backgroundColor: context.colors.background,
       ),
       backgroundColor: context.colors.background,
@@ -27,7 +28,7 @@ class SecurityPage extends HookConsumerWidget {
           children: [
             ListTile(
               contentPadding: EdgeInsets.zero,
-              title: const TextUI.regularNoneRegular("Secure App"),
+              title: TextUI.regularNoneRegular(S.of(context).secureApp),
               trailing: Switch.adaptive(
                 value: state.secureAppActive,
                 activeColor: context.colors.primary.light,
@@ -49,7 +50,7 @@ class SecurityPage extends HookConsumerWidget {
               contentPadding: EdgeInsets.zero,
               enabled: state.secureAppActive,
               title: TextUI.regularNoneRegular(
-                "Change PIN",
+                S.of(context).changePIN,
                 color: state.secureAppActive ? context.colors.onBackground : context.colors.ink.light,
               ),
               onTap: () {
@@ -64,7 +65,7 @@ class SecurityPage extends HookConsumerWidget {
                 contentPadding: EdgeInsets.zero,
                 enabled: state.secureAppActive,
                 title: TextUI.regularNoneRegular(
-                  "Biometrik",
+                  S.of(context).biometric,
                   color: state.secureAppActive ? context.colors.onBackground : context.colors.ink.light,
                 ),
                 trailing: Switch.adaptive(
@@ -76,8 +77,9 @@ class SecurityPage extends HookConsumerWidget {
                     if (!canAuthenticateWithBiometrics) {
                       return;
                     }
+
                     bool authenticated = await localAuth.authenticate(
-                        localizedReason: "Scan for enable biometrik",
+                        localizedReason: reason,
                         options: const AuthenticationOptions(
                           biometricOnly: true,
                           useErrorDialogs: true,

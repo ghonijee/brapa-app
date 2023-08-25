@@ -1,6 +1,7 @@
 import 'package:app_ui/token/figma_token.dart';
 import 'package:app_ui/utils/theme_extension.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/gen/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:brapa/presentation/provider/account/get_list_account_provider.dart';
@@ -56,28 +57,28 @@ class MainPage extends ConsumerWidget {
               selectedItemColor: context.theme.appColors.sky.light,
               unselectedItemColor: context.theme.appColors.sky.dark,
               type: BottomNavigationBarType.fixed,
-              items: const [
+              items: [
                 BottomNavigationBarItem(
-                    label: 'Record',
-                    icon: Padding(
+                    label: S.of(context).menuRecord,
+                    icon: const Padding(
                       padding: EdgeInsets.all(4),
                       child: Icon(Icons.add_box_outlined),
                     )),
                 BottomNavigationBarItem(
-                    label: 'History',
-                    icon: Padding(
+                    label: S.of(context).menuHistory,
+                    icon: const Padding(
                       padding: EdgeInsets.all(4.0),
                       child: Icon(Icons.bar_chart_outlined),
                     )),
                 BottomNavigationBarItem(
-                    label: 'Account',
-                    icon: Padding(
+                    label: S.of(context).menuAccount,
+                    icon: const Padding(
                       padding: EdgeInsets.all(4.0),
                       child: Icon(Icons.wallet_outlined),
                     )),
                 BottomNavigationBarItem(
-                    label: 'Settings',
-                    icon: Padding(
+                    label: S.of(context).menuSetting,
+                    icon: const Padding(
                       padding: EdgeInsets.all(4.0),
                       child: Icon(Icons.settings_outlined),
                     )),

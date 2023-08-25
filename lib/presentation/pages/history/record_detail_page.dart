@@ -3,6 +3,7 @@ import 'package:app_ui/molecules/account_chip.dart';
 import 'package:app_ui/molecules/category_chip.dart';
 import 'package:app_ui/token/figma_token.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/gen/l10n.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -83,13 +84,13 @@ class RecordDetailPage extends HookConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         FreeSpaceUI.vertical(20),
-                        const TextUI.titleRegular("Transaction Details"),
+                        TextUI.titleRegular(S.of(context).transactionDetail),
                         FreeSpaceUI.vertical(32),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextUI.smallTightRegular(
-                              "Amount value",
+                              S.of(context).amountValue,
                               color: context.colors.sky.dark,
                             ),
                             FreeSpaceUI.vertical(16),
@@ -124,7 +125,7 @@ class RecordDetailPage extends HookConsumerWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   TextUI.smallNoneRegular(
-                                    "Category",
+                                    S.of(context).category,
                                     color: context.colors.sky.dark,
                                   ),
                                   GestureDetector(
@@ -137,7 +138,7 @@ class RecordDetailPage extends HookConsumerWidget {
                                       WidgetUI.showBottomSheet(context,
                                           height: MediaQuery.of(context).size.height * 0.7,
                                           child: ShowMoreBottomSheet<Category>(
-                                            label: "All Categories",
+                                            label: S.of(context).allCategory,
                                             itemBuilder: listDataShowMore.map((item) {
                                               return CategoryChip(
                                                   label: item.name,
@@ -158,7 +159,7 @@ class RecordDetailPage extends HookConsumerWidget {
                                           ));
                                     },
                                     child: TextUI.tinyNoneRegular(
-                                      "Show more",
+                                      S.of(context).showMore,
                                       color: context.colors.primary.base,
                                     ),
                                   )
@@ -213,7 +214,7 @@ class RecordDetailPage extends HookConsumerWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   TextUI.smallNoneRegular(
-                                    "Account",
+                                    S.of(context).account,
                                     color: context.colors.sky.dark,
                                   ),
                                   GestureDetector(
@@ -226,7 +227,7 @@ class RecordDetailPage extends HookConsumerWidget {
                                         context,
                                         height: MediaQuery.of(context).size.height * 0.7,
                                         child: ShowMoreBottomSheet<Account>(
-                                          label: "All Accounts",
+                                          label: S.of(context).allAccount,
                                           itemBuilder: listDataShowMore.map((item) {
                                             return AccountChip(
                                               width: 150,
@@ -252,7 +253,7 @@ class RecordDetailPage extends HookConsumerWidget {
                                       );
                                     },
                                     child: TextUI.tinyNoneRegular(
-                                      "Show more",
+                                      S.of(context).showMore,
                                       color: context.colors.primary.base,
                                     ),
                                   )
@@ -292,7 +293,7 @@ class RecordDetailPage extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextUI.smallTightRegular(
-                              "Memo",
+                              S.of(context).memo,
                               color: context.colors.sky.dark,
                             ),
                             FreeSpaceUI.vertical(16),
@@ -303,6 +304,7 @@ class RecordDetailPage extends HookConsumerWidget {
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: context.colors.surface,
+                                hintText: S.of(context).memoHint,
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
                               ),
@@ -314,7 +316,7 @@ class RecordDetailPage extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextUI.smallTightRegular(
-                              "Date",
+                              S.of(context).date,
                               color: context.colors.sky.dark,
                             ),
                             FreeSpaceUI.vertical(16),
@@ -355,7 +357,7 @@ class RecordDetailPage extends HookConsumerWidget {
                                     ref.watch(asyncListHistory.notifier).reload();
                                     context.router.pop();
                                     Fluttertoast.showToast(
-                                      msg: "Save record success!",
+                                      msg: S.of(context).updateRecordSuccess,
                                       backgroundColor: context.colors.green.darkest,
                                       textColor: context.colors.sky.base,
                                     );
@@ -369,7 +371,7 @@ class RecordDetailPage extends HookConsumerWidget {
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          child: const TextUI.regularNoneRegular("Save"),
+                          child: TextUI.regularNoneRegular(S.of(context).save),
                         ),
                         FreeSpaceUI.vertical(42),
                       ],

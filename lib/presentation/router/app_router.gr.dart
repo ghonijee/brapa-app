@@ -51,6 +51,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SecurityPage(),
       );
     },
+    LanguageRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const LanguagePage(),
+      );
+    },
     DetailCategoryRoute.name: (routeData) {
       final args = routeData.argsAs<DetailCategoryRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -79,6 +85,29 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const HistoryPage(),
+      );
+    },
+    RecordFormRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RecordFormPage(),
+      );
+    },
+    TransferDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<TransferDetailRouteArgs>(
+          orElse: () => const TransferDetailRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: TransferDetailPage(
+          key: args.key,
+          transaction: args.transaction,
+        ),
+      );
+    },
+    TransferFormRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TransferFormPage(),
       );
     },
     RecordDetailRoute.name: (routeData) {
@@ -119,29 +148,6 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const MainPage(),
-      );
-    },
-    TransferDetailRoute.name: (routeData) {
-      final args = routeData.argsAs<TransferDetailRouteArgs>(
-          orElse: () => const TransferDetailRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: TransferDetailPage(
-          key: args.key,
-          transaction: args.transaction,
-        ),
-      );
-    },
-    RecordFormRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const RecordFormPage(),
-      );
-    },
-    TransferFormRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const TransferFormPage(),
       );
     },
   };
@@ -227,6 +233,20 @@ class SecurityRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SecurityRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [LanguagePage]
+class LanguageRoute extends PageRouteInfo<void> {
+  const LanguageRoute({List<PageRouteInfo>? children})
+      : super(
+          LanguageRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LanguageRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -337,6 +357,72 @@ class HistoryRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'HistoryRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RecordFormPage]
+class RecordFormRoute extends PageRouteInfo<void> {
+  const RecordFormRoute({List<PageRouteInfo>? children})
+      : super(
+          RecordFormRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RecordFormRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TransferDetailPage]
+class TransferDetailRoute extends PageRouteInfo<TransferDetailRouteArgs> {
+  TransferDetailRoute({
+    Key? key,
+    Transaction? transaction,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TransferDetailRoute.name,
+          args: TransferDetailRouteArgs(
+            key: key,
+            transaction: transaction,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'TransferDetailRoute';
+
+  static const PageInfo<TransferDetailRouteArgs> page =
+      PageInfo<TransferDetailRouteArgs>(name);
+}
+
+class TransferDetailRouteArgs {
+  const TransferDetailRouteArgs({
+    this.key,
+    this.transaction,
+  });
+
+  final Key? key;
+
+  final Transaction? transaction;
+
+  @override
+  String toString() {
+    return 'TransferDetailRouteArgs{key: $key, transaction: $transaction}';
+  }
+}
+
+/// generated route for
+/// [TransferFormPage]
+class TransferFormRoute extends PageRouteInfo<void> {
+  const TransferFormRoute({List<PageRouteInfo>? children})
+      : super(
+          TransferFormRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TransferFormRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -460,72 +546,6 @@ class MainRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MainRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [TransferDetailPage]
-class TransferDetailRoute extends PageRouteInfo<TransferDetailRouteArgs> {
-  TransferDetailRoute({
-    Key? key,
-    Transaction? transaction,
-    List<PageRouteInfo>? children,
-  }) : super(
-          TransferDetailRoute.name,
-          args: TransferDetailRouteArgs(
-            key: key,
-            transaction: transaction,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'TransferDetailRoute';
-
-  static const PageInfo<TransferDetailRouteArgs> page =
-      PageInfo<TransferDetailRouteArgs>(name);
-}
-
-class TransferDetailRouteArgs {
-  const TransferDetailRouteArgs({
-    this.key,
-    this.transaction,
-  });
-
-  final Key? key;
-
-  final Transaction? transaction;
-
-  @override
-  String toString() {
-    return 'TransferDetailRouteArgs{key: $key, transaction: $transaction}';
-  }
-}
-
-/// generated route for
-/// [RecordFormPage]
-class RecordFormRoute extends PageRouteInfo<void> {
-  const RecordFormRoute({List<PageRouteInfo>? children})
-      : super(
-          RecordFormRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'RecordFormRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [TransferFormPage]
-class TransferFormRoute extends PageRouteInfo<void> {
-  const TransferFormRoute({List<PageRouteInfo>? children})
-      : super(
-          TransferFormRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'TransferFormRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

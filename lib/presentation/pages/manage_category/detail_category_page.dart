@@ -1,6 +1,7 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:app_ui/token/figma_token.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/gen/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -75,14 +76,15 @@ class DetailCategoryPage extends HookConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         FreeSpaceUI.vertical(20),
-                        TextUI.titleRegular(
-                            formMode == FormCategoryType.create ? "Create Category" : "Category Details"),
+                        TextUI.titleRegular(formMode == FormCategoryType.create
+                            ? S.of(context).createCategory
+                            : S.of(context).category),
                         FreeSpaceUI.vertical(32),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextUI.smallTightBold(
-                              "Name",
+                              S.of(context).name,
                               color: context.colors.sky.base,
                             ),
                             FreeSpaceUI.vertical(16),
@@ -108,12 +110,12 @@ class DetailCategoryPage extends HookConsumerWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 TextUI.smallTightBold(
-                                  "Active",
+                                  S.of(context).active,
                                   color: context.colors.sky.base,
                                 ),
                                 FreeSpaceUI.vertical(8),
                                 TextUI.tinyNoneRegular(
-                                  "When an account is set to inactive,\n it will not appear on the list.",
+                                  S.of(context).activeDesc,
                                   color: context.colors.sky.dark,
                                 )
                               ],
@@ -162,7 +164,7 @@ class DetailCategoryPage extends HookConsumerWidget {
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          child: const TextUI.regularNoneRegular("Save"),
+                          child: TextUI.regularNoneRegular(S.of(context).save),
                         ),
                         FreeSpaceUI.vertical(42),
                       ],

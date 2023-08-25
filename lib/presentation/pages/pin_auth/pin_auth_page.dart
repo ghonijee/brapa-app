@@ -3,6 +3,7 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:app_ui/token/figma_token.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/gen/l10n.dart';
 import 'package:brapa/presentation/router/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -39,7 +40,7 @@ class PinAuthPage extends HookConsumerWidget {
               size: 42,
             ),
             FreeSpaceUI.vertical(20),
-            const TextUI.titleRegular("Enter your PIN"),
+            TextUI.titleRegular(S.of(context).enterYourPin),
             FreeSpaceUI.vertical(32),
             Pinput(
               controller: pinTextController,
@@ -83,7 +84,7 @@ class PinAuthPage extends HookConsumerWidget {
             WidgetUI.visibility(
                 visibility: errorPin.value,
                 child: TextUI.regularNoneRegular(
-                  "PIN is incorrect",
+                  S.of(context).pinIsIncorrect,
                   color: context.colors.red.base,
                 )),
             const Spacer(),
@@ -117,7 +118,7 @@ class PinAuthPage extends HookConsumerWidget {
                             return;
                           }
                           bool authenticated = await localAuth.authenticate(
-                              localizedReason: "Scan for enable biometrik",
+                              localizedReason: S.of(context).hintBiometric,
                               options: const AuthenticationOptions(
                                 biometricOnly: true,
                                 useErrorDialogs: true,

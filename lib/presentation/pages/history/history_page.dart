@@ -1,5 +1,6 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/gen/l10n.dart';
 import 'package:brapa/presentation/pages/history/widgets/history_menu_bottom_sheet.dart';
 import 'package:brapa/presentation/provider/account/update_transfer_provider.dart';
 import 'package:flutter/material.dart';
@@ -36,13 +37,13 @@ class HistoryPage extends HookConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const TextUI.titleRegular("History"),
+                  TextUI.titleRegular(S.of(context).histories),
                   Row(
                     children: [
                       GestureDetector(
                         onTap: () => searchMode.value = !searchMode.value,
                         child: searchMode.value
-                            ? const TextUI.smallNormalRegular('Cancel')
+                            ? TextUI.smallNormalRegular(S.of(context).cancel)
                             : const Icon(Icons.search_rounded),
                       ),
                       FreeSpaceUI.horizontal(16),
@@ -89,8 +90,8 @@ class HistoryPage extends HookConsumerWidget {
                     child: SegmentedControl(
                       groupValue: historyView.value,
                       children: [
-                        SegmentedControlValue(label: "Daily"),
-                        SegmentedControlValue(label: "Monthly"),
+                        SegmentedControlValue(label: S.of(context).daily),
+                        SegmentedControlValue(label: S.of(context).monthly),
                       ],
                       onValueChanged: (index, value) {
                         historyView.value = index;
@@ -159,14 +160,10 @@ class HistoryPage extends HookConsumerWidget {
                                         ref.watch(updateTransferProvider.notifier).loadTransfer(transactionItem);
                                         context.router.push(TransferDetailRoute(transaction: transactionItem));
                                       } else {
-                                        // WidgetUI.showBottomSheet(context, TransactionEditBottomSheet());
                                         ref.watch(updateRecordProvider).loadTransaction(transactionItem);
 
                                         context.router.push(RecordDetailRoute(transaction: transactionItem));
                                       }
-                                      // ref.watch(updateRecordProvider).loadTransaction(transactionItem);
-
-                                      // context.router.push(RecordDetailRoute(transaction: transactionItem));
                                     },
                                     contentPadding: EdgeInsets.zero,
                                     leading: HistoryIconItemWidget(

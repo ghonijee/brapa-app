@@ -1,6 +1,7 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:app_ui/token/figma_token.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/gen/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -20,11 +21,9 @@ class DetailAccountPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final nameTextController = useTextEditingController(text: data?.name);
-    final balanceTextController =
-        useTextEditingController(text: data?.balance.toThousandSeparator());
+    final balanceTextController = useTextEditingController(text: data?.balance.toThousandSeparator());
     final isActiveState = useState(data?.isActive ?? true);
-    final assetImagePath =
-        useState(data?.assets ?? Assets.accounts.walletAltGreen.path);
+    final assetImagePath = useState(data?.assets ?? Assets.accounts.walletAltGreen.path);
 
     final controller = ref.watch(manageAccountProvider.notifier);
 
@@ -55,13 +54,8 @@ class DetailAccountPage extends HookConsumerWidget {
                             context: context,
                             builder: (context) {
                               return AlertDeleteItemUI(onConfirm: () {
-                                ref
-                                    .watch(manageAccountProvider.notifier)
-                                    .delete()
-                                    .then<void>((value) {
-                                  ref
-                                      .watch(listAccountProvider.notifier)
-                                      .reload();
+                                ref.watch(manageAccountProvider.notifier).delete().then<void>((value) {
+                                  ref.watch(listAccountProvider.notifier).reload();
                                   context.router.popForced();
                                   context.router.pop();
                                 });
@@ -82,15 +76,15 @@ class DetailAccountPage extends HookConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         FreeSpaceUI.vertical(20),
-                        TextUI.titleRegular(formMode == FormAccountType.create
-                            ? "Create Account"
-                            : "Account Details"),
+                        TextUI.titleRegular(
+                          formMode == FormAccountType.create ? S.of(context).createAccount : S.of(context).account,
+                        ),
                         FreeSpaceUI.vertical(32),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextUI.smallTightBold(
-                              "Name",
+                              S.of(context).name,
                               color: context.colors.sky.base,
                             ),
                             FreeSpaceUI.vertical(16),
@@ -102,8 +96,7 @@ class DetailAccountPage extends HookConsumerWidget {
                                 filled: true,
                                 fillColor: context.colors.surface,
                                 border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    borderSide: BorderSide.none),
+                                    borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
                               ),
                             )
                           ],
@@ -113,7 +106,7 @@ class DetailAccountPage extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextUI.smallTightBold(
-                              "Balance",
+                              S.of(context).balance,
                               color: context.colors.sky.base,
                             ),
                             FreeSpaceUI.vertical(16),
@@ -129,8 +122,7 @@ class DetailAccountPage extends HookConsumerWidget {
                                 filled: true,
                                 fillColor: context.colors.surface,
                                 border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    borderSide: BorderSide.none),
+                                    borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
                               ),
                             )
                           ],
@@ -144,12 +136,12 @@ class DetailAccountPage extends HookConsumerWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 TextUI.smallTightBold(
-                                  "Active",
+                                  S.of(context).active,
                                   color: context.colors.sky.base,
                                 ),
                                 FreeSpaceUI.vertical(8),
                                 TextUI.tinyNoneRegular(
-                                  "When an account is set to inactive,\n it will not appear on the list.",
+                                  S.of(context).activeDesc,
                                   color: context.colors.sky.dark,
                                 )
                               ],
@@ -172,12 +164,12 @@ class DetailAccountPage extends HookConsumerWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 TextUI.smallTightBold(
-                                  "Icon Image",
+                                  S.of(context).iconImage,
                                   color: context.colors.sky.base,
                                 ),
                                 FreeSpaceUI.vertical(8),
                                 TextUI.tinyNoneRegular(
-                                  "This image will show on list and chips",
+                                  S.of(context).iconImageDesc,
                                   color: context.colors.sky.dark,
                                 )
                               ],
@@ -186,38 +178,33 @@ class DetailAccountPage extends HookConsumerWidget {
                             GestureDetector(
                                 onTap: () async {
                                   var pathSelected = await showModalBottomSheet(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(12)),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                                     context: context,
                                     builder: (context) {
                                       return Container(
                                         padding: const EdgeInsets.all(20),
                                         child: GridView.builder(
-                                          gridDelegate:
-                                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 4,
                                             crossAxisSpacing: 8,
                                             mainAxisSpacing: 8,
                                           ),
-                                          itemCount:
-                                              Assets.accounts.values.length,
+                                          itemCount: Assets.accounts.values.length,
                                           itemBuilder: (context, index) {
-                                            var path = Assets
-                                                .accounts.values[index].path;
+                                            var path = Assets.accounts.values[index].path;
                                             return GestureDetector(
                                                 onTap: () {
                                                   context.router.pop(path);
                                                 },
-                                                child: Image.asset(path,
-                                                    fit: BoxFit.fitWidth));
+                                                child: Image.asset(path, fit: BoxFit.fitWidth));
                                           },
                                         ),
                                       );
                                     },
                                   );
-
-                                  assetImagePath.value = pathSelected;
+                                  if (pathSelected != null) {
+                                    assetImagePath.value = pathSelected;
+                                  }
                                 },
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(16),
@@ -240,9 +227,7 @@ class DetailAccountPage extends HookConsumerWidget {
                                       isActive: isActiveState.value,
                                       assetsPath: assetImagePath.value)
                                   .then((value) {
-                                ref
-                                    .watch(listAccountProvider.notifier)
-                                    .reload();
+                                ref.watch(listAccountProvider.notifier).reload();
 
                                 context.router.pop();
                               });
@@ -254,9 +239,7 @@ class DetailAccountPage extends HookConsumerWidget {
                                       isActive: isActiveState.value,
                                       assetsPath: assetImagePath.value)
                                   .then((value) {
-                                ref
-                                    .watch(listAccountProvider.notifier)
-                                    .reload();
+                                ref.watch(listAccountProvider.notifier).reload();
                                 context.router.pop();
                               });
                             }
@@ -268,7 +251,7 @@ class DetailAccountPage extends HookConsumerWidget {
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          child: const TextUI.regularNoneRegular("Save"),
+                          child: TextUI.regularNoneRegular(S.of(context).save),
                         ),
                         FreeSpaceUI.vertical(42),
                       ],

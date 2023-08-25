@@ -2,6 +2,7 @@ import 'package:app_ui/app_ui.dart';
 import 'package:app_ui/molecules/account_chip.dart';
 import 'package:app_ui/token/figma_token.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/gen/l10n.dart';
 import 'package:brapa/presentation/provider/account/transfer_account_provider.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +70,7 @@ class TransferFormPage extends HookConsumerWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   TextUI.smallNoneRegular(
-                                    "Account Source",
+                                    S.of(context).accountSource,
                                     color: context.colors.sky.dark,
                                   ),
                                   GestureDetector(
@@ -82,7 +83,7 @@ class TransferFormPage extends HookConsumerWidget {
                                         context,
                                         height: MediaQuery.of(context).size.height * 0.7,
                                         child: ShowMoreBottomSheet<Account>(
-                                          label: "All Accounts",
+                                          label: S.of(context).allAccount,
                                           itemBuilder: listDataShowMore.map((item) {
                                             return AccountChip(
                                               width: 150,
@@ -109,7 +110,7 @@ class TransferFormPage extends HookConsumerWidget {
                                       );
                                     },
                                     child: TextUI.tinyNoneRegular(
-                                      "Show more",
+                                      S.of(context).showMore,
                                       color: context.colors.primary.base,
                                     ),
                                   )
@@ -155,7 +156,7 @@ class TransferFormPage extends HookConsumerWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   TextUI.smallNoneRegular(
-                                    "Account Target",
+                                    S.of(context).accountTarget,
                                     color: context.colors.sky.dark,
                                   ),
                                   GestureDetector(
@@ -168,7 +169,7 @@ class TransferFormPage extends HookConsumerWidget {
                                         context,
                                         height: MediaQuery.of(context).size.height * 0.7,
                                         child: ShowMoreBottomSheet<Account>(
-                                          label: "All Accounts",
+                                          label: S.of(context).allAccount,
                                           itemBuilder: listDataShowMore.map((item) {
                                             return AccountChip(
                                               width: 150,
@@ -195,7 +196,7 @@ class TransferFormPage extends HookConsumerWidget {
                                       );
                                     },
                                     child: TextUI.tinyNoneRegular(
-                                      "Show more",
+                                      S.of(context).showMore,
                                       color: context.colors.primary.base,
                                     ),
                                   )
@@ -235,7 +236,7 @@ class TransferFormPage extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextUI.smallTightRegular(
-                              "Amount value",
+                              S.of(context).amountValue,
                               color: context.colors.sky.dark,
                             ),
                             FreeSpaceUI.vertical(16),
@@ -265,7 +266,7 @@ class TransferFormPage extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextUI.smallTightRegular(
-                              "Date",
+                              S.of(context).date,
                               color: context.colors.sky.dark,
                             ),
                             FreeSpaceUI.vertical(16),
@@ -308,7 +309,7 @@ class TransferFormPage extends HookConsumerWidget {
                                     ref.watch(asyncListHistory.notifier).reload();
                                     context.router.pop();
                                     Fluttertoast.showToast(
-                                      msg: "Transfer success!",
+                                      msg: S.of(context).transferSuccess,
                                       backgroundColor: context.colors.green.darkest,
                                       textColor: context.colors.sky.base,
                                     );
@@ -322,7 +323,7 @@ class TransferFormPage extends HookConsumerWidget {
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          child: const TextUI.regularNoneRegular("Save"),
+                          child: TextUI.regularNoneRegular(S.of(context).save),
                         ),
                         FreeSpaceUI.vertical(42),
                       ],

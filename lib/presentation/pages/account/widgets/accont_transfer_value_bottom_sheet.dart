@@ -1,8 +1,10 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:app_ui/token/figma_token.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/gen/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../domain/account.dart';
@@ -90,13 +92,13 @@ class TransferValueBottomSheet extends HookConsumerWidget {
                     style: FigmaTextStyles.smallNormalRegular,
                     children: [
                       TextSpan(
-                        text: transferState.fromAccount!.name,
+                        text: transferState.fromAccount?.name,
                         style: FigmaTextStyles.smallNormalBold,
                       ),
                     ],
                   ),
                 ),
-                TextUI.smallNormalBold(transferState.fromAccount!.balance.currency()),
+                TextUI.smallNormalBold(transferState.fromAccount?.balance.currency() ?? "0"),
               ],
             ),
             FreeSpaceUI.vertical(20),
@@ -108,6 +110,12 @@ class TransferValueBottomSheet extends HookConsumerWidget {
                       transferController.transfer().then<void>((value) {
                         if (value) {
                           context.router.popUntilRoot();
+                          transferController.reset();
+                          Fluttertoast.showToast(
+                            msg: S.of(context).transferSuccess,
+                            backgroundColor: context.colors.green.darkest,
+                            textColor: context.colors.sky.base,
+                          );
                           ref.invalidate(getListAccountProvider);
                         }
                       });

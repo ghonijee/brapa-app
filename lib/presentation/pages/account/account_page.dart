@@ -1,5 +1,6 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/gen/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:brapa/domain/account.dart';
@@ -29,7 +30,7 @@ class AccountPage extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               FreeSpaceUI.vertical(8.h),
-              const TextUI.titleRegular("Accounts"),
+              TextUI.titleRegular(S.of(context).accounts),
               FreeSpaceUI.vertical(20),
               Container(
                 padding: const EdgeInsets.all(16),
@@ -40,7 +41,7 @@ class AccountPage extends ConsumerWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const TextUI.smallNormalMedium("My Balance"),
+                    TextUI.smallNormalMedium(S.of(context).myBalance),
                     TextUI.smallNoneBold(listAccount.value!.countValue()!.currency())
                   ],
                 ),

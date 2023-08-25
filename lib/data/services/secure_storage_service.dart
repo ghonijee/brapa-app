@@ -1,7 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 
-@injectable
+@singleton
 class SecureStorageService {
   final FlutterSecureStorage storage;
 

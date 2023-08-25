@@ -14,7 +14,7 @@ class CategoryLocalSource implements BaseLocalSource<CategoryModel> {
 
   @override
   Future<List<CategoryModel>> getAll() {
-    return isar.categoryModels.where().sortByOrder().findAll();
+    return isar.categoryModels.filter().not().nameEqualTo("Transfer", caseSensitive: false).sortByOrder().findAll();
   }
 
   @override

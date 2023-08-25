@@ -1,6 +1,7 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:app_ui/token/figma_token.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/gen/l10n.dart';
 import 'package:brapa/presentation/pages/security/widgets/pin_keyboard.dart';
 import 'package:brapa/presentation/provider/setting/security_provider.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +31,8 @@ class ChangePINPage extends HookConsumerWidget {
             size: 52,
           ),
           FreeSpaceUI.vertical(20),
-          const TextUI.largeTightBold(
-            "Set PIN to secure your data",
+          TextUI.largeTightBold(
+            S.of(context).setPinDesc,
             textAlign: TextAlign.center,
           ),
           FreeSpaceUI.vertical(40),
@@ -78,7 +79,7 @@ class ChangePINPage extends HookConsumerWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: const TextUI.regularNoneRegular("Save"),
+            child: TextUI.regularNoneRegular(S.of(context).save),
           ),
           FreeSpaceUI.vertical(24),
         ]),

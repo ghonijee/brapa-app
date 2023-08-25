@@ -1,6 +1,7 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:app_ui/token/figma_token.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/gen/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -39,7 +40,7 @@ class RecordPage extends HookConsumerWidget {
                         groupValue: controller.segmentedControllerGroupValue,
                         children: [
                           SegmentedControlValue(
-                              label: "Expense",
+                              label: S.of(context).expense,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
@@ -48,15 +49,15 @@ class RecordPage extends HookConsumerWidget {
                                     color: context.colors.red.base,
                                     size: 20,
                                   ),
-                                  const TextUI.tinyNoneMedium("Expense"),
+                                  TextUI.tinyNoneMedium(S.of(context).expense),
                                 ],
                               )),
                           SegmentedControlValue(
-                              label: "Income",
+                              label: S.of(context).income,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  const TextUI.tinyNoneMedium("Income"),
+                                  TextUI.tinyNoneMedium(S.of(context).income),
                                   Icon(
                                     Icons.arrow_circle_down_rounded,
                                     color: context.colors.green.base,
@@ -112,7 +113,7 @@ class RecordPage extends HookConsumerWidget {
                           }
                           await controller.save().then((value) {
                             Fluttertoast.showToast(
-                              msg: "Save record success!",
+                              msg: S.of(context).saveRecordSuccess,
                               backgroundColor: context.colors.green.darkest,
                               textColor: context.colors.sky.base,
                             );

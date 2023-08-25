@@ -3,6 +3,7 @@ import 'package:app_ui/molecules/account_chip.dart';
 import 'package:app_ui/molecules/category_chip.dart';
 import 'package:app_ui/token/figma_token.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/gen/l10n.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -55,14 +56,14 @@ class RecordFormPage extends HookConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         FreeSpaceUI.vertical(20),
-                        const TextUI.titleRegular("Create Transaction"),
+                        TextUI.titleRegular(S.of(context).createTransactionTitle),
                         FreeSpaceUI.vertical(32),
                         Center(
                           child: SegmentedControl(
                             groupValue: controller.segmentedControllerGroupValue,
                             children: [
                               SegmentedControlValue(
-                                  label: "Expense",
+                                  label: S.of(context).expense,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -72,15 +73,15 @@ class RecordFormPage extends HookConsumerWidget {
                                         size: 20,
                                       ),
                                       FreeSpaceUI.horizontal(8),
-                                      const TextUI.tinyNoneBold("Expense"),
+                                      TextUI.tinyNoneBold(S.of(context).expense),
                                     ],
                                   )),
                               SegmentedControlValue(
-                                  label: "Income",
+                                  label: S.of(context).income,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      const TextUI.tinyNoneBold("Income"),
+                                      TextUI.tinyNoneBold(S.of(context).income),
                                       FreeSpaceUI.horizontal(8),
                                       Icon(
                                         Icons.arrow_circle_down_rounded,
@@ -101,7 +102,7 @@ class RecordFormPage extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextUI.smallTightRegular(
-                              "Amount value",
+                              S.of(context).amountValue,
                               color: context.colors.sky.dark,
                             ),
                             FreeSpaceUI.vertical(16),
@@ -137,7 +138,7 @@ class RecordFormPage extends HookConsumerWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   TextUI.smallNoneRegular(
-                                    "Category",
+                                    S.of(context).category,
                                     color: context.colors.sky.dark,
                                   ),
                                   GestureDetector(
@@ -150,7 +151,7 @@ class RecordFormPage extends HookConsumerWidget {
                                       WidgetUI.showBottomSheet(context,
                                           height: MediaQuery.of(context).size.height * 0.7,
                                           child: ShowMoreBottomSheet<Category>(
-                                            label: "All Categories",
+                                            label: S.of(context).allCategory,
                                             itemBuilder: listDataShowMore.map((item) {
                                               return CategoryChip(
                                                   label: item.name,
@@ -171,7 +172,7 @@ class RecordFormPage extends HookConsumerWidget {
                                           ));
                                     },
                                     child: TextUI.tinyNoneRegular(
-                                      "Show more",
+                                      S.of(context).showMore,
                                       color: context.colors.primary.base,
                                     ),
                                   )
@@ -226,7 +227,7 @@ class RecordFormPage extends HookConsumerWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   TextUI.smallNoneRegular(
-                                    "Account",
+                                    S.of(context).account,
                                     color: context.colors.sky.dark,
                                   ),
                                   GestureDetector(
@@ -239,7 +240,7 @@ class RecordFormPage extends HookConsumerWidget {
                                         context,
                                         height: MediaQuery.of(context).size.height * 0.7,
                                         child: ShowMoreBottomSheet<Account>(
-                                          label: "All Accounts",
+                                          label: S.of(context).allAccount,
                                           itemBuilder: listDataShowMore.map((item) {
                                             return AccountChip(
                                               width: 150,
@@ -265,7 +266,7 @@ class RecordFormPage extends HookConsumerWidget {
                                       );
                                     },
                                     child: TextUI.tinyNoneRegular(
-                                      "Show more",
+                                      S.of(context).showMore,
                                       color: context.colors.primary.base,
                                     ),
                                   )
@@ -305,7 +306,7 @@ class RecordFormPage extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextUI.smallTightRegular(
-                              "Memo",
+                              S.of(context).memo,
                               color: context.colors.sky.dark,
                             ),
                             FreeSpaceUI.vertical(16),
@@ -316,7 +317,7 @@ class RecordFormPage extends HookConsumerWidget {
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: context.colors.surface,
-                                hintText: "Description memo for transaction",
+                                hintText: S.of(context).memoHint,
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
                               ),
@@ -328,7 +329,7 @@ class RecordFormPage extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextUI.smallTightRegular(
-                              "Date",
+                              S.of(context).date,
                               color: context.colors.sky.dark,
                             ),
                             FreeSpaceUI.vertical(16),
@@ -343,7 +344,9 @@ class RecordFormPage extends HookConsumerWidget {
                                   dialogSize: const Size(325, 400),
                                   borderRadius: BorderRadius.circular(15),
                                 );
-                                controller.changeDateTransaction(datePickerResult!.first!);
+                                if (datePickerResult != null) {
+                                  controller.changeDateTransaction(datePickerResult.first!);
+                                }
                               },
                               child: TextFormField(
                                 style: FigmaTextStyles.smallNormalRegular.copyWith(color: context.colors.onSurface),
@@ -369,7 +372,7 @@ class RecordFormPage extends HookConsumerWidget {
                                     ref.watch(asyncListHistory.notifier).reload();
                                     context.router.pop();
                                     Fluttertoast.showToast(
-                                      msg: "Save record success!",
+                                      msg: S.of(context).saveRecordSuccess,
                                       backgroundColor: context.colors.green.darkest,
                                       textColor: context.colors.sky.base,
                                     );
@@ -383,7 +386,7 @@ class RecordFormPage extends HookConsumerWidget {
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          child: const TextUI.regularNoneRegular("Save"),
+                          child: TextUI.regularNoneRegular(S.of(context).save),
                         ),
                         FreeSpaceUI.vertical(42),
                       ],

@@ -1,6 +1,7 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:app_ui/molecules/category_chip.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/gen/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -63,7 +64,7 @@ class ListCategoryWidget extends ConsumerWidget {
                         ));
                   },
                   child: TextUI.tinyNoneRegular(
-                    "Show more",
+                    S.of(context).showMore,
                     color: context.colors.primary.base,
                   ),
                 )

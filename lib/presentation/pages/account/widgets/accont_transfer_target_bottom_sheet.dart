@@ -68,6 +68,8 @@ class TransferTargetBottomSheet extends ConsumerWidget {
                           isActive: false,
                           onValueChanged: () {
                             transferController.selectedTargetAccount(item);
+                            context.router.popUntilRoot();
+
                             WidgetUI.showBottomSheet(
                               context,
                               isScrollControlled: true,

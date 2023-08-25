@@ -1,5 +1,6 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/gen/l10n.dart';
 import 'package:brapa/presentation/provider/account/transfer_account_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -53,7 +54,7 @@ class AccountMenuBottomSheet extends ConsumerWidget {
             children: [
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                title: const TextUI.smallNormalRegular("Transfer"),
+                title: TextUI.smallNormalRegular(S.of(context).transfer),
                 trailing: Icon(
                   Icons.chevron_right_rounded,
                   color: context.colors.sky.dark,
@@ -61,6 +62,7 @@ class AccountMenuBottomSheet extends ConsumerWidget {
                 ),
                 onTap: () {
                   transferController.initTransfer(item);
+                  context.router.pop();
                   WidgetUI.showBottomSheet(
                     context,
                     isScrollControlled: true,
@@ -69,7 +71,7 @@ class AccountMenuBottomSheet extends ConsumerWidget {
                   );
                 },
                 subtitle: TextUI.tinyNoneRegular(
-                  "Send balance to other account",
+                  S.of(context).transferDetail,
                   color: context.colors.sky.dark,
                 ),
               )
