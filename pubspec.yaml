@@ -148,13 +148,7 @@ flutter_intl:
 flutter_native_splash:
   color: "#090a0a"
   image: 'assets/launcher/round_launcher.png'
-  branding: 'assets/launcher/round_launcher.png'
-  color_dark: "#121212"
-  image_dark: 'assets/launcher/round_launcher.png'
-  branding_dark: 'assets/launcher/round_launcher.png'
   android_12:
     image: 'assets/launcher/round_launcher.png'
     icon_background_color: "#090a0a"
-    image_dark: 'assets/launcher/round_launcher.png'
-    icon_background_color_dark: "#121212"
   web: false
