@@ -13,7 +13,7 @@ class SplashScreenPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Future.delayed(const Duration(milliseconds: 2000), () {
+    Future.delayed(const Duration(milliseconds: 1500), () {
       final state = ref.watch(pinAuthProvider);
       if (state.secureAppActive) {
         context.router.replace(const PinAuthRoute());
