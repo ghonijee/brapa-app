@@ -14,7 +14,7 @@
     "histories": "Riwayat",
     "daily": "Harian",
     "monthly": "Bulanan",
-    "otherMenu": "Menu lain",
+    "otherMenu": "Menu Lain",
     "createTransactionTitle": "Buat Transaksi",
     "createTransactionSubtitle": "Catat transaksi baru melalui form",
     "createTransferitle": "Buat Transfer",
@@ -65,5 +65,6 @@
     "saveRecordSuccess": "Berhasil menyimpan",
     "updateRecordSuccess": "Berhasil mengupdate",
     "transferSuccess": "Transfer berhasil",
-    "transferUpdateSuccess": "Transfer berhasil diupdate"
+    "transferUpdateSuccess": "Transfer berhasil diupdate",
+    "today": "Hari ini"
 }

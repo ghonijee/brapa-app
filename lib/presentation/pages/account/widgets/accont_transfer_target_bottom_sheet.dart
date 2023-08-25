@@ -1,6 +1,7 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:app_ui/molecules/account_chip.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:brapa/gen/l10n.dart';
 import 'package:brapa/presentation/pages/account/widgets/accont_transfer_value_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -32,7 +33,7 @@ class TransferTargetBottomSheet extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const TextUI.regularNormalBold("Transfer to"),
+              TextUI.regularNormalBold(S.of(context).transferTo),
               IconButton(
                 onPressed: () {
                   context.router.popUntilRoot();

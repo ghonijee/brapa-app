@@ -83,7 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "name": MessageLookupByLibrary.simpleMessage("Nama"),
         "noCancel": MessageLookupByLibrary.simpleMessage("Tidak"),
         "noteHint": MessageLookupByLibrary.simpleMessage("Tulis keterangan"),
-        "otherMenu": MessageLookupByLibrary.simpleMessage("Menu lain"),
+        "otherMenu": MessageLookupByLibrary.simpleMessage("Menu Lain"),
         "pinIsIncorrect": MessageLookupByLibrary.simpleMessage("PIN salah"),
         "removeData": MessageLookupByLibrary.simpleMessage("Hapus Data"),
         "removeDataDesc": MessageLookupByLibrary.simpleMessage(
@@ -99,6 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Atur PIN untuk melindungi Data"),
         "settings": MessageLookupByLibrary.simpleMessage("Setelan"),
         "showMore": MessageLookupByLibrary.simpleMessage("Lihat semua"),
+        "today": MessageLookupByLibrary.simpleMessage("Hari ini"),
         "transactionDetail":
             MessageLookupByLibrary.simpleMessage("Detail Transaksi"),
         "transfer": MessageLookupByLibrary.simpleMessage("Transfer"),

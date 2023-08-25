@@ -88,7 +88,7 @@ class TransferValueBottomSheet extends HookConsumerWidget {
               children: [
                 RichText(
                   text: TextSpan(
-                    text: "From: ",
+                    text: "${S.of(context).from}  ",
                     style: FigmaTextStyles.smallNormalRegular,
                     children: [
                       TextSpan(

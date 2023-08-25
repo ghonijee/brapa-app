@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:brapa/data/services/isar_service.dart';
@@ -27,6 +28,7 @@ abstract class RegisterModule {
   FlutterSecureStorage get secureStorage =>
       const FlutterSecureStorage(aOptions: AndroidOptions(encryptedSharedPreferences: true));
 
+  GlobalKey<NavigatorState> get globalKey => GlobalKey<NavigatorState>();
   // url here will be injected
   // @lazySingleton
   // Dio dio(@Named('BaseUrl') String url) => Dio(BaseOptions(baseUrl: url));

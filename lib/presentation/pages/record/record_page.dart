@@ -81,7 +81,10 @@ class RecordPage extends HookConsumerWidget {
                         controller: controller.amountController,
                       ),
                       FreeSpaceUI.vertical(12.sp),
-                      MemoInputField(memoController: controller.memoController),
+                      MemoInputField(
+                        memoController: controller.memoController,
+                        hintText: S.of(context).noteHint,
+                      ),
                     ],
                   ),
                 ],

@@ -20,7 +20,7 @@ void main() {
 class InitialApp extends ConsumerWidget {
   InitialApp({super.key});
 
-  final _appRouter = AppRouter();
+  final _appRouter = AppRouter(navigatorKey: getIt<GlobalKey<NavigatorState>>());
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -32,7 +32,7 @@ class ListCategoryWidget extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextUI.smallNoneRegular(
-                  "Category",
+                  S.of(context).category,
                   color: context.colors.sky.dark,
                 ),
                 GestureDetector(
@@ -45,7 +45,7 @@ class ListCategoryWidget extends ConsumerWidget {
                     WidgetUI.showBottomSheet(context,
                         height: MediaQuery.of(context).size.height * 0.7,
                         child: ShowMoreBottomSheet<Category>(
-                          label: "All Categories",
+                          label: S.of(context).allCategory,
                           itemBuilder: listDataShowMore.map((item) {
                             return CategoryChip(
                                 label: item.name,

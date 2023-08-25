@@ -114,7 +114,8 @@ class HistoryPage extends HookConsumerWidget {
                   child: CircularProgressIndicator(),
                 ),
                 data: (data) {
-                  final listData = historyView.value == 0 ? data.groupDaily() : data.groupMonthly();
+                  final listData =
+                      historyView.value == 0 ? data.groupDaily(todaylabel: S.of(context).today) : data.groupMonthly();
                   return Expanded(
                     child: ListView.separated(
                       padding: EdgeInsets.zero,

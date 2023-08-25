@@ -71,7 +71,7 @@ class AccountMenuBottomSheet extends ConsumerWidget {
                   );
                 },
                 subtitle: TextUI.tinyNoneRegular(
-                  S.of(context).transferDetail,
+                  S.of(context).createTransferSubtitle,
                   color: context.colors.sky.dark,
                 ),
               )

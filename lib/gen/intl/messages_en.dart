@@ -97,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Set PIN to secure your data"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "showMore": MessageLookupByLibrary.simpleMessage("Show more"),
+        "today": MessageLookupByLibrary.simpleMessage("Today"),
         "transactionDetail":
             MessageLookupByLibrary.simpleMessage("Transaction Detail"),
         "transfer": MessageLookupByLibrary.simpleMessage("Transfer"),

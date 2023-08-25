@@ -65,5 +65,6 @@
     "saveRecordSuccess": "Save record success",
     "updateRecordSuccess": "Update record success",
     "transferSuccess": "Transfer success",
-    "transferUpdateSuccess": "Update transfer success"
+    "transferUpdateSuccess": "Update transfer success",
+    "today": "Today"
 }
