@@ -31,7 +31,7 @@ class SettingPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SettingMenuItem(
-                    label: S.of(context).security,
+                    label: S.of(context).accounts,
                     iconData: BoxIcons.bxl_pocket,
                     onTapPushPage: const ManageAccountsRoute(),
                   ),
