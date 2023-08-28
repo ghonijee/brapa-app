@@ -31,6 +31,7 @@ class TransactionLocalSource implements BaseLocalSource<TransactionModel> {
         .category((q) => q.nameContains(keyword, caseSensitive: false))
         .or()
         .account((q) => q.nameContains(keyword, caseSensitive: false))
+        .sortByCreatedAtDesc()
         .findAll();
     return query;
   }
