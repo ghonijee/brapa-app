@@ -104,9 +104,26 @@ class RecordPage extends HookConsumerWidget {
                       visibility: numberKeyboarVisible.value,
                       child: NumericKeyboard(
                         onKeyboardTap: (value) {
-                          var oldValue = controller.amountController.text;
-                          var newValue = oldValue + value;
-                          controller.amountController.text = newValue.currency(prefix: '');
+                          String newValue;
+                          if (controller.amountController.selection.start >= 0) {
+                            int newPosition = controller.amountController.selection.start + value.length;
+                            controller.amountController.text = controller.amountController.text.replaceRange(
+                              controller.amountController.selection.start,
+                              controller.amountController.selection.end,
+                              value,
+                            );
+
+                            controller.amountController.selection = TextSelection(
+                              baseOffset: newPosition,
+                              extentOffset: newPosition,
+                            );
+                            newValue = controller.amountController.text;
+                            controller.amountController.text = newValue.currency(prefix: '');
+                          } else {
+                            var oldValue = controller.amountController.text;
+                            newValue = oldValue + value;
+                            controller.amountController.text = newValue.currency(prefix: '');
+                          }
                           controller.onChangeAmountValue(newValue);
                         },
                         textStyle: FigmaTextStyles.largeNormalMedium,
@@ -129,11 +146,37 @@ class RecordPage extends HookConsumerWidget {
                           size: 28,
                         ),
                         leftButtonFn: () {
-                          var newValue = controller.amountController.text
-                              .substring(0, controller.amountController.text.length - 1)
-                              .currency(prefix: "");
-                          controller.amountController.text = newValue.currency(prefix: '');
+                          if (controller.amountController.text.isEmpty) {
+                            return;
+                          }
+                          String newValue;
+                          if (controller.amountController.selection.start >= 0) {
+                            int newPosition = controller.amountController.selection.start - 1;
+                            controller.amountController.text = controller.amountController.text.replaceRange(
+                              controller.amountController.selection.start - 1,
+                              controller.amountController.selection.end,
+                              '',
+                            );
+
+                            controller.amountController.selection = TextSelection(
+                              baseOffset: newPosition,
+                              extentOffset: newPosition,
+                            );
+                            newValue = controller.amountController.text;
+                            controller.amountController.text = newValue.currency(prefix: '');
+                          } else {
+                            newValue = controller.amountController.text
+                                .substring(0, controller.amountController.text.length - 1)
+                                .currency(prefix: "");
+                            controller.amountController.text = newValue.currency(prefix: '');
+                          }
                           controller.onChangeAmountValue(newValue);
+
+                          // newValue = controller.amountController.text
+                          //     .substring(0, controller.amountController.text.length - 1)
+                          //     .currency(prefix: "");
+                          // controller.amountController.text = newValue.currency(prefix: '');
+                          // controller.onChangeAmountValue(newValue);
                         },
                         leftIcon: const Icon(
                           Icons.backspace,
