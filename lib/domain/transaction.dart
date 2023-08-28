@@ -1,14 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
-import 'package:brapa/gen/l10n.dart';
-import 'package:flutter/material.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:brapa/domain/category.dart';
 import 'package:intl/intl.dart';
 
 import 'package:app_ui/app_ui.dart';
-
-import '../gen/injection/injection.dart';
 import 'account.dart';
 import 'history.dart';
 
@@ -76,8 +70,6 @@ class Transaction {
 
 extension TransactionExtension on List<Transaction> {
   List<History> groupDaily({todaylabel}) {
-    var navigatorKey = getIt<GlobalKey<NavigatorState>>();
-    var context = navigatorKey.currentContext;
     var group = <History>[];
     for (var item in this) {
       var indexGroup = group.indexWhere((element) => element.date.eqvYearMonthDay(item.createdAt!));

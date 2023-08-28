@@ -24,6 +24,7 @@ class HistoryPage extends HookConsumerWidget {
     var historyView = useState(0);
     var searchMode = useState(false);
     TextEditingController findController = useTextEditingController();
+    var searchFocus = useFocusNode();
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -41,7 +42,10 @@ class HistoryPage extends HookConsumerWidget {
                   Row(
                     children: [
                       GestureDetector(
-                        onTap: () => searchMode.value = !searchMode.value,
+                        onTap: () {
+                          searchMode.value = !searchMode.value;
+                          searchFocus.requestFocus();
+                        },
                         child: searchMode.value
                             ? TextUI.smallNormalRegular(S.of(context).cancel)
                             : const Icon(Icons.search_rounded),
@@ -61,6 +65,8 @@ class HistoryPage extends HookConsumerWidget {
               WidgetUI.visibility(
                 visibility: searchMode.value,
                 child: TextFormField(
+                  focusNode: searchFocus,
+                  autofocus: true,
                   controller: findController,
                   onTap: () {
                     searchMode.value = true;
@@ -70,6 +76,14 @@ class HistoryPage extends HookConsumerWidget {
                   },
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.search),
+                    suffixIcon: InkWell(
+                      onTap: () {
+                        findController.clear();
+                        ref.watch(asyncListHistory.notifier).reload();
+                        searchMode.value = false;
+                      },
+                      child: Icon(Icons.clear_rounded),
+                    ),
                     contentPadding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                     filled: true,
                     fillColor: context.colors.ink.darker,
